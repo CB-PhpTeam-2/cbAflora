@@ -1,0 +1,50 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$helper = $block->getHelper();
+$address = $helper->getSavedAddress();
+?>
+<span id="selected-location"><?= $address ? $block->escapeHtml($address['address']) :''; ?></span>
+<i class="material-icons my_location">my_location</i>
+<div class="wk-mp-design" style="display: none;">
+    <fieldset class="info wk-mp-fieldset fieldset" id="select-address-popup">
+        <div class="fieldset form-list" id="cust">
+            <div class="field">
+                <label class="label"><?= $block->escapeHtml(__('Enter Location')); ?></label>
+                <div class="control">
+                    <input class="input-text" data-lat="<?= $address ? $block->escapeHtml($address['latitude']) :'' ?>" data-lng="<?= $address ? $block->escapeHtml($address['longitude']):''?>" data-city="<?= $address ? $block->escapeHtml($address['city']) :'' ?>" data-state="<?= $address ? $block->escapeHtml($address['state']) : '' ?>" data-state_code="<?= $address ? $block->escapeHtml($address['stateCode']) : '' ?>" data-country_code="<?= $address ? $block->escapeHtml($address['countryCode']) : '' ?>" data-postcode="<?= $address ? $block->escapeHtml($address['postcode']) : "" ?>" data-country="<?= $address ? $block->escapeHtml($address['country']) :'' ?>" name="address" value="<?= $address ? $block->escapeHtml($address['address']) : '' ?>" id="autocomplete" type="text" />
+                </div>
+            </div>
+        </div>
+    </fieldset> 
+</div>
+<script>
+require.config({
+    map: {
+        '*': {
+            'googleMapPlaceLibrary': "<?= 'https://maps.googleapis.com/maps/api/js?key='.
+                $block->escapeHtml($helper->getGoogleApiKey()).'&v=3.exp&libraries=places'; ?>"
+            }
+        }
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "addresspopup": {
+                "saveAction": "<?= $block->escapeUrl($block->getSaveAction()); ?>",
+                "getAction": "<?= $block->escapeUrl($blockObj->getAddressAction()); ?>",
+                "isAddressSet": "<?= $address ? 1:0 ?>",
+                "popupHeading": "<?= $block->escapeHtml($helper->getPopupMessage()); ?>"
+            }
+        }
+    }
+</script>

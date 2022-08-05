@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Cb_GreenlineApi::css/style.css"/>
+    </head>
+    <body>
+        <attribute name="class" value="account"/>
+        <referenceContainer name="sidebar.main">
+            <referenceContainer name="seller_account_navigation" >
+                <block class="Cb\GreenlineApi\Block\Account\Navigation" name="greenlineapi-navigation" template="Cb_GreenlineApi::account/navigation.phtml" />
+            </referenceContainer>
+        </referenceContainer>
+    </body>
+</page>

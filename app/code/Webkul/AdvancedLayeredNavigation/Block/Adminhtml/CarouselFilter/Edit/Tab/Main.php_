@@ -1,0 +1,224 @@
+<?php
+/**
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+namespace Webkul\AdvancedLayeredNavigation\Block\Adminhtml\CarouselFilter\Edit\Tab;
+
+use Magento\Backend\Block\Widget\Form\Generic;
+use Magento\Backend\Block\Widget\Tab\TabInterface;
+use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
+use Webkul\AdvancedLayeredNavigation\Helper\Data as DataHelper;
+
+class Main extends Generic implements TabInterface
+{
+    /**
+     * @var Attribute
+     */
+    private $attributeFactory;
+
+    /**
+     * @var DataHelper
+     */
+    private $dataHelper;
+
+    /**
+     * @param \Magento\Backend\Block\Template\Context $context
+     * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Framework\Data\FormFactory $formFactory
+     * @param Attribute $attributeFactory
+     * @param DataHelper $dataHelper
+     * @param array $data
+     */
+    public function __construct(
+        \Magento\Backend\Block\Template\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Magento\Framework\Data\FormFactory $formFactory,
+        Attribute $attributeFactory,
+        DataHelper $dataHelper,
+        array $data = []
+    ) {
+        $this->attributeFactory = $attributeFactory;
+        $this->dataHelper = $dataHelper;
+        parent::__construct($context, $registry, $formFactory, $data);
+    }
+
+    /**
+     * Init form
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        parent::_construct();
+        $this->setId('badges_form');
+        $this->setTitle(__('Badge Information'));
+    }
+
+
+    /**
+     * Prepare form fields
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * @return \Magento\Backend\Block\Widget\Form
+     */
+    protected function _prepareForm()
+    {
+        $model = $this->_coreRegistry->registry('carouselFilter');
+        $form = $this->_formFactory->create(
+            ['data' => ['id' => 'edit_form',
+                        'enctype' => 'multipart/form-data',
+                        'action' => $this->getData('action'),
+                        'method' => 'post'
+                        ]
+                    ]
+        );
+        $form->setHtmlIdPrefix('layered_');
+        $fieldset = $form->addFieldset(
+            'base_fieldset',
+            ['legend' => __('General'), 'class' => 'fieldset-wide']
+        );
+        if ($model->getEntityId()) {
+            $fieldset->addField('entity_id', 'hidden', ['name' => 'entity_id']);
+        }
+
+        $fieldset->addField(
+            'title',
+            'text',
+            [
+                'name'  => 'title',
+                'label' => __('Title'),
+                'id'    => 'title',
+                'title' => __('Title'),
+                'class' => 'required-entry'
+            ]
+        );
+
+        $fieldset->addField(
+            'image_path',
+            'image',
+            [
+                'name'  => 'image',
+                'label' => __('Choose Image'),
+                'id'    => 'image',
+                'title' => __('Choose Image'),
+                'class' => 'required-entry'
+            ]
+        );
+
+        $fieldset->addField(
+            'attribute_code',
+            'select',
+            [
+                'name'   => 'attribute_code',
+                'label'  => __('Attribute'),
+                'id'     => 'attribute_code',
+                'title'  => __('Attribute'),
+                'class'  => 'required-entry',
+                'values' => $this->getAttributes(),
+                'style'  => 'width:250px'
+            ]
+        );
+
+        $fieldset->addField(
+            'option_id',
+            'select',
+            [
+                'name'   => 'option_id',
+                'label'  => __('Option'),
+                'id'     => 'option_id',
+                'title'  => __('Option'),
+                'class'  => 'required-entry',
+                'values' => $this->getOptions(),
+                'style'  => 'width:250px'
+            ]
+        );
+        $form->setValues($model->getData());
+        // $form->setUseContainer(true);
+        $this->setForm($form);
+        return parent::_prepareForm();
+    }
+
+    /**
+     * Prepare label for tab
+     *
+     * @return string
+     */
+    public function getTabLabel()
+    {
+        return __('General');
+    }
+ 
+    /**
+     * Prepare title for tab
+     *
+     * @return string
+     */
+    public function getTabTitle()
+    {
+        return __('General');
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function canShowTab()
+    {
+        return true;
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function isHidden()
+    {
+        return false;
+    }
+
+    /**
+     * get attributes
+     *
+     * @return array
+     */
+    private function getAttributes()
+    {
+        $attributeArray = [];
+        $attributeInfo = $this->attributeFactory
+                              ->getCollection()
+                              ->addFieldToFilter('frontend_input', 'select');
+        $attributeArray[0] = "Select";
+        foreach ($attributeInfo as $attributes) {
+            if ($this->attributeFactory->load($attributes->getAttributeId())->getIsFilterable() == 1) {
+                $attributeArray[$attributes->getAttributeCode()] = $attributes->getFrontendLabel();
+            }
+        }
+        return $attributeArray;
+    }
+
+    /**
+     * get attribute options
+     *
+     * @return void|array
+     */
+    private function getOptions()
+    {
+        $model = $this->_coreRegistry->registry('carouselFilter');
+        $optionsArray = [];
+        if ($model['attribute_code']) {
+            $options = $this->dataHelper->getOptions($model['attribute_code']);
+            $i = 0;
+            foreach ($options as $option) {
+                if ($i == 0) {
+                    $optionsArray[$option['value']] = 'Select';
+                    $i++;
+                } else {
+                    $optionsArray[$option['value']] = $option['label'];
+                }
+            }
+        }
+        return $optionsArray;
+    }
+}

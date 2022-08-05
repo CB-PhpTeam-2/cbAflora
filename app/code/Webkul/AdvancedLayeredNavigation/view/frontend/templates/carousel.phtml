@@ -1,0 +1,139 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+if ($block->enableChoiceAttribute()) {
+    $viewModel = $block->getViewModel();
+    $helper = $viewModel->getAdvanceNavHelper();
+    $items = $helper->getCategoryCarouselImages($block->getRequest()->getParam('id'));
+    $config = $block->getConfigure();
+    ?>
+
+    <link rel="stylesheet" type="text/css"
+    href="<?= /* @noEscape */ $block->getViewFileUrl('Webkul_AdvancedLayeredNavigation::css/skin.css');?>"/>
+
+    <style>
+    .jcarousel-skin-tango .jcarousel-container {
+        -moz-border-radius: 10px;
+        background: <?=/* @noEscape */  $config['backgroundColor'];?>;
+        border: 1px solid <?=/* @noEscape */  $config['borderColor'];?>;
+        width: <?=/* @noEscape */ count($items)*$config['imageWidth'];?>px;
+        max-width:1030px;
+
+    }
+    .jcarousel-skin-tango .jcarousel-item{
+        background-color: antiquewhite;
+    }
+.jcarousel-next{
+    text-align: center;
+    font-size: 2.9rem;
+    position: absolute;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    top: calc(50% - 23px);
+    right: 5px;
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    color: #7d7d7d;
+    width: 35px;
+    height: 43px;
+    }
+    .jcarousel-skin-tango .jcarousel-container-horizontal {
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 10px 20px;
+
+    }
+    .jcarousel-skin-tango .jcarousel-clip-horizontal {
+        height: <?=/* @noEscape */ $config['updateHeight'].'px'?>;
+        max-width:1030px;
+    }
+    .mycarousel .jcarousel-list .jcarousel-list-horizontal{
+        width:<?=/* @noEscape */ $config['imageWidth'].'px';?>;
+        height:<?=/* @noEscape */ $config['imageHeight'].'px'?>;
+    }
+    .jcarousel-skin-tango .jcarousel-item{
+        width:<?=/* @noEscape */ $config['imageWidth'].'px';?>;
+        height: <?=/* @noEscape */ $config['updateHeight'].'px'?>;
+    }
+    .jcarousel-prev {
+    text-align: center;
+    font-size: 2.9rem;
+    position: absolute;
+    top: calc(50% - 23px);
+    left: 5px;
+    background-color: #f1f1f1;
+    color: black;
+    border-radius: 50%;
+    width: 35px;
+    height: 43px;
+    cursor: pointer;
+}
+    .jcarousel-skin-tango .jcarousel-prev-horizontal {
+       
+        top:<?=/* @noEscape */ $config['clicktop'].'px';?>;
+    }
+    .jcarousel-skin-tango .jcarousel-next-horizontal{
+        top:<?=/* @noEscape */ $config['clicktop'].'px';?>;
+    }
+    img.image{
+        height:<?=/* @noEscape */ $config['imageHeight'].'px'?>;
+        width:<?=/* @noEscape */ $config['imageWidth'].'px';?>;
+    }
+    img.image:hover{
+        opacity:.7;
+    }
+    p{
+        text-align:center;
+        line-height: 10px;
+    }
+    </style>
+    <script type="text/x-magento-init">
+        {
+        "*":{
+            "carouseljs": {}
+            }
+        }
+    </script>
+
+    <script>
+        require([
+            "jquery",
+            "jquery/ui",
+            "carouseljs"
+        ], function($){
+            $(document).ready(function() {
+                $('.mycarousel').jcarousel({
+                    wrap: 'circular'
+                });
+            });
+        })
+    </script>
+
+    <?php
+    $html='';
+    if (!empty($items)) {
+        $html.= '<div id="wrap">
+
+    <ul class="mycarousel jcarousel-skin-tango">';
+        foreach ($items as $item) {
+            $optionName = $helper->getOptionLabelByValue($item['attribute_code'], $item['attribute_option_id']);
+            $html.= '<li><a href="javascript:void(0)" class="wk-carousel-link" 
+        data-attrname="'.$item['attribute_code'].'" data-attrvalue="'.$item['attribute_option_id'].'">
+        <img class="image" src="'.$block->getUrl("pub/media").$item['image_path'].'" 
+         title="'.$optionName.'" />
+        <p>'.$optionName.'</p>
+    </a></li>';
+        }
+        $html.= '</ul>
+    </div>';
+        /* @noEscape */ echo $html;
+    }
+} ?>

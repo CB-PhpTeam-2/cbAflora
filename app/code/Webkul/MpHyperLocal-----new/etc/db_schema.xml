@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="mp_hyper_local_shipping_area" resource="default" engine="innodb" comment="Seller Shipping Area">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+    <column xsi:type="int" name="seller_id" padding="10" unsigned="true" nullable="true" identity="false" comment="Seller Id"/>
+    <column xsi:type="mediumtext" name="address" nullable="true" comment="Address"/>
+    <column xsi:type="varchar" name="latitude" nullable="true" length="255" comment="Latitude"/>
+    <column xsi:type="varchar" name="longitude" nullable="true" length="255" comment="Longitude"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+    <column xsi:type="text" name="address_type" nullable="true" comment="Address Type"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+  </table>
+  <table name="mp_hyper_local_shipping_rate" resource="default" engine="innodb" comment="Hyper Local Shipping Rate">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+    <column xsi:type="int" name="seller_id" padding="10" unsigned="true" nullable="true" identity="false" comment="Seller Id"/>
+    <column xsi:type="decimal" name="distance_from" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Distance From"/>
+    <column xsi:type="decimal" name="distance_to" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Distance To"/>
+    <column xsi:type="decimal" name="weight_from" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Weight From"/>
+    <column xsi:type="decimal" name="weight_to" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Weight To"/>
+    <column xsi:type="decimal" name="cost" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Cost"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+  </table>
+  <table name="marketplace_userdata" resource="default">
+    <column xsi:type="text" name="origin_address" nullable="true" comment="Seller Origin Address"/>
+    <column xsi:type="varchar" name="latitude" nullable="true" length="255" comment="Seller Latitude"/>
+    <column xsi:type="varchar" name="longitude" nullable="true" length="255" comment="Seller Longitude"/>
+    <column xsi:type="varchar" name="radius" nullable="true" length="255" comment="Seller Radius"/>
+  </table>
+  <table name="marketplace_seller_outlet">
+      <column xsi:type="int" name="entity_id" unsigned="true" identity="true" nullable="false" comment="Id"/>
+      <column xsi:type="text" name="address" nullable="true" comment="Address"/>
+      <column xsi:type="varchar" name="latitude" nullable="true" length="255" comment="Latitude"/>
+      <column xsi:type="varchar" name="longitude" nullable="true" length="255" comment="Longitude"/>
+      <column xsi:type="smallint" name="status" unsigned="true" nullable="false" default="0" comment="Status"/>
+      <column xsi:type="varchar" length="255" name="outlet_name" nullable="true" comment="Outlet Name"/>
+      <column xsi:type="int" name="seller_id" unsigned="true" nullable="false" default="0" comment="Seller Id"/>
+      <column xsi:type="text" name="source_code" nullable="false" comment="Selected Source Code"/>
+      <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+      <constraint xsi:type="primary" referenceId="PRIMARY">
+          <column name="entity_id"/>
+      </constraint>
+  </table>
+</schema>

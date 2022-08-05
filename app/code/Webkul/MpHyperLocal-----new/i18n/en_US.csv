@@ -1,0 +1,213 @@
+Save,Save
+"Edit '%1'","Edit '%1'"
+"New Ship Area","New Ship Area"
+"Ship Area Information","Ship Area Information"
+Address,Address
+"Ship Area Address","Ship Area Address"
+"Address Type","Address Type"
+--select--,--select--
+City,City
+State,State
+Country,Country
+Latitude,Latitude
+Longitude,Longitude
+"Ship Area Info","Ship Area Info"
+"Add Ship Rate","Add Ship Rate"
+"Ship Rate Information","Ship Rate Information"
+"Ship Rate","Ship Rate"
+"Ship Rate Info","Ship Rate Info"
+"Your shipping rate has been successfully updated","Your shipping rate has been successfully updated"
+"Please upload Csv file","Please upload Csv file"
+"Add Shipping Rate","Add Shipping Rate"
+"Add Shipping Area","Add Shipping Area"
+"Ship area removed successfully.","Ship area removed successfully."
+"Not permitted.","Not permitted."
+"Ship rate removed successfully.","Ship rate removed successfully."
+"Ship area deleted successfully.","Ship area deleted successfully."
+"Invalid request.","Invalid request."
+"Ship rate deleted successfully.","Ship rate deleted successfully."
+"Your shipping origin has been successfully saved.","Your shipping origin has been successfully saved."
+"Invalid seller","Invalid seller"
+"Add Shipping Origin","Add Shipping Origin"
+"Ship area saved successfully.","Ship area saved successfully."
+"Ship area already exist.","Ship area already exist."
+"Address has to be completed","Address has to be completed"
+"Address Type has to be completed","Address Type has to be completed"
+"Latitude should contain only decimal numbers","Latitude should contain only decimal numbers"
+"Longitude should contain only decimal numbers","Longitude should contain only decimal numbers"
+"Address Not found.","Address Not found."
+Lists,Lists
+"Manage Info","Manage Info"
+"This ship area no longer exists.","This ship area no longer exists."
+"Edit Ship Area","Edit Ship Area"
+"Edit info","Edit info"
+"New Info","New Info"
+"Hyper Local Shipping Area","Hyper Local Shipping Area"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"You edited the ship area details successfully.","You edited the ship area details successfully."
+"You saved the ship area details successfully.","You saved the ship area details successfully."
+"New Ship Rate","New Ship Rate"
+"Hyper Local Shipping Rate","Hyper Local Shipping Rate"
+"Please upload CSV file","Please upload CSV file"
+"Item Id Not found.","Item Id Not found."
+"Address Set","Address Set"
+"Fill Correct Address.","Fill Correct Address."
+"Edit Outlet %1","Edit Outlet %1"
+"This outlet no longer exists.","This outlet no longer exists."
+"Add New outlet","Add New outlet"
+"Outlet List","Outlet List"
+"A total of %1 outlet(s) were disabled.","A total of %1 outlet(s) were disabled."
+"A total of %1 outlet(s) were enabled.","A total of %1 outlet(s) were enabled."
+"Code is already exist!","Code is already exist!"
+"Could not save Outlet.","Could not save Outlet."
+"The Outlet has been saved.","The Outlet has been saved."
+"Could not save Source.","Could not save Source."
+"Please set your location.","Please set your location."
+". ' is invalid'",". ' is invalid'"
+Distance,Distance
+"City, State/Province & Country","City, State/Province & Country"
+kilometer,kilometer
+Mile,Mile
+"Via Popup","Via Popup"
+"Via Page Redirect","Via Page Redirect"
+Enabled,Enabled
+Disabled,Disabled
+"Please select your location!","Please select your location!"
+"At a time you can add only one store's product in the cart","At a time you can add only one store's product in the cart"
+"At a time you can add only one store's product in the cart. Please update your cart with only one store's product(s).","At a time you can add only one store's product in the cart. Please update your cart with only one store's product(s)."
+"Seller do not provide shipping at your location.","Seller do not provide shipping at your location."
+"store does not provide service on your location.","store does not provide service on your location."
+"Store does not provide delivery to selected address..","Store does not provide delivery to selected address.."
+"Store does not provide delivery to selected address.","Store does not provide delivery to selected address."
+"Please select your address.","Please select your address."
+Edit,Edit
+Admin,Admin
+"Add your ship area","Add your ship area"
+"Enter Location","Enter Location"
+"My Ship Area List","My Ship Area List"
+"Delete Ship Area","Delete Ship Area"
+Action,Action
+Delete,Delete
+"No ship area available","No ship area available"
+Back,Back
+"Add your shipping rate","Add your shipping rate"
+"Download Sample File","Download Sample File"
+"Upload CSV ","Upload CSV "
+"My Ship Rate List","My Ship Rate List"
+"Delete Ship Rate","Delete Ship Rate"
+Weight,Weight
+Cost,Cost
+"From :","From :"
+"To :","To :"
+"No ship rate available","No ship rate available"
+Hyperlocal,Hyperlocal
+"Seller Origin","Seller Origin"
+"Manage Outlet","Manage Outlet"
+"Add your shipping origin address","Add your shipping origin address"
+"Radius (%1)","Radius (%1)"
+"Search Stores","Search Stores"
+"Search for your location and
+                    we'll get a complete list of available stores for you","Search for your location and
+                    we'll get a complete list of available stores for you"
+"Find Stores","Find Stores"
+"Your Addresses","Your Addresses"
+"You can select one of the address used before. Just click the button to set the location again.","You can select one of the address used before. Just click the button to set the location again."
+"Sold By","Sold By"
+"Visit Shop","Visit Shop"
+"Search Product","Search Product"
+Search,Search
+Menu,Menu
+"Outlet Information","Outlet Information"
+Name,Name
+Code,Code
+"Is Enabled","Is Enabled"
+Enable,Enable
+Disable,Disable
+Description,Description
+"Enter Address","Enter Address"
+"Contact Info","Contact Info"
+"Contact Name","Contact Name"
+Email,Email
+Phone,Phone
+Fax,Fax
+"Address Data","Address Data"
+"Select Country","Select Country"
+State/Province,State/Province
+Street,Street
+Postcode,Postcode
+"To Become Seller Please Contact to Admin.","To Become Seller Please Contact to Admin."
+"Add New Outlet","Add New Outlet"
+"Recently Added Products","Recently Added Products"
+"View Detail","View Detail"
+"View Collection","View Collection"
+"View All %1 Products","View All %1 Products"
+About,About
+Shipping,Shipping
+Return,Return
+"Privacy Policy","Privacy Policy"
+"Check in Facebook","Check in Facebook"
+"Check in Twitter","Check in Twitter"
+"Check in Google+","Check in Google+"
+"Check in Vimeo","Check in Vimeo"
+"Check in Youtube","Check in Youtube"
+"Check in Instagram","Check in Instagram"
+"Check in Pinterest","Check in Pinterest"
+"Make a Review","Make a Review"
+Rating,Rating
+Orders,Orders
+Products,Products
+Close,Close
+"Your Name","Your Name"
+"Your Email","Your Email"
+"Choose an appropriate reason to flag","Choose an appropriate reason to flag"
+Reset,Reset
+Submit,Submit
+"Thank you.","Thank you."
+"Your report against ","Your report against "
+" has been submitted."," has been submitted."
+"We will re-verify the seller Information and see if it violates any of our policy or selling guidelines.","We will re-verify the seller Information and see if it violates any of our policy or selling guidelines."
+"Popular Stores","Popular Stores"
+"We have got you the top stores in your selected location.","We have got you the top stores in your selected location."
+"No Store Available","No Store Available"
+"View Store","View Store"
+"View Store's Product","View Store's Product"
+"View All","View All"
+"Report Seller","Report Seller"
+"On location address change cart will empty.","On location address change cart will empty."
+"You are sure to delete ship area.","You are sure to delete ship area."
+"You are sure to delete selected ship area.","You are sure to delete selected ship area."
+"Please select record for delete.","Please select record for delete."
+"View Product","View Product"
+Webkul,Webkul
+"Hyperlocal Marketplace","Hyperlocal Marketplace"
+"General Settings","General Settings"
+"Single Seller Checkout","Single Seller Checkout"
+"Google API Key","Google API Key"
+"Heading For Location Popup Window","Heading For Location Popup Window"
+"Radius Unit","Radius Unit"
+"Set Address Change Method","Set Address Change Method"
+"Searching Templates","Searching Templates"
+"Background Banner Image","Background Banner Image"
+"Button Color","Button Color"
+"Hyper Local shipping","Hyper Local shipping"
+"Enabled for Checkout","Enabled for Checkout"
+Title,Title
+"Show Method if Not Applicable","Show Method if Not Applicable"
+"Add New Ship Area","Add New Ship Area"
+"Do you want to delete selected ship area record?","Do you want to delete selected ship area record?"
+Seller,Seller
+"Add New Ship Rate","Add New Ship Rate"
+"Do you want to delete selected ship rate record?","Do you want to delete selected ship rate record?"
+"Distance From","Distance From"
+"Distance To","Distance To"
+"Weight From","Weight From"
+"Weight To","Weight To"
+"Shipping Cost","Shipping Cost"
+"Change Address","Change Address"
+"Disable Outlet","Disable Outlet"
+"Are you sure you wan't to disable selected Outlet?","Are you sure you wan't to disable selected Outlet?"
+"Enable Outlet","Enable Outlet"
+"Are you sure you wan't to enable selected Outlet?","Are you sure you wan't to enable selected Outlet?"
+ID,ID
+"Outlet Name","Outlet Name"
+Status,Status

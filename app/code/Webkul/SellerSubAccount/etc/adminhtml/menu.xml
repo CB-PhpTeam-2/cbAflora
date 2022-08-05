@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_SellerSubAccount
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<add id="Webkul_SellerSubAccount::manager" title="Seller Sub Account" module="Webkul_SellerSubAccount" sortOrder="20" resource="Webkul_SellerSubAccount::manager" parent="Webkul_Marketplace::marketplace"/>
+    	
+        <add id="Webkul_SellerSubAccount::config_sellersubaccount" title="Configuration" module="Webkul_SellerSubAccount" sortOrder="20" parent="Webkul_SellerSubAccount::manager" action="adminhtml/system_config/edit/section/sellersubaccount" resource="Webkul_SellerSubAccount::config_sellersubaccount"/>
+    </menu>
+</config>

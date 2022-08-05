@@ -1,0 +1,60 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$helper = $this->helper(\Webkul\Marketplace\Helper\Data::class);
+$isSellerGroup = $helper->isSellerGroupModuleInstalled();
+if ($helper->isSeller() && $block->isModuleEnable() && ((($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/addshiparea')) || !$isSellerGroup) || (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/addrate')) || !$isSellerGroup) || (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/origin')) || !$isSellerGroup))) { ?>
+    <li class="mp-mphyperlocal nav item <?= $block->escapeHtml($block->getCurrentNavClass('mphyperlocal/account'))?>">
+        <?php if ($block->getCurrentNavClass('mphyperlocal/account')) { ?>   
+            <strong><?= $block->escapeHtml(__('Hyperlocal')) ?></strong>        
+            <?php
+        } else { ?>    
+            <a href="#"><?= $block->escapeHtml(__('Hyperlocal')) ?></a>                
+        <?php } ?>
+        <ul class="nav items">
+        <?php if (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/addrate')) || !$isSellerGroup) { ?>
+            <li class="nav item <?= $block->escapeHtml($block->getCurrentNavClass('mphyperlocal/account/addrate'));?>">
+                <?php if ($block->getCurrentNavClass('mphyperlocal/account/addrate')) { ?>   
+                    <strong><?= $block->escapeHtml(__('Ship Rate')) ?></strong>
+                    <?php
+                } else { ?>    
+                    <a href="<?= $block->escapeHtml($block->getDealUrl('mphyperlocal/account/addrate'))?>">
+                        <?= $block->escapeHtml(__('Ship Rate')) ?>
+                    </a>                
+                <?php } ?>
+            </li>
+        <?php } ?>
+        <?php if (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/origin')) || !$isSellerGroup) { ?>
+            <li class="nav item <?= $block->escapeHtml($block->getCurrentNavClass('mphyperlocal/account/origin'));?>">
+                <?php if ($block->getCurrentNavClass('mphyperlocal/account/origin')) { ?>   
+                    <strong><?= $block->escapeHtml(__('Seller Origin')) ?></strong>        
+                    <?php
+                } else { ?>    
+                    <a href="<?= $block->escapeHtml($block->getDealUrl('mphyperlocal/account/origin'))?>">
+                        <?= $block->escapeHtml(__('Seller Origin')) ?>
+                    </a>                
+                <?php } ?>
+            </li>
+        <?php } ?>
+        <?php if (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/outlet')) || !$isSellerGroup) { ?>
+            <li class="nav item <?= $block->escapeHtml($block->getCurrentNavClass('mphyperlocal/outlet/index'));?>">
+                <?php if ($block->getCurrentNavClass('mphyperlocal/outlet/index')) { ?>   
+                    <strong><?= $block->escapeHtml(__('Manage Outlet')) ?></strong>
+                    <?php
+                } else { ?>    
+                    <a href="<?= $block->escapeUrl($block->getDealUrl('mphyperlocal/outlet/index'))?>">
+                        <?= $block->escapeHtml(__('Manage Outlet')) ?>
+                    </a>                
+                <?php } ?>
+            </li>
+        <?php } ?>
+        </ul>   
+    </li>
+<?php } ?>

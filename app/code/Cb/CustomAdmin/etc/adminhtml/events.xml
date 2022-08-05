@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <event name="catalog_product_edit_action">
+        <observer name="cb_customadmin_lock_attributes" instance="Cb\CustomAdmin\Observer\LockProductAttributes"/>
+    </event>
+
+    <!-- <event name="catalog_product_delete_after_done">
+        <observer name="cb_customadmin_catalog_product_delete_after" instance="Cb\CustomAdmin\Observer\ProductDeleteAfter" />
+    </event> -->
+</config>

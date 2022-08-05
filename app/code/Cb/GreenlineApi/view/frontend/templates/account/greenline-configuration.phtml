@@ -1,0 +1,153 @@
+<?php
+$configuration = $block->getConfiguration();
+$sellerCronData = $block->getSellerCronData();
+$statuses = $block->getStatuses();
+if ($block->getMarketplaceHelper()->isSeller()) { ?>      
+<div class="wk-mp-design">
+    <form action="<?= $block->getSaveAction()?>" method="POST" id="greenline-credential-form" data-mage-init='{"validation":{}}'>
+        <fieldset class="info wk-mp-fieldset fieldset" id="credential-form">
+        <legend class="legend">
+            <span><?= __('Greenline Credential')?></span>
+            <button class="button wk-mp-btn" title="Save" type="submit" id="save-btn">
+                <span><span><?= __('Save')?></span></span>
+            </button>
+        </legend>            
+        <?= $block->getBlockHtml('formkey'); ?>
+        <?= $block->getBlockHtml('seller.formkey'); ?>
+        <div class="fieldset form-list" id="cust">
+            <div class="field required">
+                <label class="label"><?= __('Enable')?></label>
+                <div class="control">
+                    <select name="status" class="required-entry">
+                    <?php foreach ($statuses as $status): ?>
+                        <option value="<?= $block->escapeHtml($status['value']) ?>" <?php if($configuration->getStatus() == $status['value']){ echo 'selected="selected"'; } ?>><?= $block->escapeHtml($status['label'])?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label"><?= __('Company Id')?></label>
+                <div class="control">
+                    <input class="input-text required-entry validate-no-html-tags" value="<?= $configuration->getCompanyId()?>" name="company_id" id="autocompleteform" type="text" />
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label"><?= __('Location Id')?></label>
+                <div class="control">
+                    <input class="required-entry input-text" value="<?= $configuration->getLocationId()?>" name="location_id" id="location_id" type="text" />
+                </div>
+            </div>
+            <!--<div class="field required">
+                <label class="label"><?= __('API Key')?></label>
+                <div class="control">
+                    <input class="required-entry input-text" value="<?= $configuration->getApiKey()?>" name="api_key" id="api_key" type="password" />
+                </div>
+            </div>-->
+        </div>
+        </fieldset>
+    </form>
+    
+    <!--<fieldset class="fieldset info wk-mp-fieldset" id="import_greenline_products">
+        <legend class="legend">
+            <span><?php /* @escapeNotVerified */ echo __('Import Greenline Products') ?></span>
+        </legend>
+        <div class="fieldset form-list" id="cust">
+            <div class="field required">
+                <label class="label"><?php echo __('Import Products ')?></label>
+                <div class="control">
+                    <?php $disabled = '';
+                        if(sizeof($sellerCronData) > 0){
+                            $disabled = 'disabled="disabled"';
+                        }
+                    ?>
+                    <button class="button" title="import-product-btn" type="button" id="import-product-btn" <?= $disabled ?>>
+                    <span><span><?php echo __('click here')?></span></span>
+                    </button>
+                    <?php $time = '';
+                          $display = 'style="display: none;"';
+                        if(sizeof($sellerCronData) > 0){
+                            $time = $sellerCronData['updated_at'];
+                            $display = '';
+                        } 
+                    ?>
+                    <div class="sellercron_message" <?= $display ?>>
+                        <p style="color: green;"><?= __('You have requested for Greenline product import at ') ?>
+                            <span id="sellercrontime"><?= $time ?></span>
+                        </p>
+                        <p style="color: green;"><?= __('Import process is running. Please wait...') ?></p>
+                    </div>
+                    <p style="color: red;"><?= __('*Note - Import process takes at least 10-15 minutes.') ?></p>
+                </div>
+            </div>
+        </div>
+    </fieldset>-->
+
+    <div class="buttons-set">
+        <p class="back-link">
+            <a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; <?= /* @escapeNotVerified */ __('Back') ?></a>
+        </p>
+    </div>
+</div>
+
+<!--<script type="text/javascript">
+require(["jquery"],function($) {
+
+    $( document ).ready(function() {
+        manage_import_greenline_products($('#credential-form select[name=status]').val());
+    });
+
+    $('#credential-form select[name=status]').on('change', function() {
+        manage_import_greenline_products($(this).val());
+    });
+
+    function manage_import_greenline_products(value){
+        if(value == 0){
+            $('#import_greenline_products').hide();
+        }else{
+            $('#import_greenline_products').show();
+        }
+    }
+});
+</script>-->
+
+<?php /*if(sizeof($sellerCronData) < 1){ ?>
+<script type="text/javascript">
+require(["jquery"],function($) {
+    
+    $("#import-product-btn").click(function () {
+
+        if(confirm("Do you really want to sync all your products from Greenline? This will overwrite all your existing Aflora store products with Greenline Products")){
+            var sellerId = '<?php echo $configuration->getSellerId() ?>';
+            var ajaxUrl = "<?php echo $this->getUrl().'greenlineapi/sellercron/run?seller_id='?>";
+            if (sellerId != '' ) {
+                $('body').trigger('processStart');
+                var ajaxUrl = ajaxUrl+sellerId;
+                $.ajax({
+                    url: ajaxUrl,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        seller_id: sellerId,
+                    },
+                complete: function(response) { 
+                        $('body').trigger('processStop');            
+                        seller_response = response.responseJSON.seller_response;
+                        $('#sellercrontime').html(seller_response.updated_at);
+                        $("#import-product-btn").attr('disabled', 'disabled');
+                        $('.sellercron_message').show();
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        $('body').trigger('processStop');
+                        console.log('Error happens. Try again.');
+                    }
+                });
+            }
+        }else{
+            return false;
+        }
+    });
+});
+</script>
+<?php }*/ ?>
+
+<?php } ?>

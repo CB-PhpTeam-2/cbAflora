@@ -1,0 +1,39 @@
+Verify,Verify
+"Credentials are required to verify phone number","Credentials are required to verify phone number"
+"Phone number is required","Phone number is required"
+"Please enter a valid phone number with country code (Ex: +918888888888)","Please enter a valid phone number with country code (Ex: +918888888888)"
+"Invalid Twilio account cedentials","Invalid Twilio account cedentials"
+"Validation code","Validation code"
+Sandbox,Sandbox
+Live,Live
+No,No
+Yes,Yes
+"Hi %1, your product %2 approved by Admin","Hi %1, your product %2 approved by Admin"
+"Hi %1, your seller account approved by admin on %2","Hi %1, your seller account approved by admin on %2"
+"Hi %1, your product %2 deny by admin on %3 For reason please check your mail at %4","Hi %1, your product %2 deny by admin on %3 For reason please check your mail at %4"
+"Hi %1, you seller account deny by admin on %2 For reason please check your mail at %3","Hi %1, you seller account deny by admin on %2 For reason please check your mail at %3"
+"Hi %1, your product %2 disapproved by admin","Hi %1, your product %2 disapproved by admin"
+"Hi %1, your seller account Disapproved by admin on %2","Hi %1, your seller account Disapproved by admin on %2"
+"Hi Seller %1, your Order #%2 for item(s) %3 has been invoiced. Please visit %4 or check your mail %5 for more details","Hi Seller %1, your Order #%2 for item(s) %3 has been invoiced. Please visit %4 or check your mail %5 for more details"
+and,and
+"Hi Seller %1, the Order #%2 for item(s) %3 has been canceled, Please visit %4 or check your mail %5 for more details","Hi Seller %1, the Order #%2 for item(s) %3 has been canceled, Please visit %4 or check your mail %5 for more details"
+"Hi Seller %1, the Order %2 for item(s) %3 has been cancelled, Please visit %4 or check your mail %5 for more details","Hi Seller %1, the Order %2 for item(s) %3 has been cancelled, Please visit %4 or check your mail %5 for more details"
+"Hi %1, A creditmemo has been generated for your Order %2 for item(s) %3, Please visit %4 or check your mail %5 for more details","Hi %1, A creditmemo has been generated for your Order %2 for item(s) %3, Please visit %4 or check your mail %5 for more details"
+"Hi Seller %1, A Creditmemo for item(s) %2 has been generated for your Order #%3, Please visit %4 or check your mail %5 for more details","Hi Seller %1, A Creditmemo for item(s) %2 has been generated for your Order #%3, Please visit %4 or check your mail %5 for more details"
+"Hi %1, An Invoice for item(s) %2 for your Order #%3 has been generated, Please visit %4 or check your email %5 for more details","Hi %1, An Invoice for item(s) %2 for your Order #%3 has been generated, Please visit %4 or check your email %5 for more details"
+"Hi %1, your Order #%2 for item(s) %3 has been successfully placed, Please visit %4 or check your email %5 for more details","Hi %1, your Order #%2 for item(s) %3 has been successfully placed, Please visit %4 or check your email %5 for more details"
+"Hi Seller %1, an Order #%2 for item(s) %3 has been placed, Please visit %4 or check your mail %5 for more details","Hi Seller %1, an Order #%2 for item(s) %3 has been placed, Please visit %4 or check your mail %5 for more details"
+"Hi Seller %1, The item(s) %2 has been shipped with Shipment Id #%3 for Order #%4. Please visit %5 or check your mail %6 for more details","Hi Seller %1, The item(s) %2 has been shipped with Shipment Id #%3 for Order #%4. Please visit %5 or check your mail %6 for more details"
+"Hi %1, The items(s) %2 has been shipped with Shipment Id #%3 for your Order #%4. Please visit %5 or check your mail %6 for more details","Hi %1, The items(s) %2 has been shipped with Shipment Id #%3 for your Order #%4. Please visit %5 or check your mail %6 for more details"
+"Verify Number","Verify Number"
+"Unable to verify Phone Number.","Unable to verify Phone Number."
+Webkul,Webkul
+"Marketplace Twilio Configuration Settings","Marketplace Twilio Configuration Settings"
+"Account Type","Account Type"
+Enabled,Enabled
+"Enable Customer Notification","Enable Customer Notification"
+"Account SID","Account SID"
+"Auth Token","Auth Token"
+"Twilio Phone Number","Twilio Phone Number"
+"Use number include + prefix","Use number include + prefix"
+"Seller Phone Number","Seller Phone Number"

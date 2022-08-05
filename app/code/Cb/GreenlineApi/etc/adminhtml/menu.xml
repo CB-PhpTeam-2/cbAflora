@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+		<add id="Cb_GreenlineApi::greenlineapi_logs_manage" 
+			title="Greenline Manager" translate="title" 
+			module="Cb_GreenlineApi" 
+			sortOrder="10" 
+			resource="Magento_Backend::content"
+		/>
+
+		<add id="Cb_GreenlineApi::greenlineapi_order_export_history" 
+			title="Parked Sales History" translate="title" 
+			module="Magento_Backend" 
+			sortOrder="10" 
+			parent="Cb_GreenlineApi::greenlineapi_logs_manage" 
+			resource="Cb_GreenlineApi::greenlineapi_order_export_history"
+			action="greenlineapi/exportorder/index" 
+		/>
+
+		<add id="Cb_GreenlineApi::configuration" 
+			title="Configuration" translate="title" 
+			module="Magento_Backend" 
+			sortOrder="20" 
+			parent="Cb_GreenlineApi::greenlineapi_logs_manage" 
+			resource="Cb_GreenlineApi::configuration"
+			action="adminhtml/system_config/edit/section/greenlineapi"
+		/>
+	</menu>
+</config>

@@ -1,0 +1,75 @@
+<?php
+/**
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$ids = [];
+?>
+<fieldset class="fieldset admin__fieldset fieldset-wide" id="layered_base_fieldset">
+    <legend class="admin__legend legend">
+        <span><?= /* @noEscape */ $block->escapeHtml(__("Options"));?></span>
+    </legend>
+</fieldset>
+<div class="wk-main">
+    <table class="data-grid data-grid-draggable">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td><?= /* @noEscape */ $block->escapeHtml(__("Title"));?></td>
+                <td><?= /* @noEscape */ $block->escapeHtml(__("Image"));?></td>
+            </tr>
+        </thead>
+    <tbody>
+    <?php $selectedOption = $block->selectedOption($block->getRequest()->getParam('id'));?>
+        <?php
+         $i = 0;
+         $allOptions = $block->options($block->getRequest()->getParam('id'));
+     
+        foreach ($allOptions as $opt) {
+            $checked = '';
+            if (in_array($opt['value'], $selectedOption)) {
+                $checked = 'checked';
+                $ids[] = $opt['value'];
+            } ?>
+            <tr>
+                <td><input type="checkbox" name="ids[]" id="check-<?= /* @noEscape */ $block->escapeHtml($i);?>" 
+                <?= /* @noEscape */ $block->escapeHtml($checked);?> 
+                value="<?= /* @noEscape */ $block->escapeHtml($opt['value']);?>">
+                <?php if ($checked == 'checked') { ?>
+                    <input type="hidden" value="<?= /* @noEscape */ $block->escapeHtml($opt['label']);?>" 
+                    id="checkOpt-<?= /* @noEscape */ $block->escapeHtml($i);?>" name="attributeName[]"/ >
+                <?php } ?>
+                
+                </td>
+                <td><?= /* @noEscape */ $block->escapeHtml($opt['label']);?></td>
+                <td><div class="image"><input type="file" 
+                name="image-<?= /* @noEscape */ $block->escapeHtml($opt['value']);?>" 
+                id="inputImg-<?= /* @noEscape */ $block->escapeHtml($i);?>" ></div>
+                <?php
+                  $optionDetail = $block->optionData($opt['value'], $block->getRequest()->getParam('id'));
+                if ($optionDetail->getImagePath()) {
+                    echo '<div class="carousel">
+                    <img id="img-'.$block->escapeHtml($i).'" 
+src="'.$block->escapeHtml($block->getBaseUrl()).'pub/media/'.($block->escapeHtml($optionDetail->getImagePath())).'"  
+                    class="carouselImg"></div>';
+                }
+                ?>
+                </td>
+            </tr>
+            <?php
+            $i++;
+        } ?>
+    </tbody>
+</table>
+   <input type="hidden" value="<?= /* @noEscape */  implode(',', $ids);?>" name="alreadOptionIds" >
+</div>
+<script type="text/x-magento-init">
+    {
+        "body" : {
+             "customjs": {}
+        }
+    }
+</script>

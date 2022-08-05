@@ -1,0 +1,103 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php $_helper = $this->helper(Magento\Catalog\Helper\Output::class); ?>
+<?php $_product = $block->getProduct(); ?>
+
+<div class="product-add-form">
+    <form data-product-sku="<?= $block->escapeHtmlAttr($_product->getSku()) ?>"
+          action="<?= $block->escapeUrl($block->getSubmitUrl($_product)) ?>" method="post"
+          id="product_addtocart_form"<?php if ($_product->getOptions()) :?> enctype="multipart/form-data"<?php endif; ?>>
+        <input type="hidden" name="product" value="<?= (int)$_product->getId() ?>" />
+        <input type="hidden" name="selected_configurable_option" value="" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <input type="hidden" name="item"  value="<?= (int)$block->getRequest()->getParam('id') ?>" />
+        <?= $block->getBlockHtml('formkey') ?>
+        <?= $block->getChildHtml('form_top') ?>
+        <?php if (!$block->hasOptions()) :?>
+            <?= $block->getChildHtml('product_info_form_content') ?>
+        <?php else :?>
+            <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1') :?>
+                <?= $block->getChildChildHtml('options_container') ?>
+            <?php endif;?>
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2') :?>
+            <?= $block->getChildChildHtml('options_container') ?>
+        <?php endif;?>
+        <?= $block->getChildHtml('form_bottom') ?>
+
+	    <div class="attribute_info">
+            <div class="attr_para">
+    	        <?php $uom = $_product->getResource()->getAttribute('uom')->getFrontend()->getValue($_product); ?>
+
+    	        <?php if($_product->getData('thc_low') != '' && $_product->getData('thc_high') != '') { ?>
+    	        <p><b><?= __('THC'); ?> : </b><?= round($_product->getData('thc_low'), 2).$uom; ?> - <?= round($_product->getData('thc_high'), 2).$uom; ?></p>
+    	    	<?php } ?>
+
+    	    	<?php if($_product->getData('cbd_low') != '' && $_product->getData('cbd_high') != '') { ?>
+    	        <p><b><?= __('CBD'); ?> : </b><?= round($_product->getData('cbd_low'), 2).$uom; ?> - <?= round($_product->getData('cbd_high'), 2).$uom; ?></p>
+    	        <?php } ?>
+            </div>
+
+            <?php $swatchAttributes = ['aroma', 'feeling', 'activity'];
+                  foreach ($swatchAttributes as $swatchAttribute) {
+                        if($_product->getData($swatchAttribute) != ''){
+                        
+                        $attributeOptions = $_product->getResource()->getAttribute($swatchAttribute)->getFrontend()->getValue($_product);
+                        $attributeOptionsArr = [];
+                        $attributeOptionsArr = explode(",", trim($attributeOptions));
+                        $attributeOptionsArr = array_values($attributeOptionsArr);
+                        
+                        $attributeHtml  =  '';
+                        $attributeHtml .= '<div class="aflora-attr">
+                                                <div class="aflora-attr-parent">
+                                                    <span>'. __($_product->getResource()->getAttribute($swatchAttribute)->getStoreLabel()).'</span>
+                                                </div>';
+
+                        
+                            $attributeHtml .=  '<div class="aflora-attr-child">
+                                                   <ul>';
+                            foreach ($attributeOptionsArr as $key => $optionLabel) {
+                                $img_name = str_replace(' ','_',strtolower(trim($optionLabel)));
+                                $img_Url = $this->getViewFileUrl('Magento_Catalog::images/product/'.$img_name.'.png');
+                                $imageHtml = '';
+                                //if($swatchAttribute != 'aroma'){
+                                    $imageHtml = '<img src="'.$img_Url.'" alt="'.$img_name.'"/>';
+                                //}
+                                $attributeHtml .=   '<li>
+                                                        <span>'.$imageHtml.'</span>'.
+                                                        $optionLabel.
+                                                    '</li>';
+                            }
+                            $attributeHtml .=  '   </ul>
+                                               </div>
+                                        </div>';
+                            echo $attributeHtml;
+                        }
+                  }
+            ?>
+		</div>
+    </form>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=priceBox][data-price-box=product-id-<?= $block->escapeHtml($_product->getId()) ?>]": {
+            "priceBox": {
+                "priceConfig":  <?= /* @noEscape */ $block->getJsonConfig() ?>
+            }
+        }
+    }
+</script>

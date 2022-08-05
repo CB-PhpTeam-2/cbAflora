@@ -1,0 +1,109 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$viewModel = $block->getViewModel();
+?>
+<?php if ($block->canShowBlock()): ?>
+    <div class="block filter wk-horizontol-filters" id="layered-filter-block" 
+    data-mage-init='{"collapsible":{"openedState": "active", 
+    "collapsible": true, "active": false, "collateral": { "openedState":   
+    "filter-active", "element": "body" } }}'>
+        <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+        <div class="block-title filter-title" 
+        data-count="<?= /* @noEscape */   $block->escapeHtml($filtered); ?>">
+            <strong data-role="title"><?= /* @noEscape */   $block->escapeHtml(__('Shop By')) ?></strong>
+        </div>
+        <div class="block-content filter-content">
+            <?= /* @noEscape */ $block->getChildHtml('state.hl') ?>
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+               
+            <?php endif; ?>
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter):
+                $attributeCode =  $filter->getRequestVar();
+           
+                $attributeType = $viewModel->checkAttributeDisplayType($attributeCode);
+                if ($attributeCode == 'rat') {
+                    continue;
+                }
+                if ($attributeType->getIsDisplay() != 1) {
+                    continue;
+                }
+                ?>
+                <?php if ($filter->getItemsCount()): ?> 
+                    <?php if (!$wrapOptions): ?>
+                        <div class="filter-options narow-by-list-hz" id="narrow-by-list" data-role="content" 
+                        data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, 
+                        "multipleCollapsible": false}}'>
+                        <?php  $wrapOptions = true;
+                    endif; ?>
+                    <div data-role="collapsible" class="filter-options-item" 
+                    id="wk-tab-<?= /* @noEscape */  $attributeCode?>">
+                        <div data-role="title" class="filter-options-title" 
+                        data-attr-tabval = "<?= /* @noEscape */ $attributeCode?>" >
+                        <?= /* @noEscape */   $block->escapeHtml(__($filter->getName())) ?></div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+           
+            <?php if ($wrapOptions):?>
+                </div>
+                <?php foreach ($block->getFilters() as $filter):
+                    $attributeCode =  $filter->getRequestVar();
+                    $attributeType = $viewModel->checkAttributeDisplayType($attributeCode);
+                    if ($attributeType->getIsDisplay() != 1) {
+                        continue;
+                    }
+                    ?>
+                <div class="data-content-<?= /* @noEscape */  $attributeCode?> no-display">
+                    <?= /* @noEscape */  $block->getChildBlock('renderer.hl')->render($filter); ?></div>
+        <?php endforeach; ?>
+            <?php else: ?>
+                <script type="x-magento-init">
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $('#layered-filter-block').addClass('filter-no-options');
+                    });
+                </script>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>
+<?php
+     $formData = [
+        'category_url' => $block->getChildBlock('state.hl')->getClearUrl()
+     ];
+     $viewModel = $block->getViewModel();
+     $serializedFormData = $viewModel->getJsonHelper()->jsonEncode($formData);
+        ?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "customlayer":  <?= /* @noEscape */  $serializedFormData; ?>
+        }
+    }
+</script>
+<script type="text/javascript">
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+    $(".filter-options-title").on('click',function(){
+         var tabId = $(this).attr('data-attr-tabval');
+         $("div[class^=data-content]").addClass('no-display');
+         if(typeof(tabId) !== undefined) {
+             $('.data-content-'+tabId).removeClass('no-display');
+         }
+        
+    });
+});
+</script>

@@ -1,0 +1,144 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$filteredAttribute = [];
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getAdvanceNavHelper();
+$currencySymbol = $helper->getCurrencySymbol();
+?>
+<div class="wk_layer_loader_bg"><span></span></div>
+<?php $_filters = $block->getActiveFilters();?>
+<?php if (!empty($_filters)): ?>
+<div class="filter-current">
+    <strong class="block-subtitle filter-current-subtitle"
+            role="heading"
+            aria-level="2"
+            data-count="<?= /* @noEscape */ count($_filters); ?>">
+            <?= /* @noEscape */   $block->escapeHtml(__('Now Shopping by')) ?></strong>
+    <ol class="items">
+        <?php foreach ($_filters as $_filter):
+
+                $label = '';
+                if($_filter->getName() == "THC High"){
+                    $label = "THC";
+                }else if($_filter->getName() == "CBD High"){
+                    $label = "CBD";
+                }else{
+                    $label = $_filter->getName();
+                }
+                
+                $value = $_filter->getValueString();
+
+            if (in_array($value, $filteredAttribute)) {
+                    continue;
+            }
+                array_push($filteredAttribute, $value);
+                $currenturl = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+            if ($label != 'Price' && strpos($currenturl, '_'.$value.'_') !== false) {
+                $url = str_replace('_'.$value.'_', "_", $currenturl);
+            } elseif ($label != 'Price' && strpos($currenturl, '_'.$value) !== false) {
+                $url = str_replace('_'.$value, "", $currenturl);
+            } elseif ($label != 'Price' && strpos($currenturl, $value.'_') !== false) {
+                $url = str_replace($value.'_', "", $currenturl);
+            } elseif ($label == 'Category') {
+                $url = str_replace('cat='.$value, "", $currenturl);
+            } else {
+                $url = $_filter->getRemoveUrl();
+            }
+            if ($label == 'Category') {
+                $categoryDetail = $helper->getCategory($value);
+                ?>
+            <li class="item">
+                <span class="filter-label"><?= /* @noEscape */ $block->escapeHtml(__($label)); ?></span>
+                <span class="filter-value">
+                <?= /* @noEscape */   $block->escapeHtml($block->stripTags($categoryDetail->getName())) ?>
+                </span>
+                <?php
+                $clearLinkUrl = $_filter->getClearLinkUrl();
+                $currentFilterName = $block->escapeHtml(__($label)) . " " .
+                $block->stripTags($_filter->getLabel());
+                if ($clearLinkUrl):
+                    ?>
+                    <span class="wk-filter-action action previous" 
+                    data-url="<?= /* @noEscape */   $block->escapeHtml($url) ?>"
+                       title="<?= /* @noEscape */   $block->escapeHtml(__('Previous')) ?>">
+                        <span><?= /* @noEscape */   $block->escapeHtml(__('Previous')) ?></span>
+                    </span>
+                    <span class="wk-filter-action action remove"
+                       title="<?= /* @noEscape */ $block->escapeHtml($_filter->getFilter()->getClearLinkText()) ?>"
+                       data-url="<?= /* @noEscape */   $block->escapeHtml($clearLinkUrl) ?>">
+                        <span>
+                        <?= /* @noEscape */ $block->escapeHtml($_filter->getFilter()->getClearLinkText()) ?>
+                        </span>
+                    </span>
+                <?php else: ?>
+                    <span class="wk-filter-action action remove" 
+                    data-url="<?= /* @noEscape */   $block->escapeHtml($url) ?>"
+                    title="<?= /* @noEscape */
+                    $block->escapeHtml(__('Remove')) . " " . $block->escapeHtml($currentFilterName);?>">
+                    <span><?= /* @noEscape */   $block->escapeHtml(__('Remove This Item')) ?></span>
+                    </span>
+                <?php endif; ?>
+            </li>
+            <?php } else { ?>
+                    <li class="item">
+                <span class="filter-label"><?= /* @noEscape */ $block->escapeHtml(__($label)); ?></span>
+                <span class="filter-value">
+                    <?php if($label == "THC" || $label == "CBD"){ ?>
+                        <?php $labtxt = str_replace($currencySymbol,"",$_filter->getLabel()); ?>
+                        <?= /* @noEscape */   $block->escapeHtml($block->stripTags($labtxt)) ?>
+                    <?php }else{ ?>
+                        <?= /* @noEscape */   $block->escapeHtml($block->stripTags($_filter->getLabel())) ?>
+                    <?php } ?>
+                </span>
+                <?php
+                $clearLinkUrl = $_filter->getClearLinkUrl();
+                $currentFilterName = $block->escapeHtml(__($label)) . " " .
+                $block->stripTags($_filter->getLabel());
+                if ($clearLinkUrl):
+                    ?>
+                    <span class="wk-filter-action action previous" 
+                    data-url="<?= /* @noEscape */   $block->escapeHtml($url) ?>"
+                       title="<?= /* @noEscape */   $block->escapeHtml(__('Previous')) ?>">
+                        <span><?= /* @noEscape */   $block->escapeHtml(__('Previous')) ?></span>
+                    </span>
+                    <span class="wk-filter-action action remove"
+                       title="<?= /* @noEscape */ $block->escapeHtml($_filter->getFilter()->getClearLinkText()) ?>"
+                       data-url="<?= /* @noEscape */   $block->escapeHtml($clearLinkUrl) ?>">
+                        <span>
+                        <?= /* @noEscape */ $block->escapeHtml($_filter->getFilter()->getClearLinkText()) ?>
+                        </span>
+                    </span>
+                <?php else: ?>
+                    <span class="wk-filter-action action remove" 
+                    data-url="<?= /* @noEscape */   $block->escapeHtml($url) ?>"
+                       title="<?= /* @noEscape */
+                        $block->escapeHtml(__('Remove')) . " " . $block->escapeHtml($currentFilterName);?>">
+                        <span><?= /* @noEscape */   $block->escapeHtml(__('Remove This Item')) ?></span>
+                    </span>
+                <?php endif; ?>
+            </li>
+            <?php  } ?>
+        <?php endforeach; ?>
+    </ol>
+</div>
+<?php endif; ?>
+<?php
+    $params["_use_rewrite"] = true;
+    $data = json_encode(["url" => $block->getUrl('advancedlayerednavigation/index/setvalues'),
+    "clearUrl" => $block->getUrl('*/*/*', $params)]);
+    ?>
+<script type="text/x-magento-init">
+{
+    "body": {
+        "Webkul_AdvancedLayeredNavigation/js/layerednavigation": <?= /* @noEscape */   $data ?>
+    }
+}
+</script>

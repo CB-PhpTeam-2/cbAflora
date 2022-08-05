@@ -1,0 +1,56 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$isSellerGroup = $helper->isSellerGroupModuleInstalled();
+$magentoCurrentUrl = $block->getCurrentUrl();
+if ($helper->isSeller() && $block->isModuleEnable() && ( (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/addshiparea')) || !$isSellerGroup) || (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/addrate')) || !$isSellerGroup) || (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/origin')) || !$isSellerGroup))) { ?>
+    <li class="level-0 <?= strpos($magentoCurrentUrl, 'mphyperlocal/account')? "current active":"";?>">
+        <a href="#" onclick="return false;" class="">
+            <span><?= __('Hyperlocal')?></span>
+        </a>
+        <div class="wk-mp-submenu">
+            <strong class="wk-mp-submenu-title"><?= __('Hyperlocal')?></strong>
+            <a href="#" class="action-close _close" data-role="wk-mp-close-submenu"></a>
+            <ul>
+                <li data-ui-id="menu-webkul-marketplace-menu" class="item-menu  parent  level-1">
+                    <strong class="wk-mp-submenu-group-title">
+                        <span><?= __('Menu')?></span>
+                    </strong>
+                    <div class="wk-mp-submenu">
+                        <ul>
+                            <?php if (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/addrate')) || !$isSellerGroup) { ?>
+                                <li class="level-2">
+                                    <a href="<?= $block->getUrl('mphyperlocal/account/addrate', ['_secure' => $this->getRequest()->isSecure()]); ?>">
+                                        <span><?= __('Ship Rate') ?></span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/account/origin')) || !$isSellerGroup) { ?>
+                                <li class="level-2">
+                                    <a href="<?= $block->getUrl('mphyperlocal/account/origin', ['_secure' => $this->getRequest()->isSecure()]); ?>">
+                                        <span><?= __('Seller Origin') ?></span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (($isSellerGroup && $helper->isAllowedAction('mphyperlocal/outlet/index')) || !$isSellerGroup) { ?>
+                                <li class="level-2">
+                                    <a href="<?= $block->getUrl('mphyperlocal/outlet/index', ['_secure' => $this->getRequest()->isSecure()]); ?>">
+                                        <span><?= __('Manage Outlet') ?></span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+<?php } ?>

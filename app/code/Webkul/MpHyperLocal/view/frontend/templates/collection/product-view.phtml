@@ -1,0 +1,27 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<div class="wrapper" style="display:none;">
+    <div class="popup">
+        <iframe id="iframe" src="">
+        </iframe>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "wkproductview": {
+                "getAction": "<?= $block->getUrl('mphyperlocal/catalog_product/view'); ?>",
+                "cartUrl": "<?= $block->getUrl('mphyperlocal/index/cartitem'); ?>"
+            }
+        }
+    }
+</script>

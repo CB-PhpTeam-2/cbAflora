@@ -1,0 +1,155 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$helper = $block->getHelper();
+if ($helper->isEnabled()):
+    $address = $helper->getSavedAddress();
+    $address_arr = $block->getAddressList();
+    $template = $block->getConfigure();
+    $img = "background.jpg";
+    if ($template['backgroundImage']) {
+        $img = $template['backgroundImage'];
+    }
+    $imgLink = $block->getUrl('pub/media').'marketplace/hyperlocal/'.$img;
+    $i = 0;
+    $isDiv = true;
+    ?>
+    <style>
+        #save-button {
+            background-color: <?= $block->escapeHtml($template['btnColor']) ?>;
+            border-color: <?= $block->escapeHtml($template['btnColor']) ?>;
+        }
+
+        .wk_search_image {
+            background: linear-gradient(
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)
+            ),
+            url("<?= $block->escapeUrl($imgLink) ?>");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            window.history.pushState('', '', '/');
+        });
+    </script>
+    <div class="lcnlogowrp">
+        <img src='<?php echo $this->getViewFileUrl('images/logo.svg'); ?>' alt="Aflora" />
+    </div>
+    <div class="wk-mp-design mylocation">
+        <div class="wk_search wk_search_image">
+            <div class="wk_search_heading">
+                <h1><?=  $block->escapeHtml(__("Enter Your Location")) ?></h1>
+                <h3>
+                <?= $block->escapeHtml(
+                    __("Search for your location and
+                    we'll get a complete list of available dispensaries for you")
+                ) ?></h3>
+            </div>
+            <div class="service_types">
+                <div class="service-type-tabs">
+                    <div class="pickup-tab">
+                        <input class="required-entry" value="2" name="service_type" type="radio" id="pck-1" checked/><label class="label" for="pck-1"><?= __('Pickup')?></label>
+                    </div>
+                    <div class="delivery-tab">
+                        <input class="required-entry" value="1" name="service_type" type="radio" id="dlr-1" /><label class="label" for="dlr-1"><?= __('Delivery')?></label>
+                    </div>
+                </div>
+                 <a class="wk_ssp_current_location"><svg width="21px" height="21px" fill="#677882" viewBox="0 0 21 21"><path fill-rule="evenodd" clip-rule="evenodd" d="M15 10.5a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm-1.5 0a3 3 0 11-6 0 3 3 0 016 0z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M11.25 18.716a8.252 8.252 0 007.466-7.466h1.534a.75.75 0 000-1.5h-1.534a8.252 8.252 0 00-7.466-7.466V.75a.75.75 0 00-1.5 0v1.534A8.252 8.252 0 002.284 9.75H.75a.75.75 0 000 1.5h1.534a8.252 8.252 0 007.466 7.466v1.534a.75.75 0 001.5 0v-1.534zM3.75 10.5a6.75 6.75 0 1113.5 0 6.75 6.75 0 01-13.5 0z"></path></svg> Use Current Location</a>
+            </div>
+            <div class="wk_search_search">
+                
+                <input class="input-text" id="autocomplete" data-address-id="0" type="text" 
+                data-lat="<?= $address ? $block->escapeHtml($address['latitude']) :'' ?>" 
+                data-lng="<?= $address ? $block->escapeHtml($address['longitude']) : ''?>" 
+                data-city="<?= $address ? $block->escapeHtml($address['city']) : '' ?>" 
+                data-state="<?= $address ? $block->escapeHtml($address['state']) :'' ?>" 
+                data-country="<?= $address ? $block->escapeHtml($address['country']) :'' ?>" 
+                data-state_code="<?= $address ? $block->escapeHtml($address['stateCode']) :'' ?>" 
+                data-postcode="<?= $address ? $block->escapeHtml($address['postcode']) : "" ?>" 
+                data-country_code="<?= $address ? $block->escapeHtml($address['countryCode']) : '' ?>"
+                name="address" value="<?= $address ? $block->escapeHtml($address['address']) : ''?>" />
+                <button id="save-button" title="Search Nearby Stores" class="action primary" type="submit">
+                    <span><?= $block->escapeHtml(__('Go')); ?></span>
+                </button>
+            </div>
+        </div>
+        <?php if (count($address_arr)): ?>
+            <div class="wk-address">
+                <div class="wk_search_heading" id="wk-address">
+                    <h1><?= $block->escapeHtml(__("Your Addresses")) ?></h1>
+                    <h3><?= $block->escapeHtml(__("You can select one of the address used before. Just
+                     click the button to set the location again.")) ?></h3>
+                </div>
+                <?php foreach ($address_arr as $customerAddress):
+                    $city = $customerAddress->getCity();
+                    $state = $customerAddress->getRegion()->getRegion();
+                    $stateCode = $customerAddress->getRegion()->getRegionCode();
+                    $countryId = $customerAddress->getCountryId();
+                    $postcode = $customerAddress->getPostCode();
+                    $country = $countryId ? $block->getCountryname($countryId) : '';
+                    $isDefault = $customerAddress->isDefaultShipping();
+                    $customerName = $customerAddress->getFirstName().' '.$customerAddress->getLastName();
+                    $addressval = $city."+".$postcode."+".$countryId;
+                    if ($i%4 == 0):
+                        echo '<div class="mp-row">';
+                        $isDiv = false;
+                    endif; ?>
+                    <div class="mp-column">
+                        <div><?= $block->escapeHtml($customerName); ?></div>
+                        <div><?= $block->escapeHtml(implode(', ', $customerAddress->getStreet())); ?></div>
+                        <div><?= $block->escapeHtml($city); ?></div>
+                        <div>
+                            <button class="button wk-btn <?= $isDefault?'primary' : 'ship'; ?>" 
+                            data-country="<?= $block->escapeHtml($country) ?>" 
+                            data-city="<?= $city ? $block->escapeHtml($city) : '' ?>" 
+                            data-state="<?= $state ? $block->escapeHtml($state) : '' ?>" 
+                            data-state_code = "<?= $block->escapeHtml($stateCode) ?>" 
+                            data-country_code = "<?= $block->escapeHtml($countryId) ?>" 
+                            data-address="<?= $block->escapeHtml($addressval) ?>" 
+                            data-postcode="<?= $block->escapeHtml($postcode) ?>" 
+                            data-address-id="<?= $block->escapeHtml($customerAddress->getId()) ?? 0 ?>">
+                                <?= $isDefault ? 'Selected' : 'Ship Here'; ?>
+                            </button>
+                        </div>
+                    </div>
+                    <?php if ($i%4 == 3):
+                        echo '</div>';
+                        $isDiv = true;
+                    endif;
+                    $i++;
+                endforeach;
+                if (!$isDiv):
+                    echo '</div>';
+                endif; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+<script>
+    require.config({
+        map: {
+            '*': {
+                'googleMapPlaceLibrary': "<?= 'https://maps.googleapis.com/maps/api/js?key='.
+                $block->escapeHtml($helper->getGoogleApiKey()).'&v=3.exp&libraries=places'; ?>"
+            }
+        }
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "address": {}
+        }
+    }
+</script>

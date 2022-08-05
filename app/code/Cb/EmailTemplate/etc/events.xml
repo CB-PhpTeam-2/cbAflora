@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- <event name="cb_email_collect_additional_vars">
+        <observer name="cb_mail_custom_var"
+                  instance="Cb\EmailTemplate\Observer\CustomVar"/>
+    </event> -->
+    <event name="email_order_set_template_vars_before">
+        <observer name="cb_add_custom_variable_to_order"
+                  instance="Cb\EmailTemplate\Observer\SalesOrderTemplateVarsBefore"/>
+    </event>
+    <event name="email_invoice_set_template_vars_before">
+        <observer name="cb_add_custom_variable_to_invoice" instance="Cb\EmailTemplate\Observer\SalesInvoiceTemplateVarsBefore" />
+    </event>
+    <event name="email_shipment_set_template_vars_before">
+        <observer name="add_Custom_variable_to_Order" 
+            instance="Cb\EmailTemplate\Observer\SalesShipmentTemplateVarsBefore" />
+    </event>
+</config>

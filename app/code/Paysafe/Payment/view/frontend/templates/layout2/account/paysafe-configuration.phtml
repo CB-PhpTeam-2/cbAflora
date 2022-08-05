@@ -1,0 +1,57 @@
+<?php
+$configuration = $block->getConfiguration();
+$statuses = $block->getStatuses();
+if ($block->getMarketplaceHelper()->isSeller()) { ?>    
+<div class="wk-mp-design">
+        <form action="<?= $block->getSaveAction()?>" method="POST" id="form-customer-attr-new" data-mage-init='{"validation":{}}'>
+            <fieldset class="info wk-mp-fieldset fieldset" id="associate-product">
+            <legend class="legend">
+                <span><?= __('Add your Paysafe Credential')?></span>
+                <button class="button wk-mp-btn" title="Save" type="submit" id="save-btn">
+                    <span><span><?= __('Save')?></span></span>
+                </button>
+            </legend>            
+            <?= $block->getBlockHtml('formkey'); ?>
+            <?= $block->getBlockHtml('seller.formkey'); ?>
+            <div class="fieldset form-list" id="cust">
+                <div class="field required">
+                    <label class="label"><?= __('API Key')?></label>
+                    <div class="control">
+                        <input class="input-text required-entry validate-no-html-tags" value="<?= $configuration->getPaysafeApiKey()?>" name="paysafe_api_key" id="paysafe_api_key" type="text" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('API Secret Key')?></label>
+                    <div class="control">
+                        <input class="required-entry input-text" value="<?= $configuration->getPaysafeApiSecretKey()?>" name="paysafe_api_secret_key" id="paysafe_api_secret_key" type="password" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Account Number')?></label>
+                    <div class="control">
+                        <input class="required-entry input-text" value="<?= $configuration->getPaysafeAccountNumber()?>" name="paysafe_account_number" id="paysafe_account_number" type="text" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Currency Code')?></label>
+                    <div class="control">
+                        <input class="required-entry input-text" value="<?= $configuration->getPaysafeCurrencycode()?>" name="paysafe_currencycode" id="paysafe_currencycode" type="text" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Currency Base Units Multiplier')?></label>
+                    <div class="control">
+                        <input class="required-entry input-text" value="<?= $configuration->getPaysafeCurrencybaseunitsmultiplier()?>" name="paysafe_currencybaseunitsmultiplier" id="paysafe_currencybaseunitsmultiplier" type="text" />
+                    </div>
+                </div>
+            </div>
+            </fieldset>
+        </form>
+    
+    <div class="buttons-set">
+        <p class="back-link">
+            <a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; <?= /* @escapeNotVerified */ __('Back') ?></a>
+        </p>
+    </div>
+</div>
+<?php } ?>

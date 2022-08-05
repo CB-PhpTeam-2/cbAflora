@@ -1,0 +1,72 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 3.0.5 --------------------------------------
+
+- Bugs fixes.
+
+-------------------------------- Version 3.0.4 --------------------------------------
+
++ Customer notification when a creditmemo is generated.
+
+-------------------------------- Version 3.0.3 --------------------------------------
+
++ Customer notification when order get cancelled.
+
+-------------------------------- Version 3.0.2 --------------------------------------
+
+	+ Customer notification when its order get placed.
+	+ Customer notification when Invoice Generated.
+	+ Customer notification when Shipment Generated.
+	- Bug fixes.
+
+-------------------------------- Version 3.0.1 --------------------------------------
+	
+	+ Version upgraded.
+	- Bug fixes.
+
+-------------------------------- Version 3.0.0 --------------------------------------
+	
+	+ Updated dependencies for making compatible with Magento 2.3.x and Marketplace 3.0.x
+	+ Feature added for verifying the outbound mobile number using Twilio API.
+
+-------------------------------- Version 2.1.0 --------------------------------------
+	
+	+ Updated dependencies for making compatible with magento 2.3.x and marketplace 2.2.x
+
+-------------------------------- Version 2.0.6 --------------------------------------
+
+    + Customer notification when a creditmemo is generated.
+
+-------------------------------- Version 2.0.5 --------------------------------------
+
+    + Customer notification when order get cancelled.
+
+-------------------------------- Version 2.0.4 --------------------------------------
+
+    + Customer notification when its order get placed.
+    + Customer notification when Invoice Generated.
+    + Customer notification when Shipment Generated.
+    - Bug fixes.
+
+-------------------------------- Version 2.0.3 --------------------------------------
+
+	+ Compatible with Magento 2.2.x and Marketplace 2.3.x
+
+-------------------------------- Version 2.0.2 --------------------------------------
+	
+	+ Updated dependencies.
+
+-------------------------------- Version 2.0.1 --------------------------------------
+	
+	+ Code modified according to updated sdk of twilio.
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+	+ Seller will receive SMS at the time of Place order, invoice generation and for order statuses.
+	+ CSV(Translation) file added.
+	+ Seller will receive notification message right to their phone at the time of Seller approval or disapproval.
+	+ Seller will receive SMS at the time of product approval.
+	+ Ability to send message when product order is placed by admin.

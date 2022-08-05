@@ -1,0 +1,47 @@
+/**
+  * @category  Webkul
+  * @package   Webkul_AdvancedLayeredNavigation
+  * @author    Webkul
+  * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+  * @license   https://store.webkul.com/license.html
+*/
+
+.category-right, .attributes-right {
+    float: right;
+    width: 85%
+}
+input.title {
+    width: 60%;
+}
+input.catId {
+    width: 60%;
+}
+label#catId-error {
+    width: 100%;
+}
+.category-div {
+    width: 60%;
+}
+.admin__scope-old label.mage-error {
+    width: 60%;
+}
+.req{
+    color:red;
+}
+.carouselImg{
+    width: 20%;
+    height: 20%;
+}
+.wk-row {
+    margin-bottom: 6%;
+}
+
+.attributes-right select {
+    width: 60%;
+}
+
+.data-grid {
+    border-top: 0.1rem solid #d6d6d6;
+    margin-bottom: 30px;
+}
+

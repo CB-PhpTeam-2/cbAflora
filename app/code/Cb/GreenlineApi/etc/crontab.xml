@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="cb_greenlineapi_cron_first_group">
+        <job name="cb_greenlineapi_cronjob_update_orderstatus" instance="Cb\GreenlineApi\Cron\UpdateOrderStatus" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+    </group> 
+
+    <group id="cb_greenlineapi_cron_second_group">
+        <job name="cb_greenlineapi_cronjob_import_products" instance="Cb\GreenlineApi\Cron\ImportProducts" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+    </group>  
+</config>

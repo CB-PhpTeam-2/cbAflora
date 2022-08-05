@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpTwilioSMSNotification
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="1">
+            <label>Webkul</label>
+        </tab>
+        <section id="twilio" translate="label" type="text" sortOrder="400"
+            showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Twilio Configuration</label>
+            <tab>webkul</tab>
+            <resource>Webkul_MpTwilioSMSNotification::config_mptwiliosmsnotification</resource>
+            <group id="twiliosettings" translate="label" type="text" sortOrder="2"
+                showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Marketplace Twilio Configuration Settings</label>
+                <field id="account" translate="label comment" sortOrder="0" type="select"
+                    showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Account Type</label>
+                    <source_model>Webkul\MpTwilioSMSNotification\Model\Config\Source\AccountType</source_model>
+                </field>
+                <field id="enabled" translate="label comment" sortOrder="1" type="select"
+                    showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Webkul\MpTwilioSMSNotification\Model\Config\Source\Status</source_model>
+                </field>
+                <field id="customer_notification" translate="label comment" sortOrder="2" type="select"
+                    showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Customer Notification</label>
+                    <source_model>Webkul\MpTwilioSMSNotification\Model\Config\Source\CustomerNotification</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="accountsid" translate="label comment" type="obscure" sortOrder="3"
+                    showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Account SID</label>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="authtoken" translate="label comment" type="obscure" sortOrder="4"
+                    showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Auth Token</label>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="twiliophonenumber" translate="label comment" sortOrder="5" type="text"
+                    showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Twilio Phone Number</label>
+                    <validate>required-entry wk-otp-telephone</validate>
+                    <comment>Use number include + prefix</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="verifytwiliophonenumber" translate="label comment" sortOrder="6" type="text"
+                    showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Seller Phone Number</label>
+                    <validate>wk-otp-telephone</validate>
+                    <comment>Use number include + prefix</comment>
+                    <depends>
+                        <field id="account">0</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="verifybutton" translate="label comment" sortOrder="6" type="button"
+                    showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Webkul\MpTwilioSMSNotification\Block\Adminhtml\System\Config\Form\VerifyPhoneNumber</frontend_model>
+                    <depends>
+                        <field id="account">0</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <!--<group id="twiliomessages" translate="label" type="text" sortOrder="2"
+                showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Marketplace Twilio Message Setting</label>
+                <field id="registration" translate="label comment" sortOrder="1" type="textarea" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Message</label>
+                </field>
+                <field id="transaction" translate="label comment" sortOrder="2" type="textarea" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Transaction Message</label>
+                </field>
+            </group>-->
+        </section>
+    </system>
+</config>

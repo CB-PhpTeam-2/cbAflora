@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="advancedlayerednavigation" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Advanced Layered Navigation</label>
+            <tab>webkul</tab>
+            <resource>Webkul_AdvancedLayeredNavigation::config_advancedlayerednavigation</resource>
+
+            <group id="multi_assign" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Advanced Layered Navigation Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_ratings_item" translate="label comment" type="select" sortOrder="2" showInWebsite="1" showInDefault="1" >
+                    <label>Filter By Ratings</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>required-entry</validate>
+                    <comment>If set 'Yes', then you can filter by customer ratings</comment>
+                </field>
+                <field id="choice_attribute_item" translate="label comment" type="select" sortOrder="3" showInWebsite="1" showInDefault="1" >
+                    <label>Carousel Filter</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>required-entry</validate>
+                    <comment>If set 'Yes', then you can filter by attributes of your choice</comment>
+                </field>
+                <field id="backgroundColor" translate="label comment" type="text" showInWebsite="1" sortOrder="3" showInDefault="1" >
+                    <label>Background Color</label>
+                    <validate>required-entry</validate>
+                    <comment>e.g black,#000</comment>
+                     <depends>
+                        <field id="choice_attribute_item">1</field>
+                    </depends>
+                </field>
+                 <field id="borderColor" translate="label comment" type="text" showInWebsite="1" sortOrder="3" showInDefault="1" >
+                    <label>Border Color</label>
+                    <validate>required-entry</validate>
+                     <comment>e.g black,#000</comment>
+                     <depends>
+                        <field id="choice_attribute_item">1</field>
+                    </depends>
+                </field>
+                <field id="imageWidth" translate="label comment" type="text" showInWebsite="1" sortOrder="3" showInDefault="1" >
+                    <label>Image Width</label>
+                    <validate>required-entry validate-number validate-length minimum-length-3 validate-digits validate-greater-than-zero validate-digits-range digits-range-100-2000</validate>
+                    <comment>You can't enter less than 100</comment>
+                    <depends>
+                       <field id="choice_attribute_item">1</field>
+                    </depends>
+                </field>
+                <field id="imageHeight" translate="label comment" type="text" showInWebsite="1" sortOrder="3" showInDefault="1" >
+                    <label>Image Height</label>
+                   <validate>required-entry validate-number validate-length minimum-length-3 validate-digits validate-greater-than-zero validate-digits-range digits-range-100-2000</validate>
+                    <comment>You can't enter less than 100</comment>
+                    <depends>
+                        <field id="choice_attribute_item">1</field>
+                    </depends>
+                </field>
+            </group>            
+        </section>
+    </system>
+</config>

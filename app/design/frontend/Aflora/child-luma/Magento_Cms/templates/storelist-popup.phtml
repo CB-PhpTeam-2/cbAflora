@@ -1,0 +1,61 @@
+<?php $_sellerCollection = $this->getSellerCollection(); ?>
+<div id="dispensaries-popup-modal">
+    <?php if($_sellerCollection->getSize() > 0){ ?>
+        <div class="dispensaries_choose">
+            <label><?= __('Please select Dispensary'); ?></label>
+            <select name="dispensaries" class="dispensary_select">
+               <option value=""><?= __('--- Please select ---'); ?></option>
+               <?php foreach ($_sellerCollection as $key => $seller_coll) { ?>
+                    <?php 
+                        $shoptitle = '';
+                        $shoptitle = $seller_coll->getShopTitle();
+                        if (!$shoptitle) {
+                            $shoptitle = $seller_coll->getShopUrl();
+                        }
+
+                        /*$originAddress = "";
+                        if ($seller_coll->getOriginAddress()) {
+                            $originAddress = $seller_coll->getOriginAddress();
+                        }*/
+                    ?>
+                  <option value="<?php echo $seller_coll->getSellerId(); ?>"><?php echo __($shoptitle); ?></option>
+               <?php } ?>
+            </select>
+        </div>
+    <?php }else{ ?>
+      <h2><?= __('There are no availbale dispensaries.'); ?></h2>
+   <?php } ?>
+</div>
+
+<script type="text/javascript">
+require([
+  'jquery',
+  'mage/url',
+],
+function($, urlBuilder) {
+  $('#dispensaries-popup-modal .dispensary_select').change(function(){
+       var value = $.trim($(this).val());
+      if(value != '' && !isNaN(value)){
+          var sessionUrl= "<?php echo $this->getUrl('mphyperlocal/session/index') ?>";
+          var guidetoolUrl = "<?php echo $this->getUrl('get-recommendation') ?>";
+          $.ajax({
+              url: sessionUrl,
+              type: 'POST',
+              dataType: 'json',
+              data: {
+                  seller_id: value
+              },
+          complete: function(response) {             
+              status_val = response.responseJSON.status;         
+                 if(status_val == 1){
+                    window.location.href = guidetoolUrl;
+                 }
+              },
+              error: function (xhr, status, errorThrown) {
+                  console.log('Error happens. Try again.');
+              }
+          });
+      }
+  });
+});
+</script>   

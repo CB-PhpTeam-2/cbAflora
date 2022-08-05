@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2019 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_DeleteOrders
+ */
+-->
+<!--
+/**
+ * Copyright © 2018 Aitoc. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="aitoc_delete_orders_action" instance="Aitoc\DeleteOrders\Cron\OrderProcess" method="execute">
+            <schedule>0 12 * * *</schedule>
+        </job>
+    </group>
+</config>

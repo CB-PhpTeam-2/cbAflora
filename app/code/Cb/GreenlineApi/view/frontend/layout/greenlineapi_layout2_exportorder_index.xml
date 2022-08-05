@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="seller-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="marketplace_styles"/>
+    <head>
+        <css src="Cb_GreenlineApi::css/styles-ui.css"/>
+    </head>
+    <body>
+        <referenceContainer name="seller.content">
+            <block class="Cb\GreenlineApi\Block\Exportorder" name="greenlineapi_exportorder" template="exportorder/exportorder.phtml" cacheable="false"/>
+        </referenceContainer>
+        <referenceBlock name="greenlineapi_exportorder">
+            <uiComponent name="greenlineapi_exportorder_listing"/>
+        </referenceBlock>
+    </body>
+</page>

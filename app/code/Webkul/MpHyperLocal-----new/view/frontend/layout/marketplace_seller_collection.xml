@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- /*
+* Webkul Software
+*
+* @category Webkul
+* @package Webkul_MpHyperLocal
+* @author Webkul
+* @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+* @license https://store.webkul.com/license.html
+*/ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  layout="seller-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_MpHyperLocal::css/productsearch.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Webkul\MpHyperLocal\Block\ProductSearch" name="seller_collection_search" template="Webkul_MpHyperLocal::collection/search.phtml" cacheable="false" />
+            <block class="Webkul\MpHyperLocal\Block\ProductSearch" name="seller_product_view" template="Webkul_MpHyperLocal::collection/product-view.phtml" cacheable="false" />
+        </referenceContainer>
+    </body>
+</page>

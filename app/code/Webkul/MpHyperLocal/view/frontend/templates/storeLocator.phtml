@@ -1,0 +1,299 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$helper = $this->helper(\Webkul\Marketplace\Helper\Data::class);
+$mpHyphelper = $this->helper(\Webkul\MpHyperLocal\Helper\Data::class);
+$storeLocatorUrl = $this->getUrl('store-locator');
+$radiousUnit = $mpHyphelper->getRadiusUnitValue();
+$pickupServiceRadius = $mpHyphelper->getHyperLocalConfig('pickup_service_radius');
+$params = $this->getRequest()->getParams();
+$radiusParam = '';
+if(array_key_exists('radius', $params)){
+    $radiusParam = $params['radius'];
+}
+$outletCollection = $block->getOutletCollection();
+$location = [];
+
+$selectedAddress = 'Oshawa';
+$savedAddress = $mpHyphelper->getSavedAddress();
+if (sizeof($savedAddress) > 0) {
+    $selectedAddress = $savedAddress['address'];
+}
+?>
+<div class="wk-mp-design wk-mp-landingpage">
+
+    <div class="wk_ssp_advance_search">
+        <div class="wk_ssp_advance_search_content">
+            <h1 class="h3">Find an Authorized Store</h1>
+            <p>All licensed retailers are regulated by the AGCO.</p>
+        </div>
+        <div class="wk_ssp_advsearch_box">
+            <div class="label">
+                <span class="wk_ssp_heading"><?= /* @noEscape */ __('Search within'); ?>:</span>
+            </div>
+            <div class="select_radius">
+                <input type="hidden" id="wk_ssp_radius" value="" />
+                <div style="position:relative; margin:auto; width:90%">
+                    <span style="position:absolute; color:red; border:1px solid blue; min-width:100px;">
+                    <span id="myValue"></span>
+                    </span>
+                    <input type="range" id="myRange" max="<?= $pickupServiceRadius ?>" value="<?= $radiusParam ?>" style="width:80%"> 
+                </div>
+            </div>
+            <div class="find_a_store"><input type="button" value="Find a store" class="wk_ssp_submit_button"></div>
+        </div>
+    </div>
+
+    <div class="wk-mp-sellerlist-container">
+        <?php if($radiusParam != ''){ ?>
+            <div class="wk-emptymsg">
+                <?= $block->escapeHtml(__('Available Stores within '.$radiusParam.' '.$radiousUnit.' are :')) ?>
+            </div>
+        <?php } ?>
+
+        <?php
+        if (count($block->getSellerCollection())==0 && count($outletCollection) == 0) { ?>
+            <div class="wk-emptymsg">
+                <?= $block->escapeHtml(__('No Store Available')) ?>
+            </div>
+            <?php
+        } else {?>
+            <ul class="mystore_list">
+                <?php
+                foreach ($block->getSellerCollection() as $seller_coll) {
+                    $seller_id = $seller_coll->getSellerId();
+                    $seller_product_count = 0;
+                    $profileurl = $seller_coll->getShopUrl();
+                    $shoptitle = '';
+                    $logo="noimage.png";
+                    $originAddress = "";
+                    if ($seller_coll->getOriginAddress()) {
+                        $originAddress = $seller_coll->getOriginAddress();
+                    }
+                    $rating = $helper->getSelleRating($seller_id);
+                    $shoptitle = $seller_coll->getShopTitle();
+                    $logo=$seller_coll->getLogoPic()==''?"noimage.png":$seller_coll->getLogoPic();
+                    if (!$shoptitle) {
+                        $shoptitle = $profileurl;
+                    }
+                    $logo=$helper->getMediaUrl().'avatar/'.$logo;
+                    ?>
+                    <li>
+
+                        <div class="wk-store-item">
+                            <a href="<?= /* @escapeNotVerified */ $block->escapeUrl($helper->getRewriteUrl('marketplace/seller/collection?shop='.$profileurl)); ?>">
+                                <img class="wk_image wk_store_image"
+                                title="<?= $block->escapeHtml(__("View Store")) ?>"
+                                src="<?= /* @escapeNotVerified */ $block->escapeUrl($logo) ; ?>"
+                                alt="image" />
+                            </a>
+                            <div class="wk-mp-stores-details">
+                                <div>
+                                    <a href="<?= /* @escapeNotVerified */ $block->escapeUrl($helper->getRewriteUrl('marketplace/seller/collection?shop='.$profileurl)); ?>" title="<?= $block->escapeHtml(__("View Store"))?>">
+                                        <strong><?= $block->escapeHtml($shoptitle) ?></strong>
+                                    </a>
+                                </div>
+                                <div><?= $block->escapeHtml(__($originAddress)); ?></div>
+                                <div class="wk-seller-rating-block">
+                                    <div class="wk-seller-rating-value">
+                                        <?= $block->escapeHtml(number_format($rating, 1)); ?>
+                                    </div>
+                                </div>
+                                <div class="seller-collection-actions">
+                                    <a href="<?= $block->escapeUrl($helper->getRewriteUrl('marketplace/seller/collection?shop='.$profileurl));?>">
+                                        <button class="button action tocart primary" title="<?= $block->escapeHtml(__("View Store's Product")) ?>">
+                                            <span>
+                                                <span>
+                                                    <?= $block->escapeHtml(__('View All')); ?>
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </a>
+                                </div>
+                                <?php if (sizeof($savedAddress) > 0) { ?>
+                                <div class="calculated_distance">
+                                    <?php 
+                                        $from = [];
+                                        $from = ['latitude' => $savedAddress['latitude'], 'longitude' => $savedAddress['longitude']];
+                                        $to   = [];
+                                        $to = ['latitude' => $seller_coll->getData('latitude'), 'longitude' => $seller_coll->getData('longitude')];
+                                        $distance = $mpHyphelper->getDistanceFromTwoPoints($from, $to, $radiousUnit);
+                                        $f_distance =  round($distance,2).' '.$radiousUnit;
+                                    ?>
+                                    <a href="javascript:void(0);" class="wk_ssp_search_submit_view" store_address="<?= $originAddress ?>"><?= __('Get Direction ('.$f_distance.')') ?></a>
+                                </div>
+                            <?php } ?>
+                            </div>
+                        </div>
+                        <?php $locationData = $block->getSearchLocation($originAddress);
+                        $location[] = [$originAddress, ((float)$locationData['latitude']),
+                ((float)$locationData['longitude']), $profileurl, $shoptitle];
+                        ?>
+                    </li>
+                    <?php
+                }?>
+                <?php
+                foreach ($outletCollection as $outlet) {
+                    $seller_id = $outlet->getSellerId();
+                    $seller_product_count = 0;
+                    $profileurl = $outlet->getShopUrl();
+                    $shoptitle = '';
+                    $logo="noimage.png";
+                    $originAddress = "";
+                    if ($outlet->getAddress()) {
+                        $originAddress = $outlet->getAddress();
+                    }
+                    $rating = $helper->getSelleRating($seller_id);
+                    $shoptitle = $outlet->getOutletName();
+                    $logo=$outlet->getLogoPic()==''?"noimage.png":$outlet->getLogoPic();
+                    if (!$shoptitle) {
+                        $shoptitle = $profileurl;
+                    }
+                    $logo=$helper->getMediaUrl().'avatar/'.$logo;
+                    $outletName = $outlet->getSourceCode();
+                    $collectionUrl = $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$profileurl);
+                    ?>
+                    <li>
+
+                        <div class="wk-store-item">
+                            <a href="<?= /* @escapeNotVerified */ $block->escapeUrl($collectionUrl."?outlet=".$outletName); ?>">
+                                <img class="wk_image wk_store_image"
+                                title="<?= $block->escapeHtml(__("View Store")) ?>"
+                                src="<?= /* @escapeNotVerified */ $block->escapeUrl($logo) ; ?>"
+                                alt="image" />
+                            </a>
+                            <div class="wk-mp-stores-details">
+                                <div>
+                                    <a href="<?= /* @escapeNotVerified */ $block->escapeUrl($collectionUrl."?outlet=".$outletName); ?>" title="<?= $block->escapeHtml(__("View Store"))?>">
+                                        <strong><?= $block->escapeHtml($shoptitle) ?></strong>
+                                    </a>
+                                </div>
+                                <div><?= $block->escapeHtml(__($originAddress)); ?></div>
+                                <div class="wk-seller-rating-block">
+                                    <div class="wk-seller-rating-value">
+                                        <?= $block->escapeHtml(number_format($rating, 1)); ?>
+                                    </div>
+                                </div>
+                                <div class="seller-collection-actions">
+                                    <a href="<?= $block->escapeUrl($collectionUrl."?outlet=".$outletName);?>">
+                                        <button class="button action tocart primary" title="<?= $block->escapeHtml(__("View Store's Product")) ?>">
+                                            <span>
+                                                <span>
+                                                    <?= $block->escapeHtml(__('View All')); ?>
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php
+                }?>
+            </ul>
+            <div id="map_container">
+                <input type="hidden" name="wk_address" value="<?= $selectedAddress ?>" id="wk_current" />
+                <a class="wk_ssp_current_location">Use Current Location</a>
+                <div class="wk_ssp_search_map">
+                    <div id="wk_ssp_map">
+
+                    </div>
+                </div>
+            </div>
+            <?php
+        }?>
+    </div>
+</div>
+<?php
+    $viewurl = $block->getUrl('marketplace/seller/collection');
+    $url = $block->getUrl();
+    $searchlocation = $block->getSearchLocation($selectedAddress);
+    $searchLocation[] = [$searchlocation['latitude'],$searchlocation['longitude'],
+    $searchlocation['formatted_address']];
+    $data = json_encode(["viewurl" => $viewurl, "location" => $location, "url" => $url ,
+    "searchlocation" => $searchLocation]); ?>
+    
+<script type="text/x-magento-init">
+{
+    "body": {
+        "Webkul_MpHyperLocal/js/storelocator": <?= $block->escapeJsQuote($data); ?>
+    }
+}
+</script>
+
+<?php $key = $block->getGoogleApiKey(); ?>
+<script>
+require.config({
+        map: {
+            '*': {
+                'googleMapPlaceLibrary': 
+                'https://maps.googleapis.com/maps/api/js?key=<?= /* @noEscape */ $key; ?>&v=3.exp&libraries=places',
+            'googleMapJsFront': 
+            'https://maps.googleapis.com/maps/api/js?key=<?= /* @noEscape */ $key; ?>&signed_in=true&libraries=places'
+            }
+        }
+    });
+</script>
+
+<script type="text/javascript">
+require([
+    'jquery',
+    'mage/url',
+],
+function($, urlBuilder) {
+    var storeLocatorUrl = '<?php echo $storeLocatorUrl ?>';
+    $('.wk_ssp_advance_search .wk_ssp_advsearch_box .wk_ssp_submit_button').click(function(){
+        var radius = $(this).parents('.wk_ssp_advsearch_box').find('#wk_ssp_radius').val();
+        storeLocatorUrl = storeLocatorUrl.endsWith('/') ? storeLocatorUrl.slice(0, -1) : storeLocatorUrl;
+        window.location.href = storeLocatorUrl + "?radius="+radius;
+    });
+});
+</script>
+<script type="text/javascript">
+var myRange = document.querySelector('#myRange');
+var myValue = document.querySelector('#myValue');
+var hiddenRadius = document.querySelector('#wk_ssp_radius');
+var myUnits = '<?php echo $radiousUnit ?>';
+var minRange = 0;
+var maxRange = <?php echo $pickupServiceRadius ?>;
+
+var off = myRange.offsetParent.offsetWidth / (parseInt(myRange.max) - parseInt(minRange));
+off = Math.ceil(off);
+var px =  ((myRange.valueAsNumber - parseInt(minRange)) * off) - (myValue.offsetParent.offsetWidth / 2);
+
+myValue.parentElement.style.left = px + 'px';
+myValue.parentElement.style.top = myRange.offsetHeight + 'px';
+myValue.innerHTML = myRange.value + ' ' + myUnits;
+
+myRange.oninput =function(){
+    let px = ((myRange.valueAsNumber - parseInt(minRange)) * off) - (myValue.offsetParent.offsetWidth / 2);
+
+    myValue.innerHTML = myRange.value + ' ' + myUnits;
+    myValue.parentElement.style.left = px + 'px';
+    hiddenRadius.setAttribute("value", myRange.value);
+};
+</script>
+<script type="text/javascript">
+require([
+    'jquery',
+    'mage/url',
+],
+function($, urlBuilder) {
+    $(window).on('load', function() {
+        $('.wk_ssp_advsearch_box .select_radius').find('div').find('span').css('opacity', '1');
+        var checkExist = setInterval(function() {
+           if ($('.wk_ssp_search_map .gm-svpc').length) {
+              $('.gm-svpc img').css('position', 'initial');
+              clearInterval(checkExist);
+           }
+        }, 100);
+    });
+});
+</script>

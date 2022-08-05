@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Webkul_AdvancedLayeredNavigation::css/styles.css"/>
+		<!-- <css src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" src_type="url"/> -->
+    </head>
+	<body>
+		<referenceBlock name="catalog.navigation.renderer">
+			<action method="setTemplate">
+				<argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::filter.phtml</argument>
+			</action>
+		</referenceBlock>
+		<referenceBlock name="catalog.navigation.renderer">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+
+		<referenceBlock name="catalog.leftnav">
+			<action method="setTemplate">
+				<argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::view.phtml</argument>
+			</action>
+		</referenceBlock>
+		<referenceBlock name="catalog.leftnav">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+		
+		<referenceBlock name="catalog.navigation.state">
+			<action method="setTemplate">
+				<argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::state.phtml</argument>
+			</action>
+		</referenceBlock>
+
+		<referenceBlock name="catalog.navigation.state">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+		  <container name="wk-horizontol-nav" as="wk-horizontol-nav" label="Horizontol 
+            Navigation" htmlTag="div" htmlClass="wk-horizontol-nav">
+                     <block class="Magento\LayeredNavigation\Block\Navigation\Category" name="catalog.leftnav.horizontol" before="-" template="Webkul_AdvancedLayeredNavigation::horizontolview.phtml">
+                    <block class="Magento\LayeredNavigation\Block\Navigation\State" name="catalog.navigation.state.horizontol" as="state.hl" />
+                    <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer.horizontol" as="renderer.hl" template="Webkul_AdvancedLayeredNavigation::horizontolfilter.phtml"/> 
+					</block>
+            </container>
+			<referenceBlock name="catalog.navigation.state.horizontol">
+			<action method="setTemplate">
+				<argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::horizontolstate.phtml</argument>
+			</action>
+		</referenceBlock>
+			<referenceBlock name="catalog.navigation.renderer.horizontol">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+		<referenceBlock name="catalog.leftnav.horizontol">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+		<referenceBlock name="catalog.navigation.state.horizontol">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+			<move element="wk-horizontol-nav" destination="content" before="category.products"/>
+	</body>
+</page>

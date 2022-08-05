@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Cb_GreenlineApi::css/style.css"/>
+        <css src="Cb_GreenlineApi::css/icon.css"/>
+    </head>
+    <body>
+        <referenceContainer name="layout2_seller_account_navigation">
+            <block class="Cb\GreenlineApi\Block\Account\Navigation" name="greenlineapi_menu" before="-" template="Cb_GreenlineApi::layout2/account/navigation.phtml"  ifconfig="greenlineapi/general_settings/enable" />
+        </referenceContainer>
+    </body> 
+</page>

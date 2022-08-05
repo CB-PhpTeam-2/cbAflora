@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="\Magento\Catalog\Block\Product\ListProduct" type="\Webkul\MpHyperLocal\Block\Product\ListProduct"/>
+
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="get_shipping_info" type="Webkul\MpHyperLocal\Plugin\ShippingInformationManagement" sortOrder="1"/>
+    </type>
+    <type name="Webkul\Marketplace\Block\Marketplace">
+        <plugin name="update_best_seller_list" type="Webkul\MpHyperLocal\Plugin\MarketplaceUpdate" sortOrder="2"/>
+    </type>
+    <type name="Webkul\Marketplace\Block\Sellerlist">
+        <plugin name="update_seller_list" type="Webkul\MpHyperLocal\Plugin\SellerlistUpdate" sortOrder="3"/>
+    </type>
+    <type name="Webkul\Marketplace\Block\Profile">
+        <plugin name="check_seller_profile" type="Webkul\MpHyperLocal\Plugin\SellerProfileCheck" sortOrder="4"/>
+    </type>
+    <!-- <type name="Webkul\Marketplace\Block\Collection">
+        <plugin name="check_seller_collection" type="Webkul\MpHyperLocal\Plugin\SellerCollectionCheck" sortOrder="5"/>
+    </type> -->
+    <type name="Webkul\MpAssignProduct\Helper\Data">
+        <plugin name="check_seller_for_assign_product" type="Webkul\MpHyperLocal\Plugin\CheckAssignProduct" sortOrder="5"/>
+    </type>
+    <type name="Magento\Framework\App\Action\AbstractAction">
+        <plugin name="hyperlocal-abstractaction-context-plugin" type="Webkul\MpHyperLocal\Plugin\Context" sortOrder="15"/>
+    </type>
+     <type name="Magento\Catalog\Controller\Product\View">
+        <plugin name="afterProductViewExecute" type="Webkul\MpHyperLocal\Plugin\Catalog\Product\View" />
+    </type>    
+     <type name="Webkul\Marketplace\Controller\Seller\Profile">
+        <plugin name="afterProfileViewExecute" type="Webkul\MpHyperLocal\Plugin\Controller\Seller\Profile" />
+    </type>    
+     <type name="Webkul\Marketplace\Controller\Seller\Collection">
+        <plugin name="afterCollectionViewExecute" type="Webkul\MpHyperLocal\Plugin\Controller\Seller\Collection" />
+    </type>  
+
+    <type name="Webkul\MpHyperLocal\Model\ResourceModel\ShipArea\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mp_hyper_local_shipping_area</argument>
+            <argument name="eventPrefix" xsi:type="string">webkul_hyperlocal_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">webkul_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MpHyperLocal\Model\Resource\ShipArea</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mphyperlocal_shiparea_grid_list_data_source" xsi:type="string">Webkul\MpHyperLocal\Model\ResourceModel\ShipArea\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MpHyperLocal\Model\ResourceModel\ShipRate\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mp_hyper_local_shipping_rate</argument>
+            <argument name="eventPrefix" xsi:type="string">webkul_hyperlocal_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">webkul_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MpHyperLocal\Model\Resource\ShipRate</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mphyperlocal_shiprate_grid_list_data_source" xsi:type="string">Webkul\MpHyperLocal\Model\ResourceModel\ShipRate\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MpHyperLocal\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MpHyperLocal\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">mpHyperLocal</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Webkul\MpHyperLocal\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

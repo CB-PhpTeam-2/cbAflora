@@ -1,0 +1,145 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$helper = $this->helper(\Webkul\Marketplace\Helper\Data::class);
+$outletCollection = $block->getOutletCollection();
+?>
+<div class="wk-mp-design wk-mp-landingpage">
+    <h1 style="margin-bottom:0px;"><?= $block->escapeHtml(__('Popular Stores')) ?></h1>
+    <h3><?= $block->escapeHtml(__('We have got you the top stores in your selected location.')) ?></h3>
+
+    <div class="wk-mp-sellerlist-container" style="display:inline-block;padding: 0;padding-top: 20px;width: 100%;">
+        <?php
+        if (count($block->getSellerCollection())==0 && count($outletCollection) == 0) { ?>
+            <div class="wk-emptymsg">
+                <?= $block->escapeHtml(__('No Store Available')) ?>
+            </div>
+            <?php
+        } else {?>
+            <ul>
+                <?php
+                foreach ($block->getSellerCollection() as $seller_coll) {
+                    $seller_id = $seller_coll->getSellerId();
+                    $seller_product_count = 0;
+                    $profileurl = $seller_coll->getShopUrl();
+                    $shoptitle = '';
+                    $logo="noimage.png";
+                    $originAddress = "";
+                    if ($seller_coll->getOriginAddress()) {
+                        $originAddress = $seller_coll->getOriginAddress();
+                    }
+                    $rating = $helper->getSelleRating($seller_id);
+                    $shoptitle = $seller_coll->getShopTitle();
+                    $logo=$seller_coll->getLogoPic()==''?"noimage.png":$seller_coll->getLogoPic();
+                    if (!$shoptitle) {
+                        $shoptitle = $profileurl;
+                    }
+                    $logo=$helper->getMediaUrl().'avatar/'.$logo;
+                    ?>
+                    <li>
+
+                        <div class="wk-store-item">
+                            <a href="<?= /* @escapeNotVerified */ $block->escapeUrl($helper->getRewriteUrl('marketplace/seller/collection/shop/'.$profileurl)); ?>">
+                                <img class="wk_image wk_store_image"
+                                title="<?= $block->escapeHtml(__("View Store")) ?>"
+                                src="<?= /* @escapeNotVerified */ $block->escapeUrl($logo) ; ?>"
+                                alt="image" />
+                            </a>
+                            <div class="wk-mp-stores-details">
+                                        <div>
+                                            <a href="<?= /* @escapeNotVerified */ $block->escapeUrl($helper->getRewriteUrl('marketplace/seller/collection/shop/'.$profileurl)); ?>" title="<?= $block->escapeHtml(__("View Store"))?>">
+                                                <strong><?= $block->escapeHtml($shoptitle) ?></strong>
+                                            </a>
+                                        </div>
+                                        <div><?= $block->escapeHtml(__($originAddress)); ?></div>
+                            <div class="wk-seller-rating-block">
+                                <div class="wk-seller-rating-value">
+                                    <?= $block->escapeHtml(number_format($rating, 1)); ?>
+                                </div>
+                            </div>
+                            <div class="seller-collection-actions">
+                                            <a href="<?= $block->escapeUrl($helper->getRewriteUrl('marketplace/seller/collection/shop/'.$profileurl));?>">
+                                                <button class="button action tocart primary" title="<?= $block->escapeHtml(__("View Store's Product")) ?>">
+                                                    <span>
+                                                        <span>
+                                                            <?= $block->escapeHtml(__('View All')); ?>
+                                                        </span>
+                                                    </span>
+                                                </button>
+                                            </a>
+                            </div>
+                                    </div>
+                        </div>
+                    </li>
+                    <?php
+                }?>
+                <?php
+                foreach ($outletCollection as $outlet) {
+                    $seller_id = $outlet->getSellerId();
+                    $seller_product_count = 0;
+                    $profileurl = $outlet->getShopUrl();
+                    $shoptitle = '';
+                    $logo="noimage.png";
+                    $originAddress = "";
+                    if ($outlet->getAddress()) {
+                        $originAddress = $outlet->getAddress();
+                    }
+                    $rating = $helper->getSelleRating($seller_id);
+                    $shoptitle = $outlet->getOutletName();
+                    $logo=$outlet->getLogoPic()==''?"noimage.png":$outlet->getLogoPic();
+                    if (!$shoptitle) {
+                        $shoptitle = $profileurl;
+                    }
+                    $logo=$helper->getMediaUrl().'avatar/'.$logo;
+                    $outletName = $outlet->getSourceCode();
+                    $collectionUrl = $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$profileurl);
+                    ?>
+                    <li>
+
+                        <div class="wk-store-item">
+                            <a href="<?= /* @escapeNotVerified */ $block->escapeUrl($collectionUrl."?outlet=".$outletName); ?>">
+                                <img class="wk_image wk_store_image"
+                                title="<?= $block->escapeHtml(__("View Store")) ?>"
+                                src="<?= /* @escapeNotVerified */ $block->escapeUrl($logo) ; ?>"
+                                alt="image" />
+                            </a>
+                            <div class="wk-mp-stores-details">
+                                        <div>
+                                            <a href="<?= /* @escapeNotVerified */ $block->escapeUrl($collectionUrl."?outlet=".$outletName); ?>" title="<?= $block->escapeHtml(__("View Store"))?>">
+                                                <strong><?= $block->escapeHtml($shoptitle) ?></strong>
+                                            </a>
+                                        </div>
+                                        <div><?= $block->escapeHtml(__($originAddress)); ?></div>
+                            <div class="wk-seller-rating-block">
+                                <div class="wk-seller-rating-value">
+                                    <?= $block->escapeHtml(number_format($rating, 1)); ?>
+                                </div>
+                            </div>
+                            <div class="seller-collection-actions">
+                                            <a href="<?= $block->escapeUrl($collectionUrl."?outlet=".$outletName);?>">
+                                                <button class="button action tocart primary" title="<?= $block->escapeHtml(__("View Store's Product")) ?>">
+                                                    <span>
+                                                        <span>
+                                                            <?= $block->escapeHtml(__('View All')); ?>
+                                                        </span>
+                                                    </span>
+                                                </button>
+                                            </a>
+                            </div>
+                                    </div>
+                        </div>
+                    </li>
+                    <?php
+                }?>
+            </ul>
+            <?php
+        }?>
+    </div>
+</div>

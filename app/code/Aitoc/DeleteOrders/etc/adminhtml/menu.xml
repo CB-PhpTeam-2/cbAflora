@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2019 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_DeleteOrders
+ */
+-->
+<!--
+/**
+ * Copyright © 2018 Aitoc. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Aitoc_DeleteOrders::archived_orders" title="Archived Orders" translate="title" module="Aitoc_DeleteOrders" parent="Magento_Sales::sales_operation" sortOrder="11" action="deleteorders/archiveorder/index" resource="Aitoc_DeleteOrders::archive"/>
+        <add id="Aitoc_DeleteOrders::rules_index" title="Delete Orders by Aitoc" translate="title" module="Aitoc_DeleteOrders" parent="Magento_Backend::system" dependsOnModule="Magento_Backend" sortOrder="90" resource="Aitoc_DeleteOrders::rules_index"/>
+        <add id="Aitoc_DeleteOrders::rules" toolTip="Aitoc Extension" title="Automatic rules" module="Aitoc_DeleteOrders" parent="Aitoc_DeleteOrders::rules_index" action="deleteorders/rules/index" resource="Aitoc_DeleteOrders::rules"/>
+    </menu>
+</config>

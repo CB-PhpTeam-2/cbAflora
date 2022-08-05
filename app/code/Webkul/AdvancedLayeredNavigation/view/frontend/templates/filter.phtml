@@ -1,0 +1,297 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+$id = $block->getRequest()->getParam('id');
+$viewModel = $block->getViewModel();
+$helperData = $viewModel->getAdvanceNavHelper();
+$currencySymbol = $helperData->getCurrencySymbol();
+if ($filter->getName() == __('Rating')) {
+    ?>
+   <ol class="items">
+        <?php foreach ($filterItems as $filterItem): ?>
+            <li class="my item">
+                <?php
+                $selected_value = $block->getRequest()->getParam($filter->getRequestVar());
+                $selected_value = explode("_", $selected_value);
+                ?>
+                <label class="layered-navigation-label rating" 
+                data-url="<?= /* @noEscape */ $block->escapeUrl($filterItem->getUrl()) ?>">
+                <?php $checked = '';
+                if (in_array($filterItem->getValue(), $selected_value)) {
+                    $checked = 'checked';
+                }
+                ?>
+                <input data-attrname="<?= /* @noEscape */ $block->escapeHtml($filter->getRequestVar()); ?>" 
+                <?= /* @noEscape */  $block->escapeHtml($checked);?> class="layered_attrs regular-checkbox" 
+                id="<?= /* @noEscape */  $block->escapeHtml($filterItem->getValue()); ?>" type="checkbox"/>
+                <?= /* @noEscape */  $filterItem->getLabel() ?>
+                    <?php if ($viewModel->getCatalogHelper()
+                                ->shouldDisplayProductCountOnLayer()): ?>
+                        <span class="count">
+                        <?= /* @noEscape */  $block->escapeHtml($filterItem->getCount())?>
+                        <span class="filter-count-label">
+                            <?php if ($filterItem->getCount() == 1):?> 
+                                <?= /* @noEscape */  $block->escapeHtml(__('item'))?>
+                            <?php else:?> 
+                                <?= /* @noEscape */  $block->escapeHtml(__('items')) ?>
+                            <?php endif;?>
+                            </span></span>
+                    <?php endif; ?>
+                </label>
+            </li>
+        <?php endforeach ?>
+    </ol>
+    
+<?php  } elseif ($filter->getName() != __('Category')) {
+    ?>
+    <?php if ($filter->getRequestVar() != "price"):?>
+    <ol class="items">
+        <li>
+            <div class="attr_filter_container">
+                <input type="text" data-attrname="<?= /* @noEscape */ $block->escapeHtml($filter->getRequestVar()); ?>" 
+                class="attr_filter_input" 
+                value="<?= /* @noEscape */ $block->escapeHtml($block->getSessionData($filter->getRequestVar())); ?>"/>
+                <span class="attr_filter_clear">×</span> 
+            </div>
+        </li>
+        <?php foreach ($filterItems as $filterItem): ?>
+            <li class="my item">
+                <?php
+                $selected_value = $block->getRequest()->getParam($filter->getRequestVar());
+                $selected_value = explode("_", $selected_value);
+                if ($filterItem->getCount() > 0): ?>
+                    <label class="layered-navigation-label" 
+                    for="<?= /* @noEscape */ $block->escapeHtml($filter->getRequestVar().'_text_'.$filterItem->getValue()) ?>" 
+                    data-url="<?= /* @noEscape */ $block->escapeUrl($filterItem->getUrl()) ?>">
+                        <input data-attrname="<?= /* @noEscape */ $block->escapeHtml($filter->getRequestVar()); ?>"
+                        <?php
+                        if (!empty($selected_value[0])) {
+                            if (in_array($filterItem->getValue(), $selected_value)) {
+                                echo "checked='checked'";
+                            }
+                        }
+                        ?> 
+                          class="layered_attrs regular-checkbox" 
+                          id="<?= /* @noEscape */
+                            $block->escapeHtml($filter->getRequestVar().'_text_'.$filterItem->getValue()); ?>" type="checkbox"/>
+                        <?php if($filter->getRequestVar() == "thc_high" || $filter->getRequestVar() == "cbd_high") { ?>
+                            <?php echo str_replace($currencySymbol,"",$filterItem->getLabel()); ?>
+                        <?php }else{ ?>
+                            <?= /* @noEscape */ $filterItem->getLabel() ?>
+                        <?php } ?>
+                        <?php if ($viewModel->getCatalogHelper()
+                        ->shouldDisplayProductCountOnLayer()): ?>
+                            <span class="count">
+                            <?= /* @noEscape */  $block->escapeHtml($filterItem->getCount())?>
+                            <span class="filter-count-label">
+                                <?php
+                                if ($filterItem->getCount() == 1):
+                                    /* @escapeNotVerified */ echo $block->escapeHtml(__('item'));
+                                else:
+                                        /* @escapeNotVerified */ echo $block->escapeHtml(__('items'));
+                                endif;
+                                ?>
+                                </span>
+                                </span>
+                        <?php endif; ?>
+                    </label>
+                <?php else:?>
+                    <?= /* @noEscape */  $block->escapeHtml($filterItem->getLabel()) ?>
+                    <?php if ($viewModel->getCatalogHelper()
+                            ->shouldDisplayProductCountOnLayer()): ?>
+                        <span class="count">
+                        <?= /* @noEscape */  $block->escapeHtml($filterItem->getCount())?>
+                        <span class="filter-count-label">
+                            <?php
+                            if ($filterItem->getCount() == 1):
+                                /* @escapeNotVerified */ echo $block->escapeHtml(__('item'));
+                            else:
+                                    /* @escapeNotVerified */ echo $block->escapeHtml(__('items'));
+                            endif;
+                            ?>
+                            </span>
+                            </span>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </li>
+        <?php endforeach ?>
+    </ol>
+    <?php else:
+                $filter_array = [];
+        foreach ($filterItems as $_item) {
+            $filter_values = explode("-", $_item->getValue());
+            if (!empty($filter_values[0]) && strpos($filter_values[0], ',') !== false) {
+                $filter_values[0] = explode(",", $filter_values[0])[0];
+            }
+            if (!empty($filter_values[1]) && strpos($filter_values[1], ',') !== false) {
+                $filter_values[1] = explode(",", $filter_values[1])[0];
+            }
+            $filter_array[] = (int)preg_replace('/[^0-9]/', '', $filter_values[0]);
+            $filter_array[] = (int)preg_replace('/[^0-9]/', '', $filter_values[1]);
+        }
+                
+        if ($block->getMinVal($id) || $block->getMinVal($id) == 0) {
+            $session_min = $block->getMinVal($id);
+            $to_cur_min = $to_display_min =$session_min;
+            if ($filter_array[0] == "" || $to_display_min == "") {
+                $to_cur_min = $to_display_min = 0;
+            }
+        } else {
+            $to_cur_min = $to_display_min = min($filter_array);
+            if ($filter_array[0] == "" || $to_display_min == "") {
+                $to_cur_min = $to_display_min = 0;
+            }
+            $block->setMinVal($to_cur_min, $id);
+        }
+                $selected_value = $block->getRequest()->getParam($filter->getRequestVar());
+        if (($session_max = $block->getMaxVal($id)) && $selected_value) {
+            $to_cur_max = $to_display_max = $session_max;
+            if ($filter_array[count($filter_array)-1] == "") {
+                $to_cur_max = $to_display_max = $session_max;
+            }
+        } else {
+            $to_cur_max = $to_display_max = max($filter_array);
+            if ($filter_array[count($filter_array)-1] == "") {
+                $to_cur_max = $to_display_max = max($filter_array);
+            }
+            $block->setMaxVal($to_cur_max, $id);
+        }
+        if ($selected_value != "") {
+            $selected_value_arr = explode("-", $selected_value);
+            if ($selected_value_arr[0] != "") {
+                $to_cur_min = $selected_value_arr[0];
+            }
+            if ($selected_value_arr[1] != "") {
+                $to_cur_max = $selected_value_arr[1];
+            }
+        }
+        $to_cur_max = (int)preg_replace('/[^0-9]/', '', $to_cur_max);
+        $to_cur_min = (int)preg_replace('/[^0-9]/', '', $to_cur_min);
+        ?>
+            <span style="display:none;" 
+            data-attrname="<?= /* @noEscape */ $block->escapeHtml($filter->getRequestVar()); ?>"
+             class="layered_attrs for_price_filter" 
+             id="<?= /* @noEscape */ $block->escapeHtml($selected_value); ?>"></span>
+            <div class= "range_slide_level_con" >
+                <div class="min_range_display">
+                    <?= /* @noEscape */ $block->escapeHtml($to_display_min); ?>
+                </div>
+                <div class="max_range_display">
+                    <?= /* @noEscape */ $block->escapeHtml($to_display_max).$block->escapeHtml(__(" & above")); ?>
+                </div>
+            </div>
+            <div class="range_slider_container">
+                <div class="range_slider" 
+                data-range_min="<?= /* @noEscape */ $block->escapeHtml($to_display_min); ?>"
+                 data-range_max="<?= /* @noEscape */ $block->escapeHtml($to_display_max); ?>" 
+                 data-cur_min="<?= /* @noEscape */ $block->escapeHtml($to_cur_min); ?>" 
+                 data-cur_max="<?= /* @noEscape */ $block->escapeHtml($to_cur_max); ?>">
+                    <div class="range_slider_bar"></div>
+                    <div class="min_grip"><div class="stick"><span class="board min_range"></span></div></div>
+                    <div class="max_grip"><div class="stick"><span class="board max_range"></span></div></div>
+                </div>
+            </div>
+    <?php endif; ?>
+<?php } else {
+    ?>
+    <ol class="items">
+     <li>
+        <div class="attr_filter_container">
+            <input type="text" data-attrname="cat" class="attr_filter_input" 
+            value="<?= /* @noEscape */ $block->escapeHtml($block->getSessionData('cat')); ?>"/>
+            <span class="attr_filter_clear">×</span> 
+        </div>
+    </li>
+    <?php
+    $i = 0;
+    $j =0;
+    if($block->getRequest()->getParam('id')){
+        $categoryId = $block->getRequest()->getParam('id');
+    }else{
+        $categoryId = $helperData->getRootCategoryId();
+    }
+    $categorySub = $helperData->getSubCategory($categoryId);
+   
+    foreach ($categorySub as $id):
+        $subCategory = [];
+        $subCategory =  $helperData->getSubCategory($id);
+        $count = $helperData->getCategoryProducts($id);
+        $categoryDetail = $helperData->getCategory($id);
+     
+        ?>
+        <li class="my item">
+        <?php
+        if (!empty($subCategory)) {
+           /* @noEscape */ echo $helperData->subCat($i, $j);
+            ?>
+        <?php } ?>
+            <?php
+            $selected_value = $block->getRequest()->getParam('cat');
+            $selected_value = explode("_", $selected_value);
+            if ($count > 0): ?>
+                <label class="layered-navigation-label" 
+                for="<?= /* @noEscape */ $block->escapeHtml($id) ?>" 
+                data-url="<?= /* @noEscape */ $block->escapeUrl($categoryDetail->getRequestPath()) ?>">
+                    <input data-attrname="cat" 
+                    <?php
+                    if (in_array($id, $selected_value)) {
+                         echo "checked='checked'";
+                    }
+                    ?> 
+                    class="layered_attrs regular-checkbox" id="<?= /* @noEscape */ $block->escapeHtml($id); ?>" 
+                    type="checkbox"/>
+                    <?= /* @noEscape */  $block->escapeHtml($categoryDetail->getName()) ?>
+                    <?php if ($viewModel->getCatalogHelper()
+                    ->shouldDisplayProductCountOnLayer()): ?>
+                        <span class="count">
+                        <?= /* @noEscape */  $block->escapeHtml($count)?>
+                        <span class="filter-count-label">
+                            <?php
+                            if ($count == 1):
+                                /* @escapeNotVerified */ echo $block->escapeHtml(__('item'));
+                            else:
+                                /* @escapeNotVerified */ echo $block->escapeHtml(__('items')); ?><?php
+                            endif;
+                            ?>
+                            </span></span>
+                    <?php endif; ?>
+                </label>
+                <?php
+                
+                $childData =  $helperData->cate($id, $selected_value, $i, $j);
+                if ($childData) {
+                    /* @noEscape */ echo $childData;
+                    echo '</ol>';
+                } ?>
+            <?php else:?>
+                <?= /* @noEscape */  $block->escapeHtml($categoryDetail->getName()) ?>
+                <?php if ($viewModel->getCatalogHelper()->shouldDisplayProductCountOnLayer()): ?>
+                    <span class="count">
+                    <?= /* @noEscape */  $block->escapeHtml($count)?>
+                    <span class="filter-count-label">
+                        <?php
+                        if ($count == 1):
+                            /* @escapeNotVerified */ echo $block->escapeHtml(__('item'));
+                        else:
+                             /* @escapeNotVerified */ echo $block->escapeHtml(__('items'));
+                        endif;
+                        ?></span></span>
+                <?php endif; ?>
+            <?php endif; ?>
+        </li>
+        <?php  $i++;
+        $j++;
+    endforeach ?>
+</ol>
+<?php }
+    
+?>

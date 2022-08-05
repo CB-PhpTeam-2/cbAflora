@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Review\Observer\CatalogBlockProductCollectionBeforeToHtmlObserver">
+        <plugin name="Webkul_MpHyperLocal::aroundExecute"
+                type="Webkul\MpHyperLocal\Plugin\CatalogBlockProductCollectionBeforeToHtmlObserver"
+                sortOrder="10" />
+    </type>
+    <type name="Magento\CatalogSearch\Model\Advanced">
+        <plugin name="Webkul_MpHyperLocal::afterGetProductCollection"
+                type="Webkul\MpHyperLocal\Plugin\Advanced"
+                sortOrder="10" />
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mphyperlocal_outlet_listing_data_source" xsi:type="string">Webkul\MpHyperLocal\Model\ResourceModel\Outlet\Front\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MpHyperLocal\Model\ResourceModel\Outlet\Front\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_seller_outlet</argument>
+            <argument name="eventObject" xsi:type="string">outlet_grid_collection</argument>
+            <argument name="eventPrefix" xsi:type="string">mphyperlocal_outlet_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MpHyperLocal\Model\ResourceModel\Outlet</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MpMSI\Block\Inventory">
+        <plugin name="Webkul_MpHyperLocal::aroundGetSources"
+                type="Webkul\MpHyperLocal\Plugin\Inventory"
+                sortOrder="10" />
+    </type>
+    <preference for="Magento\Catalog\Controller\Category\View" type="Webkul\MpHyperLocal\Rewrite\Controller\Category\View"/>
+    <type name="Webkul\Marketplace\Helper\Data">
+        <plugin name="Webkul_MpHyperLocal::aroundGetSellerProCount"
+                type="Webkul\MpHyperLocal\Plugin\Helper\Data"
+                sortOrder="10" />
+    </type>
+    <preference for="Webkul\Marketplace\Block\Collection" type="Webkul\MpHyperLocal\Rewrite\Marketplace\Block\Collection"/>
+    <!-- Plugin to add the outlet id in the cart item-->
+    <type name="Magento\Checkout\Model\Cart">
+        <plugin name="Webkul_MpHyperLocal::addOutletItemOption" type="Webkul\MpHyperLocal\Plugin\Checkout\Model\Cart"/>
+    </type>
+
+</config>

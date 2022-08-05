@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="marketplace_seller_top_header" />
+    <head>
+        <css src="Webkul_Marketplace::css/filter.css"/>
+        <css src="Magento_Swatches::css/swatches.css"/>
+        <css src="Webkul_AdvancedLayeredNavigation::css/styles.css"/>
+    </head>
+    <body>
+        <attribute name="class" value="page-products"/>
+        <referenceContainer name="content">
+            <block class="Webkul\Marketplace\Block\Collection" name="marketplace_sellercollection" template="Webkul_Marketplace::collectionview.phtml" after="-">
+                <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                    <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="setToolbarBlockName">
+                    <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <!-- <referenceContainer name="marketplace_sellercollection">
+            <block class="Webkul\Marketplace\Block\Sellercategory" name="marketplace_sellercollectionleft" template="Webkul_Marketplace::collectionleft.phtml" before="-"/>
+        </referenceContainer> -->
+
+        <referenceBlock name="marketplace.catalog.navigation.renderer">
+            <arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="marketplace_sellercollection_layered_navigation">
+            <arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="marketplace.catalog.navigation.state">
+            <arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+        </referenceBlock>
+
+        <!-- <referenceContainer name="marketplace_sellercollectionleft"> -->
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\LayeredNavigation\Block\Navigation\Category" name="marketplace_sellercollection_layered_navigation" as="navigation" before="-" template="Magento_LayeredNavigation::layer/view.phtml">
+                <block class="Magento\LayeredNavigation\Block\Navigation\State" name="marketplace.catalog.navigation.state" as="state" template="Magento_LayeredNavigation::state.phtml" />
+                <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="marketplace.catalog.navigation.renderer" as="renderer" template="Magento_LayeredNavigation::layer/filter.phtml"/>
+            </block>
+        </referenceContainer>
+        
+        <referenceBlock name="marketplace_sellercollection_layered_navigation">
+            <action method="setTemplate" ifconfig="advancedlayerednavigation/multi_assign/enable">
+                <argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::view.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="marketplace.catalog.navigation.state">
+            <action method="setTemplate" ifconfig="advancedlayerednavigation/multi_assign/enable">
+                <argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::state.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="marketplace.catalog.navigation.renderer">
+            <action method="setTemplate" ifconfig="advancedlayerednavigation/multi_assign/enable">
+                <argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::filter.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <!-- <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true"/> -->
+        <move element="marketplace_seller_top_block" destination="page.wrapper" before="main.content"/>
+        <move element="seller_collection_search" destination="page.wrapper" after="marketplace_seller_top_block"/>
+        <move element="seller_product_view" destination="page.wrapper" after="seller_collection_search"/>
+        <!-- <referenceBlock name="seller_collection_search" remove="true"/>
+        <referenceBlock name="seller_product_view" remove="true"/> -->
+    </body>
+</page>

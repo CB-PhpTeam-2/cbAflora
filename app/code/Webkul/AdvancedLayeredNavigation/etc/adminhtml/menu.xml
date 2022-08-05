@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+ /**
+  * @category  Webkul
+  * @package   Webkul_AdvancedLayeredNavigation
+  * @author    Webkul
+  * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+  * @license   https://store.webkul.com/license.html
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu> 
+        <add id="Webkul_AdvancedLayeredNavigation::manager" title="Advanced Layered Navigation" module="Webkul_AdvancedLayeredNavigation" sortOrder="10" resource="Webkul_AdvancedLayeredNavigation::manager" />
+        <add id="Webkul_AdvancedLayeredNavigation::carousel" title="Carousel Filter" module="Webkul_AdvancedLayeredNavigation" sortOrder="20" parent="Webkul_AdvancedLayeredNavigation::manager" action="advancedlayerednavigation/carouselFilter/index" resource="Webkul_AdvancedLayeredNavigation::carousel"/>
+        <add id="Webkul_AdvancedLayeredNavigation::config_advancedlayerednavigation" title="Configuration" module="Webkul_AdvancedLayeredNavigation" sortOrder="30" parent="Webkul_AdvancedLayeredNavigation::manager" action="adminhtml/system_config/edit/section/advancedlayerednavigation" resource="Webkul_AdvancedLayeredNavigation::config_advancedlayerednavigation"/>
+    </menu>
+</config>

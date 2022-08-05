@@ -1,0 +1,63 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$blockObj = $block->getLayout()->createBlock(\Webkul\MpHyperLocal\Block\AddressForm::class);
+$helper = $blockObj->getHelper();
+$address = $helper->getSavedAddress();
+?>
+<div style="float:right;">
+    <div class="field" style="border: 1px solid #ccc; display:inline-block; margin-right:5px;">
+        <div style="display:inline-block;vertical-align: middle; text-align:center;">
+            <i class="material-icons location_on">location_on</i>
+        </div>
+        <div class="control" style="width:200px; display:inline-block;">
+            <input class="input-text" data-lat="<?= $address ? $block->escapeHtml($address['latitude']) :'' ?>" 
+            data-lng="<?= $address ? $block->escapeHtml($address['longitude']):''?>" 
+            data-city="<?= $address ? $block->escapeHtml($address['city']) : '' ?>" 
+            data-state="<?= $address ? $block->escapeHtml($address['state']) :'' ?>"
+            data-state_code="<?= $address ? $block->escapeHtml($address['stateCode']) :'' ?>" 
+            data-country_code="<?= $address ? $block->escapeHtml($address['countryCode']) :'' ?>"  
+            data-country="<?= $address ? $block->escapeHtml($address['country']) :'' ?>" name="address"
+            data-postcode="<?= $address ? $block->escapeHtml($address['postcode']) : "" ?>"  
+            value="<?= $address ? $block->escapeHtml($address['address']) :''?>" id="wkautocomplete" type="text" 
+            placeholder="<?= $block->escapeHtml($helper->getPopupMessage()); ?>" style="border:none;"/>
+        </div>
+    </div>
+</div>
+<?php if ($helper->getAddressOption() == 'popup'): ?>
+    <div class="wk-mp-design" style="display: none;">
+        <fieldset class="info wk-mp-fieldset fieldset" id="select-address-popup">
+            <?= $blockObj->setTemplate('Webkul_MpHyperLocal::address/add.phtml')->toHtml(); ?>
+        </fieldset>
+    </div>
+<?php endif; ?>
+<script>
+    require.config({
+        map: {
+            '*': {
+                'googleMapPlaceLibrary': "<?= 'https://maps.googleapis.com/maps/api/js?key='.
+                $block->escapeHtml($helper->getGoogleApiKey()).'&v=3.exp&libraries=places'; ?>"
+            }
+        }
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "addresspopup": {
+                "saveAction": "<?= $block->escapeUrl($blockObj->getSaveAction()) ?>",
+                "getAction": "<?= $block->escapeUrl($blockObj->getAddressAction()) ?>",
+                "isAddressSet": "<?= $address ? 1:0 ?>",
+                "popupHeading": "<?= $block->escapeHtml($helper->getPopupMessage()) ?>"
+            }
+        }
+    }
+</script>

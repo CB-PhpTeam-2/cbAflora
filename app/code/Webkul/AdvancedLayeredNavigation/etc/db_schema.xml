@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+ 
+  <table name="wk_layered_carousel_options" resource="default" engine="innodb" comment="Layered Carousel options">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity Id"/>
+        <column xsi:type="text" name="carousel_id" nullable="true" comment="Title"/>
+         <column xsi:type="text" name="image_path"
+        comment="Image Path"/>
+         <column xsi:type="text" name="attribute_option_id"
+        comment="Attribute Code"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="WK_LAYERED_CAROUSEL_OPTIONS" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+    </table>
+     <table name="wk_layered_carousel_attributes" resource="default" engine="innodb" comment="Carousel Attributes">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity Id"/>
+        <column xsi:type="text" name="attribute_code" nullable="true" comment="Attribute Code"/>
+        <column xsi:type="int" name="categories" unsigned="true" nullable="false" identity="false" 
+         comment="Categories"/>
+
+         <column xsi:type="text" name="title"
+        comment="Title"/>
+        <column xsi:type="int" name="enable" unsigned="true" nullable="false" identity="false" 
+         comment="Enable"/>
+          <column xsi:type="text" name="option_name"
+        comment="Option Name"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="WK_LAYERED_CAROUSEL_ATTRIBUTES" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+    </table>
+     <table name="catalog_eav_attribute" resource="sales" comment="Catalog Product Option">
+        <column xsi:type="smallint" name="is_display" padding="5" unsigned="true" nullable="false" identity="false"
+        comment="Display Type"/>
+    </table>
+
+</schema>

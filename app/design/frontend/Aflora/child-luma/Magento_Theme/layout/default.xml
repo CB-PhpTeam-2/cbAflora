@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+        <!-- Header -->
+        <referenceContainer name="header.container">
+            <container name="header.main" label="headerMain" htmlTag="div" htmlClass="header-main">
+                <container name="main.container" label="mainContainer" htmlTag="div" htmlClass="container">
+                    <container name="header.left" label="headerLeft" htmlTag="div" htmlClass="left-col" />
+                    <container name="header.center" label="headerCenter" htmlTag="div" htmlClass="center-col" />
+                    <container name="header.right" label="headerRight" htmlTag="div" htmlClass="right-col" />
+                </container>
+            </container>
+        </referenceContainer>
+        <!-- Header -->
+        
+        <referenceContainer name="header.links">
+        	<block class="Magento\Framework\View\Element\Html\Link" name="custom-header-link">
+            	<arguments>
+            	    <argument name="class" xsi:type="string" translate="true">lcnwrp</argument>
+                	<argument name="label" xsi:type="string" translate="true"></argument>
+            	</arguments>
+        	</block>
+        </referenceContainer>
+    	
+
+        <!-- Navigation -->
+        <referenceContainer name="catalog.topnav" template="Magento_Theme::html/custommenu.phtml">
+            <block class="Magento\Cms\Block\Block" name="header.top.menu" before="-">  
+                <arguments>
+                    <argument name="block_id" xsi:type="string">header_menu</argument>
+                </arguments>
+             </block>
+        </referenceContainer>
+        <!-- Navigation -->
+        
+         <!-- Navigation -->
+        <referenceContainer name="catalog.map" template="Magento_Theme::html/store-locator.phtml">
+            <block class="Magento\Cms\Block\Block" name="locator.store" before="-">  
+                <arguments>
+                    <argument name="block_ids" xsi:type="string">Locator</argument>
+                </arguments>
+             </block>
+        </referenceContainer>
+        <referenceBlock name="wish-list-link" remove="false" />
+
+        
+        <!-- Footer -->
+        <referenceContainer name="footer-container">
+            <container name="footer.center" label="footerCenter" htmlTag="div" htmlClass="center-ft">
+                <block class="Magento\Framework\View\Element\Template" name="footer.custom.block" template="Magento_Theme::html/footer-custom.phtml"/>
+            </container>
+        </referenceContainer>
+        <!-- Footer -->
+        
+
+
+        <!-- Slider-block -->
+        <!--<referenceContainer name="page.top">-->
+        <!--    <container name="banner.slide" label="bannerSlide" htmlTag="div" htmlClass="banner" />-->
+        <!--     <block class="Magento\Cms\Block\Block" name="banner.main">-->
+        <!--        <arguments>-->
+        <!--          <argument name="block_id" xsi:type="string">banner_slide</argument>-->
+        <!--        </arguments>-->
+        <!--    </block>-->
+        <!--</referenceContainer>-->
+        <!-- Slider-block -->
+
+
+        <move element="logo" destination="header.left" />
+        <move element="top.search" destination="header.center" />
+        <move element="minicart" destination="header.right" />
+        <move element="wish-list-link" destination="header.right"/>
+        <move element="authorization-link-login" destination="header.right"/>
+        <move element="copyright" destination="footer.center" after="footer.custom.block"/>
+        <referenceBlock name="register-link" remove="true" /> 
+        <referenceBlock name="footer_links" remove="true" />
+        <referenceBlock name="form.subscribe" remove="true" />
+        
+        
+        <!--<move element="banner.main" destination="banner.slide" />-->
+        
+
+</page>

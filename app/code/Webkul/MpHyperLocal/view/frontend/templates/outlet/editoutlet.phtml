@@ -1,0 +1,200 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$id = $block->getRequest()->getParam('id');
+$helper = $block->getMpHelper();
+$isPartner = $helper->isSeller();
+if ($isPartner == 1):
+    $outletdata = [];
+    if ($id) {
+        $outletdata = $block->getOutletDataById($id);
+    } else {
+        $outletdata = $block->getPersistentData();
+    }
+    $countryList = $block->getCountryList();
+    ?>
+    <form action="
+        <?= $block->escapeUrl($block->getUrl('mphyperlocal/outlet/save', ['_secure' => $block->getRequest()->isSecure()])) ?>" 
+    enctype="multipart/form-data" method="post" id="edit-outlet" data-form="edit-outlet" data-mage-init='{"validation":{}}'>
+        <button class="button wk-mp-btn" title="Save" type="submit" id="save-btn">
+            <span><span><?= __('Save')?></span></span>
+        </button>
+        <div class="wk-mp-design">
+            <fieldset class="fieldset info wk-mp-fieldset">
+                <legend class="legend">
+                    <span><?= __('Outlet Information')?></span>
+                </legend>    
+                <?php if ($id) { ?>
+                    <input type="hidden" name="id" value="<?= $block->escapeHtml($id); ?>">
+                    <input type="hidden" name="general[source_code]" value="<?= $block->escapeHtml($id); ?>">
+                <?php } ?>
+                <input type="hidden" name="seller_id" value="<?= $block->escapeHtml($helper->getCustomerId()); ?>">
+                <?= /*@noEscape*/ $block->getBlockHtml('seller.formkey')?>
+                <?= /*@noEscape*/ $block->getBlockHtml('formkey')?>
+                <div class="field required">
+                    <label class="label" for="name"><?= /* @noEscape */ __('Name') ?>:</label>
+                    <div class="control">
+                        <input type="text" class="required-entry input-text validate-no-html-tags" 
+                            name="general[name]" id="name" value="<?= $block->escapeHtml($outletdata['name'])?>"/>
+                    </div>
+                </div>
+                <?php if (!$id) { ?>
+                <div class="field required">
+                    <label class="label" for="source_code"><?= /* @noEscape */ __('Code') ?>:</label>
+                    <div class="control">
+                        <input type="text" class="required-entry input-text validate-no-html-tags" 
+                            name="general[source_code]" id="source_code" value="<?= $block->escapeHtml($outletdata['source_code'])?>" />
+                    </div>
+                </div>
+                <?php } ?>
+                <div class="field required">
+                    <label class="label"><?= $block->escapeHtml(__('Is Enabled')) ?>:</label>
+                    <div class="control">
+                        <select id="status" name="general[enabled]">
+                            <option value="1" <?php if ($outletdata['enabled'] == 1) { echo "selected";} ?>><?= $block->escapeHtml(__("Enable")); ?></option>
+                            <option value="0"<?php if ($outletdata['enabled'] == 0) { echo "selected";} ?> ><?= $block->escapeHtml(__("Disable")); ?></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label" for="description"><?= /* @noEscape */ __('Description') ?>:</label>
+                    <div class="control">
+                        <textarea class="input-text validate-no-html-tags" name="general[description]" 
+                            id="description"><?= $block->escapeHtml($outletdata['description']); ?></textarea>
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Enter Address')?></label>
+                    <div class="control">
+                        <input class="input-text required-entry validate-no-html-tags" name="general[address]"
+                        value="<?= $block->escapeHtml($outletdata['address'])?>" id="addressautocomplete" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><?= __('Latitude')?></label>
+                    <div class="control">
+                        <input class="input-text" readonly="readonly"
+                         value="<?= $block->escapeHtml($outletdata['latitude'])?>"
+                         name="general[latitude]" id="wk_latitude" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><?= __('Longitude')?></label>
+                    <div class="control">
+                        <input class="input-text" readonly="readonly"
+                         value="<?= $block->escapeHtml($outletdata['longitude'])?>"
+                        name="general[longitude]" id="wk_longitude" type="text" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="fieldset info wk-mp-fieldset-contact-info" style="margin-top:40px;">
+                <legend class="legend">
+                    <span><?= __('Contact Info')?></span>
+                </legend>
+                <div class="field">
+                    <label class="label"><?= __('Contact Name')?></label>
+                    <div class="control">
+                        <input class="input-text validate-no-html-tags" name="general[contact_name]" 
+                         value="<?= $block->escapeHtml($outletdata['contact_name'])?>"
+                        id="contact_name" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><?= __('Email')?></label>
+                    <div class="control">
+                        <input class="input-text validate-email" name="general[email]"
+                         value="<?= $block->escapeHtml($outletdata['email'])?>"
+                         id="email" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><?= __('Phone')?></label>
+                    <div class="control">
+                        <input class="input-text validate-no-html-tags" name="general[phone]"
+                         value="<?= $block->escapeHtml($outletdata['phone'])?>"
+                         id="phone" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><?= __('Fax')?></label>
+                    <div class="control">
+                        <input class="input-text validate-fax" name="general[fax]"
+                         value="<?= $block->escapeHtml($outletdata['fax'])?>"
+                         id="fax" type="text" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="fieldset info wk-mp-fieldset-contact-info">
+                <legend class="legend">
+                    <span><?= __('Address Data')?></span>
+                </legend>
+                <div class="field required">
+                    <label class="label"><?= __('Country')?></label>
+                    <div class="control">
+                        <select name="general[country_id]" class="country-select required-entry validate-select">
+                            <option value><?= __('Select Country')?></option>
+                            <?php foreach ($countryList as $country):
+                                if ($country['value'] != ''):?>
+                                <option value="<?= $block->escapeHtml($country['value']); ?>" <?php if ($outletdata['country_id']==$country['value']) { echo "selected";} ?>><?= $block->escapeHtml($country['label']); ?></option>
+                            <?php endif;
+endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><?= __('State/Province')?></label>
+                    <div class="control">
+                        <input class="input-text validate-no-html-tags" name="general[region]"
+                         value="<?= $block->escapeHtml($outletdata['region'])?>"
+                         id="region" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><?= __('City')?></label>
+                    <div class="control">
+                        <input class="input-text validate-no-html-tags" name="general[city]"
+                         value="<?= $block->escapeHtml($outletdata['city'])?>"
+                         id="city" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><?= __('Street')?></label>
+                    <div class="control">
+                        <input class="input-text validate-no-html-tags" name="general[street]" 
+                         value="<?= $block->escapeHtml($outletdata['street'])?>"
+                        id="street" type="text" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Postcode')?></label>
+                    <div class="control">
+                        <input class="input-text required-entry validate-zip-international" name="general[postcode]"
+                         value="<?= $block->escapeHtml($outletdata['postcode'])?>"
+                         id="postcode" type="text" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "outletform": {
+                    "googleApiKey":"<?= $block->getHelper()->getGoogleApiKey()?>"
+                }
+            }
+        }
+    </script>
+<?php else: ?>
+    <h2 class="wk-mp-error-msg">
+        <?= /* @noEscape */ __("To Become Seller Please Contact to Admin."); ?>
+    </h2>
+<?php endif;
+

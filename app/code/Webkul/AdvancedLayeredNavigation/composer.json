@@ -1,0 +1,27 @@
+{
+    "name": "webkul/advanced-layered-navigation",
+    "description": "Advanced Layered Navigation For Magento2",
+    "require": {
+        "magento/module-config": "101.1.*",
+        "magento/module-store": "101.0.*",
+        "magento/module-backend": "101.0.*",
+        "magento/module-catalog": "103.0.*",
+        "magento/framework": "102.0.*"
+    },
+    "type": "magento2-module",
+    "version": "3.0.1",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\AdvancedLayeredNavigation\\": ""
+        }
+    }
+}
+
+
+

@@ -1,0 +1,801 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_SellerStorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+ @media  screen and (max-width: 386px) and (min-width:374px){
+    .wk_ssp_store_search_form{
+        margin-top:5px;
+   border:none !important;
+}
+}
+
+@media  screen and (max-width: 466px) and (min-width:387px){
+
+.wk_ssp_store_zip_input{
+   width:68% !important;
+}
+.wk_ssp_store_search_form{
+   margin-top:25px !important;
+   border:none !important;
+}
+
+}
+
+@media  screen and (max-width: 373px) and (min-width:0px){
+.wk_ssp_store_zip_input{
+   width:54% !important;
+   height:20px !important;
+}
+.wk_ssp_search_submit{
+   height:20px !important;
+}
+.wk_ssp_store_search_form{
+   margin-top:25px !important;
+   border:none !important;
+}
+}
+
+/*
+Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
+*/
+@media
+ only screen
+and (max-width: 760px), (min-device-width: 20px)
+and (max-device-width: 1024px)  {
+/*     	.wk_ssp_popup_table tbody tr td p{
+       margin-left:300px;
+   } */
+
+   /* Force table to not be like tables anymore */
+   .wk_all_otherstores_css table, thead, tbody, th, tr, td{
+       display: block;
+
+   }
+
+   /* Hide table headers (but not display: none;, for accessibility) */
+   .wk_all_otherstores_css thead tr {
+       position: absolute;
+       top: -9999px;
+       left: -9999x;
+   }
+
+
+tbody tr td {
+ margin: 0 0 1rem 0;
+ width:auto !important;
+}
+
+
+   tbody tr td {
+       border: none;
+       border-bottom: 1px solid #eee;
+       position: relative;
+       padding-left: 5%;
+   }
+
+
+    .wk_all_otherstores_css tbody tr td:before {
+       position: absolute;
+       top: 0;
+       left: 5px;
+       padding-right: 10px;
+       white-space: nowrap;
+   }
+   .wk_all_otherstores_css tbody tr td{
+       height:65px;
+       margin-left: 180px;
+
+   }
+   .wk_all_otherstores_css tbody tr td:before{
+       margin-left: -130px;
+   }
+
+   .wk_all_otherstores_css .wk_ssp_popup_table tbody td{
+       margin-left:125px;
+   }
+   .wk_all_otherstores_css .wk_ssp_popup_table>tbody{
+       overflow:scroll;
+   }
+
+   .wk_all_otherstores_css thead tr th:before{
+       margin-left:100px;
+   }
+   .wk_ssp_set_td_width p{
+       margin-top:-13px;
+       font-size:13px;
+   }
+   table{
+       border:none;
+   }
+
+   .wk_all_otherstores_css td center{
+   position: absolute;
+   font-size:13px;
+   }
+   .wk_all_otherstores_css .wk_ssp_mystore_result{
+       width:50px;
+       height:40px;
+       font-size:13px;
+       padding-right: 0px;
+       padding-left: 0px;
+       padding-bottom: 0px;
+       float:none;
+       padding-top:0px !important;
+margin-right:30px;
+
+   }
+
+
+   /*
+   Label the data
+You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
+   */
+   td:nth-of-type(1):before { content: "Stores near you"; color:black; }
+   td:nth-of-type(2):before { content: "Select"; color:black; }
+   td:nth-of-type(3):before { content: "Distance"; color:black; }
+   td:nth-of-type(4):before { content: "Availibility"; color:black;  }
+   td:nth-of-type(5):before { content: "Select"; color:black; }
+}
+
+
+
+
+
+
+@media  screen and (max-width: 386px) and (min-width:0px){
+.wk_ssp_zipselect {
+width: 67%!important;
+}
+}
+@media  screen and (max-width: 687px) and (min-width:387px){
+.wk_ssp_zipselect {
+width: 54%!important;
+}
+}
+@media  screen and (max-width: 1100px) and (min-width:701px){
+.wk_ssp_advance_search {
+width: 97%!important;
+}
+.wk_ssp_search_map{
+   width:99%!important;
+   padding-left: 0px!important;
+}
+.wk_ssp_row{
+   width:85%!important;
+}
+}
+@media  screen and (max-width: 700px) and (min-width:0px){
+.wk_ssp_advance_search {
+width: 97%!important;
+}
+.wk_ssp_search_map{
+   width:99%!important;
+   padding-left: 0px!important;
+}
+.wk_ssp_row{
+   width:95%!important;
+   padding:0px!important;
+}
+.wk_ssp_row_after{
+   padding-left:5px!important;
+   padding-top: 5px!important;
+   padding-bottom: 5px!important;
+   padding-right: 11px!important;
+}
+}
+@media  screen and (max-width: 1100px) and (min-width:687px){
+.wk_ssp_zipselect {
+width: 37%!important;
+}
+}
+@media  screen and (max-width: 700px) and (min-width:0px){
+.wk_ssp_advance_search_view {
+   width: 50%!important;
+}
+.wk_ssp_all_details{
+   width: 50%!important;
+}
+.wk_ssp_search_map_view{
+   width: 100%!important;
+}
+}
+@media  screen and (max-width: 1100px) and (min-width:701px){
+.wk_ssp_advance_search_view {
+   width: 50%!important;
+}
+.wk_ssp_all_details{
+   width: 50%!important;
+}
+.wk_ssp_search_map_view{
+   width: 100%!important;
+}
+}
+.wk_ssp_fieldset
+{
+display: inline-block;
+border:1px solid #ddd;
+margin-top: 1%;
+}
+.wk_ssp_box{
+margin-bottom: 10px;
+}
+.wk_ssp_edit{
+display: inline-block;
+width: 16px;
+height: 16px;
+background: url("../images/icon-edit.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+cursor: pointer;
+}
+.wk_ssp_delete{
+display: inline-block;
+width: 16px;
+height: 16px;
+background: url("../images/icon-delete.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+cursor: pointer;
+}
+.wk_ssp_image
+{
+height:100px;
+width:100px;
+}
+.wk_ssp_heading{
+font-weight: 600;
+text-transform: capitalize;
+}
+.wk_ssp_store{
+margin-top: 10px;
+border:1px solid #b5b0b0;
+font-weight: 600;
+}
+.wk_ssp_store table tr td select {
+   width: 79%;
+margin-left: 10px;
+}
+.wk_ssp_store table td .wk_ssp_qtywidth {
+width: 75%;
+margin-left: 15px;
+}
+.wk_ssp_remove{
+background: url("../images/false.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+background-size: 28px 28px;
+background-position: 71px 0px;
+background-repeat: no-repeat;
+height: 28px;
+width: 100px;
+}
+.wk_ssp_border{
+border-bottom: 1px solid #ddd;
+}
+.wk_ssp_zipformbox
+{
+display: inline-block;
+width: 100%;
+}
+.wk_ssp_zipselect{
+float: right;
+width: 23%;
+padding-bottom: 5px;
+font-size: 13px;
+font-weight: 600;
+position: relative;
+}
+.wk_ssp_store_color{
+color:red;
+}
+.wk_ssp_change
+{
+cursor: pointer;
+}
+.wk_ssp_change:hover{
+color:#0d93b5;
+}
+.wk_ssp_store_search_form{
+display: none;
+position: absolute;
+z-index: 10;
+top: 22px;
+border: 1px solid #868686;
+padding: 5px;
+left: 5px;
+}
+.wk_ssp_store_search_form .wk_ssp_store_zip_input
+{
+height: 20px;
+width: 73%;
+}
+.wk_ssp_store_search_form .wk_ssp_search_submit{
+margin-left: 5px;
+background: #de0707;
+border: 1px solid #ab0a0a;
+color: white;
+}
+.wk_ssp_addmorenew{
+float: right;
+}
+.wk_ssp_arrow_up {
+width: 0;
+height: 0;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+display: inline-block;
+border-bottom: 5px solid black;
+cursor: pointer;
+}
+
+.wk_ssp_arrow_down {
+width: 0;
+height: 0;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+display: none;
+border-top: 5px solid black;
+cursor: pointer;
+}
+.wk_ssp_zip_heading
+{
+display: inline-block;
+float: left;
+}
+.wk_ssp_zip_change{
+display: inline-block;
+float: left;
+padding-left: 6px;
+cursor: pointer;
+}
+.wk_ssp_advance_search
+{
+width:43%;
+float:left;
+}
+.wk_ssp_search_map{
+width:52%;
+float:left;
+padding-left: 45px;
+height:500px;
+}
+.wk_ssp_row{
+display: inline-block;
+width: 91%;
+padding: 30px;
+}
+.wk_ssp_headingtop{
+font-size: 20px;
+font-weight: 600;
+text-transform: capitalize;
+}
+.wk_ssp_advsearch_box{
+display: inline-block;
+border: 3px solid #9e9a9a;
+width: 100%;
+padding: 5px;
+margin-top: 10px;
+background: #e8e8e8;
+}
+#wk_ssp_advsearch_table tr .wk_ssp_rowspan {
+padding-top: 20px;
+}
+.wk_ssp_distance_select{
+height:24px;
+font-size: 10px;
+font-weight: 600;
+}
+table tr td .wk_ssp_address_form{
+height:24px;
+}
+#wk_ssp_advsearch_table tr td
+{
+padding:5px 5px;
+}
+.wk_ssp_submit_button{
+background: #c53e3b;
+border: 1px solid #b12020;
+color: white;
+font-weight: 500;
+}
+.wk_ssp_current_location{
+font-size: 12px;
+font-weight: bold;
+color: #333;
+cursor: pointer;
+}
+.wk_ssp_distance_select option
+{
+font-size: 10px;
+font-weight: 600;
+}
+.wk_ssp_row_after{
+padding: 20px;
+background: rgb(240, 240, 240);
+display: inline-block;
+width: 100%;
+}
+#wk_ssp_map
+{
+height: 500px;
+border: 2px solid #8f8f8f;
+}
+.wk_ssp_stores{
+display: inline-block;
+width: 100%;
+padding-top: 20px;
+}
+.wk_ssp_single_store{
+padding: 10px;
+border-top: 1px solid #fff;
+}
+.wk_ssp_store_order{
+float: left;
+width: 25px;
+border: 1px solid #de1205;
+font-size: 18px;
+text-align: center;
+color: #ad150b;
+background: white;
+}
+.wk_ssp_store_details
+{
+float: left;
+padding-left: 10px;
+width: 52%;
+}
+.wk_ssp_store_distance
+{
+float: left;
+}
+.wk_ssp_store_name{
+font-size: 18px;
+font-weight: 600;
+}
+.wk_ssp_store_address{
+padding-top: 5px;
+}
+.wk_ssp_phone_no{
+padding-top: 10px;
+font-size: 16px;
+font-weight: 600;
+}
+.wk_ssp_store_timing{
+padding-top: 5px;
+}
+.wk_ssp_store_distance{
+float:right;
+}
+.wk_ssp_store_actual_dist
+{
+float: right;
+font-size: 16px;
+font-weight: 600;
+color: #c53e3b;
+display: inline-block;
+}
+.wk_ssp_view_store{
+margin-top: 80px;
+margin-left: 18px;
+}
+.wk_ssp_make_store{
+margin-top: 20px;
+position:relative;
+cursor: pointer;
+font-weight: 600;
+}
+div .wk_ssp_dist_button{
+background: #c53e3b;
+color: white;
+border: 1px solid #c53e3b;
+box-shadow: inset 0 1px 0 0 #bf3939, inset 0 -1px 0 0 rgba(202, 108, 108, 0.3);
+}
+#wk_ssp_map_view{
+border: 2px solid #8f8f8f;
+height:400px;
+}
+.wk_ssp_all_details{
+width:30%;
+float: left;
+display: inline-block;
+}
+.wk_ssp_search_map_view{
+width:50%;
+float:left;
+}
+.wk_ssp_heading_view{
+font-weight: 600;
+text-transform: capitalize;
+padding-bottom: 10px;
+}
+.wk_ssp_image_view{
+border: 1px solid #ddd;
+padding: 5px;
+}
+.wk_ssp_image_view_size{
+height: 214px;
+width: 214px;
+}
+.wk_ssp_all_details{
+padding-top: 15px;
+}
+.wk_ssp_formatted_address{
+padding: 15px;
+}
+.wk_ssp_phone_view{
+padding-left: 15px;
+}
+.wk_ssp_store_hours_view{
+padding-left: 15px;
+}
+.wk_ssp_advance_search_view{
+width:20%;
+float:left;
+}
+.wk_ssp_direction_form{
+padding-top: 10px;
+}
+.wk_ssp_direction_form .wk_ssp_address_form_view {
+width: 60%;
+height: 22px;
+}
+.wk_ssp_direction_form .wk_ssp_search_submit_view{
+margin-left: 5px;
+background: #de0707;
+border: 1px solid #ab0a0a;
+color: white;
+}
+.wk_ssp_result_error
+{
+font-size: 16px;
+font-weight: 600;
+text-transform: capitalize;
+padding: 10px;
+color: red;
+}
+.wk_ssp_ajaxloader
+{
+height: 32px;
+width: 32px;
+position: absolute;
+top: 0px;
+left: 165px;
+display: none;
+background-image: url(../images/ajaxloader.gif);
+background-size: 32px 32px;
+background-repeat: no-repeat;
+}
+.wk_ssp_store_zipform{
+width:101%;
+}
+div div .wk_ssp_mystore_result {
+float: right;
+color: white;
+padding-top: 10px;
+border: 1px solid rgb(36, 72, 1);
+box-shadow: rgb(36, 72, 1) 0px 1px 0px 0px inset, rgba(202, 108, 108, 0.298039) 0px -1px 0px 0px inset;
+background: rgb(36, 72, 1);
+}
+.wk_ssp_product_make_store {
+font-size: 14px;
+font-weight: 600;
+color: #e02b27;
+}
+.wk_ssp_product_stock_show{
+font-size: 14px;
+font-weight: 600;
+color: green;
+}
+div .wk_ssp_dist_button a
+{
+color: white;
+text-decoration: none;
+}
+.wk_ssp_store_contact{
+font-size:16px;
+font-weight: 600;
+}
+.ek_ssp_cookie_store{
+background: #e6f8fb;
+}
+.wk_ssp_popup_table tr th
+{
+border:1px solid #ddd;
+}
+.wk_ssp_popup_table tr td
+{
+border:1px solid #ddd;
+}
+.wk_ssp_cart{
+font-weight: 600;
+}
+.wk-btn{
+display: inline-block;
+padding: 6px 12px;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+background-image: none;
+border: 1px solid #ccc;
+border-radius: 4px;
+color: #fff;
+background-color: #428bca;
+border-color: #357ebd;
+}
+.wk_ssp_instock
+{
+display: block;
+font-size: 1.3rem;
+color: #006400;
+font-weight: 700;
+}
+#wk_ssp_availability{
+padding:10px;
+}
+.wk_ssp_outofstock{
+color: #e02b27;
+font-weight: 600;
+}
+.wk_ssp_fieldset_order{
+display: inline-block;
+border:1px solid #ddd;
+margin-left: 5%;
+width:80%;
+}
+#wk_ssp_product_add_qty_table tr td{
+border:1px solid #ddd;
+text-align: center;
+}
+#wk_ssp_product_add_qty_table tr th{
+border:1px solid #ddd;
+text-align: center;
+}
+#wk_link{
+color: red;
+font-weight: 600;
+}
+table tr td .wk_ssp_mystore_result1{
+color:green;
+}
+.wk_ssp_add_to_cart_lable{
+float: left;
+}
+.control .wk_ssp_add_to_cart_qty
+{
+float: left;
+width: 20%;
+margin-left: 5px;
+}
+.wk_ssp_add_to_cart
+{
+float: left;
+margin-left: 5px;
+}
+.wk_ssp_float_right{
+float:right;
+}
+.wk_ssp_set_td_width{
+width:35%;
+}
+.wk_aap_not_available{
+font-weight:600;
+color:#ff5501;
+}
+#wk_ssp_advsearch_table tr td #wk_ssp_current_location_img{
+height: 40px;
+background-image: url(../images/icon-location-marker.png);
+background-repeat: no-repeat;
+background-position: 38px 0px;
+}
+.wk_ssp_not_for_pickup{
+margin-left: 50px;
+color:red;
+}
+.wk_ssp_show_error_msg{
+color:red;
+}
+.wk_ssp_set_width{
+width: 74%;
+}
+.wk_ssp_scroll{
+overflow:auto;
+}
+.wk_ssp_in_hours{
+width:10%;
+}
+.wk_ssp_in_mins{
+width:10%;
+}
+.wk_ssp_in_secs{
+width:10%;
+}
+.wk-ssp-list-table{
+background-color: #eeeeee;
+}
+.wk-mp-body .wk_mp_td_span{
+float: left;
+width:50%;
+}
+.wk-mp-body .wk_ssp_td_span_input{
+width:70%;
+}
+.wk_ssp_fieldset .stoare-address{
+width:20%;
+}
+.wk_ssp_fieldset_order table thead{
+background: #eeeeee;
+}
+.wk-ssp-top-padding{
+padding-top:5px;
+}
+.wk_ssp_product_box{
+width: 100%;
+display: inline-block;
+border: 1px solid #ccc;
+padding: 5px;
+background: #eee;
+}
+.wk_ssp_product_box .wk_link{
+color:red;
+}
+input[type=text].qty {
+width: 3em;
+text-align: center;
+vertical-align: middle;
+}
+.product-shop .qty-wrapper {
+float:left;
+}
+.product-shop .add-to-cart-buttons{
+float: left;
+}
+.wk_ssp_product_otherstore .wk_link{
+color:red;
+}
+.wk-ssp-mass-action {
+width: 10%;
+border: 1px solid #504d4d;
+}
+@media  screen and (max-width: 612px){
+.wk_ssp_fieldset {
+   font-size:5px;
+}
+}
+@media  screen and (max-width: 485px){
+.wk_ssp_fieldset_order {
+   font-size:9px;
+}
+}
+#wk_ssp_results{
+position:absolute;
+background:grey;
+width:300px;
+height:80px;
+overflow-x:auto;
+/* display: none; */
+}
+.display_none{
+display: none;
+}
+.each_sugg{
+list-style:none;
+border:1px solid white;
+text-align:center;
+padding:10px;
+color:white;
+cursor:pointer;
+}
+.wk_ssp_results_list_gp{
+padding-left:0px;
+}

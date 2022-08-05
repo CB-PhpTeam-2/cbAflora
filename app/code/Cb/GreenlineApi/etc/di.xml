@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="greenlineapi_exportorder_listing_data_source" xsi:type="string">Cb\GreenlineApi\Model\ResourceModel\OrderExportHistory\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Cb\GreenlineApi\Model\ResourceModel\OrderExportHistory\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">greenlineapi_export_order_history</argument>
+            <argument name="eventPrefix" xsi:type="string">greenlineapi_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Cb\GreenlineApi\Model\ResourceModel\OrderExportHistory</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Model\Product\CopyConstructor\Composite"> 
+        <arguments> 
+            <argument name="constructors" xsi:type="array"> 
+                <item name="crossSell" xsi:type="string">Magento\Catalog\Model\Product\CopyConstructor\CrossSell</item> 
+                <item name="upSell" xsi:type="string">Magento\Catalog\Model\Product\CopyConstructor\UpSell</item> 
+                <item name="related" xsi:type="string">Magento\Catalog\Model\Product\CopyConstructor\Related</item> 
+                <item name="catalog_inventory" xsi:type="string">Magento\CatalogInventory\Model\Product\CopyConstructor\CatalogInventory</item> 
+                <item name="downloadable" xsi:type="string">Magento\Downloadable\Model\Product\CopyConstructor\Downloadable</item> 
+            </argument>
+        </arguments> 
+    </type> 
+    <type name="Magento\Catalog\Model\Product\Copier"> 
+        <arguments> 
+            <argument name="copyConstructor" xsi:type="object">Magento\Catalog\Model\Product\CopyConstructor\Composite</argument> 
+        </arguments> 
+    </type>
+    <type name="Webkul\SellerSubAccount\Helper\Data">
+        <plugin name="cb_greenlineapi_plugin_webkul_sellersubaccount"
+                type="Cb\GreenlineApi\Plugin\SellerSubAccount\Helper\Data" sortOrder="10" />
+    </type>
+	<type name="Magento\Customer\Model\ResourceModel\CustomerRepository">
+        <plugin name="restrict_default_seller_delete" type="Cb\GreenlineApi\Plugin\DeleteCustomerRestrict" />
+    </type>
+
+</config>

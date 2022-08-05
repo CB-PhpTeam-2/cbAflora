@@ -1,0 +1,48 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$profileUrl=$block->getProfileUrl();
+$searchText=$block->getSearchText();
+$params = $block->getRequest()->getParams();
+$collectionUrl = $block->getUrl('marketplace/seller/collection', ["shop"=>$profileUrl]);
+if (isset($params['outlet']) && $params['outlet']) {
+    $outlet = $params['outlet'];
+    $collectionUrl = $block->getUrl(
+        'marketplace/seller/collection',
+        ["shop"=>$profileUrl, "outlet" => $outlet]
+    );
+}
+?>
+<div class="wk_collection_search">
+    <form id="collectionproductsearchform" action="<?= $block->escapeUrl($collectionUrl); ?>" method="GET" >
+        <div class="form-search">
+            <div class="wk-collection-left">
+                <input id="collectionsearch" type="text" name="name" value="<?= $block->escapeHtml($searchText);?>" class="input-text" placeholder="<?= $block->escapeHtml(__('Search Product')); ?>"/>
+            </div>
+            <div class="wk-collection-right">
+                <button type="submit" title="<?= $block->escapeHtml(__('Search')); ?>" class="button"><span><span><?= $block->escapeHtml(__('Search')); ?></span></span></button>
+            </div>
+        </div>
+    </form>
+</div>
+<?php
+$formData = [
+    'searchstatus' => (isset($searchText) && $searchText!="") ? 1 : 0
+];
+$serializedFormData = $block->getJsonHelper()->jsonEncode($formData);
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "wkproductsearch": <?= $block->escapeJsQuote($serializedFormData); ?>
+        }
+    }
+</script>

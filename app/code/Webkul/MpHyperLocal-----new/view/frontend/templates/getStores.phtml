@@ -1,0 +1,11 @@
+<div id="wk-stores-container"></div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Webkul_MpHyperLocal/js/stores": {
+                "storesUrl": "<?= $block->escapeJs($block->getStoreUrl()) ?>"
+            }
+        }
+    }
+</script>

@@ -1,0 +1,107 @@
+<?php
+/**
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$id = $block->getRequest()->getparam('id');
+$detail = $block->getCarouselDetail($id);
+?>
+<fieldset class="fieldset admin__fieldset fieldset-wide" id="layered_base_fieldset">
+    <legend class="admin__legend legend">
+        <span><?= /* @noEscape */ $block->escapeHtml(__("General"));?></span>
+    </legend>
+</fieldset>
+<div class="wk-main">
+    <div class="wk-row">
+        <span><label><?= /* @noEscape */ $block->escapeHtml(__("Title"));?> <span class="req"> *</span></label></span>
+        <span class="attributes-right">
+        <input type="hidden" value="<?= /* @noEscape */ $block->escapeHtml($id); ?>" name="id">
+           <input type="text" class="required title" name="title" id="title" 
+           value="<?= /* @noEscape */ $detail->getTitle() ? $block->escapeHtml($detail->getTitle()) : '';?>">
+        </span>
+    </div>
+    <?php $disable = '';
+    if ($block->getRequest()->getParam('id')) {
+        $disable = 'disabled';
+    }
+    ?>
+        <div class="wk-row attributes">
+            <span><label><?= /* @noEscape */ $block->escapeHtml(__("Attribute"));?> 
+            <span class="req"> *</span></label></span>
+            <span class="attributes-right">
+                <select name="attribute_code" required <?= /* @noEscape */ $disable;?>> 
+                <?php
+                foreach ($block->getAttributes() as $code => $attribute) {
+                    $selected = '';
+                    if ($code == $detail->getAttributeCode()) {
+                        $selected = 'selected';
+                    }
+                    ?>
+                    <option value="<?= /* @noEscape */ $block->escapeHtml($code) ?>" 
+                    <?= /* @noEscape */ $block->escapeHtml($selected);?>>
+                    <?= /* @noEscape */ $block->escapeHtml($attribute) ?></option>  
+                <?php } ?>
+                </select> 
+            </span>
+        </div>
+    
+    <div id="output"></div>
+ 
+    <div class="wk-row category">
+        <span><label class="">
+        <?= /* @noEscape */ $block->escapeHtml(__("Category"));?> 
+        <span class="req"> *</span></label></span>
+        <span class="category-right">
+            <div class="category-div " data-bind="scope: 'sellerCategory'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+        </span>
+        <script type="text/x-magento-init">
+            {
+                "*": {
+                    "Magento_Ui/js/core/app": {
+                        "components": {
+                            "sellerCategory": {
+                                "component": "Webkul_AdvancedLayeredNavigation/js/product/seller-category-tree",
+                                "template" : "Webkul_AdvancedLayeredNavigation/seller-category-tree",
+                                "filterOptions": true,
+                                "levelsVisibility": "1",
+                                "selectedOpt": "<?= /* @noEscape */  $detail->getCategories() ?>",
+                                "options": <?= /* @noEscape */  $block->getCategoriesTree()?>
+                            }
+                        }
+                    },
+                    "customjs": {}
+                }
+            }
+        </script>
+    </div>
+    <div class="wk-row">
+        <span><label><?= /* @noEscape */ $block->escapeHtml(__("Enable"));?> <span class="req"> *</span></label></span>
+        <span class="attributes-right">
+        <select  name="enable"> 
+            <option value="1"  <?= /* @noEscape */ ($detail->getEnable()== 1) ? 'selected' : '';?> >
+            <?= /* @noEscape */ $block->escapeHtml(__("Enable"));?></option> 
+            <option value="0" <?= /* @noEscape */ ($detail->getEnable()== 0) ? 'selected' : '';?>>
+            <?= /* @noEscape */ $block->escapeHtml(__("Disable"));?></option> 
+        </select> 
+        </span>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "optionsScript": 
+            { 
+                "url" : 
+                 "<?= /* @noEscape */ $block->escapeHtml(
+                     $block->getUrl('advancedlayerednavigation/carouselfilter/options')
+                 ); ?>"
+                 }
+        }
+    }
+</script>

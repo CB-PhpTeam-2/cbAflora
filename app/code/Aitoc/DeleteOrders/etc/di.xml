@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2019 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_DeleteOrders
+ */
+-->
+<!--
+/**
+ * Copyright © 2018 Aitoc. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Backend\Block\Widget\Context">
+        <plugin name="add_buttons_to_order_details" type="Aitoc\DeleteOrders\Plugin\OrderButtons" sortOrder="1"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\View">
+        <plugin name="change_url_for_back_button" type="Aitoc\DeleteOrders\Plugin\BackButton" sortOrder="1"/>
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Order\View">
+        <plugin name="add_label_to_archved_order" type="Aitoc\DeleteOrders\Plugin\AddLabel" sortOrder="1"/>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\Reporting">
+        <plugin name="filter_sales_order_collection" type="Aitoc\DeleteOrders\Plugin\FilterCollection" sortOrder="1"/>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="aitoc_deleteorders_archive_listing_data_source" xsi:type="string">Aitoc\DeleteOrders\Model\ResourceModel\Archive\Grid\Collection</item>
+                <item name="aitoc_deleteorders_rules_listing_data_source" xsi:type="string">Aitoc\DeleteOrders\Model\ResourceModel\Rules\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aitoc\DeleteOrders\Model\ResourceModel\Archive\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aitoc_deleteorders_order_archive</argument>
+            <argument name="eventPrefix" xsi:type="string">deleteorders_archive_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">archive_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aitoc\DeleteOrders\Model\ResourceModel\Archive</argument>
+        </arguments>
+    </type>
+    <type name="Aitoc\DeleteOrders\Model\ResourceModel\Rules\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aitoc_deleteorders_rules</argument>
+            <argument name="eventPrefix" xsi:type="string">deleteorders_rules_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">rules_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aitoc\DeleteOrders\Model\ResourceModel\Rules</argument>
+        </arguments>
+    </type>
+    <preference for="Aitoc\DeleteOrders\Api\Data\ArchiveInterface" type="Aitoc\DeleteOrders\Model\Archive" />
+    <preference for="Aitoc\DeleteOrders\Api\ArchiveRepositoryInterface" type="Aitoc\DeleteOrders\Model\ArchiveRepository" />
+    <preference for="Aitoc\DeleteOrders\Api\Data\RulesInterface" type="Aitoc\DeleteOrders\Model\Rules" />
+    <preference for="Aitoc\DeleteOrders\Api\RulesRepositoryInterface" type="Aitoc\DeleteOrders\Model\RulesRepository" />
+</config>

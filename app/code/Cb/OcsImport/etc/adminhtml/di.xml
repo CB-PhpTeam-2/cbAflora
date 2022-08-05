@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    
+    <!-- <type name="Magento\CatalogUrlRewrite\Model\ProductUrlPathGenerator">
+        <plugin name="cb_ocsimport_product_urlkey_generator" type="Cb\OcsImport\Plugin\GeneratorUrlKey" />
+    </type> -->
+
+    <preference for="Magento\CatalogUrlRewrite\Model\ProductUrlPathGenerator" type="Cb\OcsImport\Model\Rewrite\ProductUrlPathGenerator" />
+    
+    <preference for="Magento\CatalogImportExport\Model\Import\Product" type="Cb\OcsImport\Model\Rewrite\Import\Product" />
+
+    <preference for="Magento\ImportExport\Controller\Adminhtml\Import\Validate" type="Cb\OcsImport\Controller\Rewrite\Adminhtml\Import\Validate" />
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    
+     <preference for="Magento\CatalogSearch\Block\SearchResult\ListProduct" type="Webkul\MpHyperLocal\Block\Product\ListProduct" />
+
+     <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="layoutprocessor_checkout_phonenumber"
+                type="Cb\CustomFrontend\Plugin\Block\Checkout\LayoutProcessor"/>
+    </type>
+</config>

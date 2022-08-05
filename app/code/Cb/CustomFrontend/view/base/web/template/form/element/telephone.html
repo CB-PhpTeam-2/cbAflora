@@ -1,0 +1,20 @@
+<div class="mobile-box">
+    <span class="prefix">
+        <img data-bind="attr: { src: require.toUrl('images/canada.png') }" alt="Canada Flag Icon">
+        <span>+1</span>
+    </span>
+    <input class="input-text" type="number" data-bind="
+        value: value,
+        valueUpdate: 'keyup',
+        hasFocus: focused,
+        attr: {
+            name: inputName,
+            placeholder: placeholder,
+            'aria-describedby': getDescriptionId(),
+            'aria-required': required,
+            'aria-invalid': error() ? true : 'false',
+            id: uid,
+            disabled: disabled
+        }" name="telephone" aria-required="true" aria-invalid="false"/>
+    <div for="mobile_number" id="mobile_number-format">Format: +1 xxxxxxxxxx</div>
+</div>

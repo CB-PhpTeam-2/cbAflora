@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="cb" translate="label" sortOrder="100">
+			<label>Greenline API</label>
+		</tab>
+		<section id="greenlineapi" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>General Information</label>
+			<tab>cb</tab>
+			<resource>Cb_GreenlineApi::config_greenlineapi</resource>
+			<group id="general_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+				<label>General Settings</label>
+				<field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Url</label>
+                </field>
+				<field id="api_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Key</label>
+                </field>
+                <field id="itemsize" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Number of Greenline Products for import in one time (per seller)</label>
+					<validate>required-entry</validate>
+				</field>
+			</group>
+		</section>
+		<section id="marketplace" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+			<group id="general_settings" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<field id="edit_product_list_allow" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow edit product to Seller</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+	</system>
+</config>

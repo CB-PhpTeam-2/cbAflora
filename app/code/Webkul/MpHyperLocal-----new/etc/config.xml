@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mphyperlocal>
+            <general_settings>
+                <enable>1</enable>
+                <allow_single_seller>1</allow_single_seller>
+                <location_popup_window>Enter your location</location_popup_window>
+                <radious_unit>km</radious_unit>
+                <radious>100</radious>
+                <address_option>redirect</address_option>
+            </general_settings>
+        </mphyperlocal>
+        <carriers>
+           <mplocalship>
+                <active>1</active>
+                <allowed_methods>hyperlocal</allowed_methods>
+                <methods>hyperlocal</methods>
+                <sallowspecific>0</sallowspecific>
+                <model>Webkul\MpHyperLocal\Model\Carrier\HyperLocal</model>
+                <name>Hyper Local</name>
+                <dest_type>DES</dest_type>
+                <unit_of_measure>lbs</unit_of_measure>
+                <container>0</container>
+                <method_title>Hyper Local</method_title>
+                <handling_type>F</handling_type>
+            </mplocalship>
+        </carriers>
+    </default>
+</config>

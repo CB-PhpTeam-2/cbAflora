@@ -1,0 +1,114 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$seller = $block->getOrigin();
+if ($seller->getIsSeller()) {
+    $unit = $block->getHelper()->getRadiusUnitValue();
+	$currencySymbol = $block->getHelper()->getCurrencySymbol();
+    ?>    
+<div class="wk-mp-design">
+        <form action="<?= $block->getSaveAction()?>" method="POST" id="form-customer-attr-new" data-mage-init='{"validation":{}}'>
+            <fieldset class="info wk-mp-fieldset fieldset" id="associate-product">
+            <legend class="legend">
+                <span><?= __('Add your Store Address')?></span>
+                <button class="button wk-mp-btn" title="Save" type="submit" id="save-btn">
+                    <span><span><?= __('Save')?></span></span>
+                </button>
+            </legend>            
+            <?= $block->getBlockHtml('formkey'); ?>
+            <?= $block->getBlockHtml('seller.formkey'); ?>
+            <div class="fieldset form-list" id="cust">
+                <div class="field required">
+                    <?php $service_type = $seller->getServiceType();
+                          $service_types = explode(",", $service_type);
+                    ?>
+                    <div class="control">
+                        <input class="required-entry" value="1" name="service_type[]" type="checkbox" <?php if(in_array(1, $service_types)){ echo 'checked="checked'; } ?>/>
+                        <label class="label"><?= __('Shipping Origin Address')?></label>
+                        <input class="required-entry" value="2" name="service_type[]" type="checkbox" <?php if(in_array(2, $service_types)){ echo 'checked="checked'; } ?>/>
+                        <label class="label"><?= __('Pickup Address')?></label>
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Enter Location')?></label>
+                    <div class="control">
+                        <input class="input-text required-entry validate-no-html-tags" value="<?= $seller->getOriginAddress()?>" name="origin_address" id="autocompleteform" type="text" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Latitude')?></label>
+                    <div class="control">
+                        <input class="required-entry input-text" value="<?= $seller->getLatitude()?>" readonly="readonly" name="latitude" id="latitude" type="text" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Longitude')?></label>
+                    <div class="control">
+                        <input class="required-entry input-text" value="<?= $seller->getLongitude()?>" readonly="readonly" name="longitude" id="longitude" type="text" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= __('Shipping Service radius (%1)', $unit)?></label>
+                    <div class="control">
+                        <input class="required-entry validate-number input-text" value="<?= $seller->getRadius()?>" name="radius" id="radius" type="number" />
+                    </div>
+                </div>
+				<div class="field required">
+                    <label class="label"><?= __('Shipping Fee (%1)', $currencySymbol)?></label>
+                    <div class="control">
+                        <input class="required-entry validate-number input-text" value="<?= $seller->getShippingFee()?>" name="shipping_fee" id="shipping_fee" type="number" />
+                    </div>
+                </div>
+            </div>
+            </fieldset>
+        </form>
+    
+    <div class="buttons-set">
+        <p class="back-link">
+            <a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; <?= /* @escapeNotVerified */ __('Back') ?></a>
+        </p>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "masssellectactions": {
+                "googleApiKey":"<?= $block->getHelper()->getGoogleApiKey()?>"
+            }
+        }
+    }
+</script>
+<script type="text/javascript">
+require(['jquery'], function($) {
+	
+	$( document ).ready(function() {
+		manageShippingInfo();
+	});
+	
+    $("#form-customer-attr-new .form-list input[name='service_type[]']").click(function(){
+        manageShippingInfo();
+    });
+	
+	function manageShippingInfo(){
+		
+		$("#form-customer-attr-new .form-list input[name='service_type[]']").each(function(){
+			if($(this).val() == 1 && !$(this).is(':checked')){
+				$('#form-customer-attr-new').find('#radius').parents('.field.required').hide();
+				$('#form-customer-attr-new').find('#shipping_fee').parents('.field.required').hide();
+			}
+			if($(this).val() == 1 && $(this).is(':checked')){
+				$('#form-customer-attr-new').find('#radius').parents('.field.required').show();
+				$('#form-customer-attr-new').find('#shipping_fee').parents('.field.required').show();
+			}
+		});
+	}
+});
+</script>
+<?php } ?>

@@ -1,0 +1,55 @@
+{
+    "mp_hyper_local_shipping_area": {
+        "column": {
+            "entity_id": true,
+            "seller_id": true,
+            "address": true,
+            "latitude": true,
+            "longitude": true,
+            "created_at": true,
+            "address_type": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mp_hyper_local_shipping_rate": {
+        "column": {
+            "entity_id": true,
+            "seller_id": true,
+            "distance_from": true,
+            "distance_to": true,
+            "weight_from": true,
+            "weight_to": true,
+            "cost": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "marketplace_userdata": {
+        "column": {
+            "origin_address": true,
+            "latitude": true,
+            "longitude": true,
+            "radius": true
+        }
+    },
+    "marketplace_seller_outlet": {
+        "column": {
+            "entity_id": true,
+            "address": true,
+            "latitude": true,
+            "longitude": true,
+            "status": true,
+            "outlet_name": true,
+            "seller_id": true,
+            "source_code": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

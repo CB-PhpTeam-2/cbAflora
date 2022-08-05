@@ -1,0 +1,32 @@
+Legend
+
++ Features
+- Bugs
+-------------------------------- Version 3.0.1 --------------------------------------
+	+ supports horizontol filter navigation 
+
+-------------------------------- Version 3.0.0 --------------------------------------
+    
+	+ compatible with magento 2.3.x
+
+
+-------------------------------- Version 2.0.2 --------------------------------------
+	
+	+ Filter by product ratings
+	+ Filter by any attribute (eg. brands) in carousel
+	+ Make attribute available for layered navigation directly from grid
+	+ Add carousel filter base of category for layered navigation 
+
+-------------------------------- Version 2.0.1 --------------------------------------
+	
+	+ Composer file updated as per magento2.2
+	- Fixed some price slider bugs.
+
+-------------------------------- Version 2.0.0 --------------------------------------
+	
+	+ Impressive price bar for user defined range search.
+	+ Ajax based filter that means customers don’t need to wait for the page reload.
+	+ Buyer can choose multiple attributes and attributes values at a time.
+	+ Display current selection directly in search box.
+	+ It maintains the previous state of browser.
+	+ Increases conversion rate.

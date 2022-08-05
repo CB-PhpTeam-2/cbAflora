@@ -1,0 +1,34 @@
+<?php
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$isSellerGroup = $helper->isSellerGroupModuleInstalled();
+$magentoCurrentUrl = $block->getCurrentUrl();
+if ($helper->isSeller() && $block->isModuleEnable()) { ?>
+    <li class="level-0 <?= strpos($magentoCurrentUrl, 'paysafe/account')? "current active":"";?>">
+        <a href="#" onclick="return false;" class="">
+            <span><?= __('Paysafe Manager')?></span>
+        </a>
+        <div class="wk-mp-submenu">
+            <strong class="wk-mp-submenu-title"><?= __('Paysafe Manager')?></strong>
+            <a href="#" class="action-close _close" data-role="wk-mp-close-submenu"></a>
+            <ul>
+                <li data-ui-id="menu-webkul-marketplace-menu" class="item-menu  parent  level-1">
+                    <strong class="wk-mp-submenu-group-title">
+                        <span><?= __('Menu')?></span>
+                    </strong>
+                    <div class="wk-mp-submenu">
+                        <ul>
+                            <?php if (($isSellerGroup && $helper->isAllowedAction('paysafe/account/configuration')) || !$isSellerGroup) { ?>
+                                <li class="level-2">
+                                    <a href="<?= $block->getUrl('paysafe/account/configuration', ['_secure' => $this->getRequest()->isSecure()]); ?>">
+                                        <span><?= __('Configuration') ?></span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+<?php } ?>

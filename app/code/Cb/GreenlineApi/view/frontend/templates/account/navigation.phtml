@@ -1,0 +1,39 @@
+<?php
+
+$helper = $this->helper(\Webkul\Marketplace\Helper\Data::class);
+$isSellerGroup = $helper->isSellerGroupModuleInstalled();
+if ($helper->isSeller() && $block->isModuleEnable()) { ?>
+    <li class="cb-greenlineapi nav item <?= $block->escapeHtml($block->getCurrentNavClass('greenlineapi/account'))?>">
+        <?php if ($block->getCurrentNavClass('greenlineapi/account')) { ?>   
+            <strong><?= $block->escapeHtml(__('Greenline Manager')) ?></strong>        
+            <?php
+        } else { ?>    
+            <a href="#"><?= $block->escapeHtml(__('Greenline Manager')) ?></a>                
+        <?php } ?>
+        <ul class="nav items">
+
+            <li class="nav item <?= $block->escapeHtml($block->getCurrentNavClass('greenlineapi/account/configuration'));?>">
+                <?php if ($block->getCurrentNavClass('greenlineapi/account/configuration')) { ?>   
+                    <strong><?= $block->escapeHtml(__('Configuration')) ?></strong>        
+                    <?php
+                } else { ?>    
+                    <a href="<?= $block->escapeHtml($block->getDealUrl('greenlineapi/account/configuration'))?>">
+                        <?= $block->escapeHtml(__('Configuration')) ?>
+                    </a>                
+                <?php } ?>
+            </li>
+
+            <li class="nav item <?= $block->escapeHtml($block->getCurrentNavClass('greenlineapi/exportorder/index'));?>">
+                <?php if ($block->getCurrentNavClass('greenlineapi/exportorder/index')) { ?>   
+                    <strong><?= $block->escapeHtml(__('Greenline Order Export History')) ?></strong>
+                    <?php
+                } else { ?>    
+                    <a href="<?= $block->escapeUrl($block->getDealUrl('greenlineapi/exportorder/index'))?>">
+                        <?= $block->escapeHtml(__('Parked Sales History')) ?>
+                    </a>                
+                <?php } ?>
+            </li>
+
+        </ul>   
+    </li>
+<?php } ?>

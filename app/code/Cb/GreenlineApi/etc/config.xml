@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<greenlineapi>
+			<general_settings>
+				<enable>1</enable>
+				<api_url>https://staging-api.getgreenline.co/</api_url>
+				<itemsize>10</itemsize>
+			</general_settings>
+		</greenlineapi>
+		<marketplace>
+			<general_settings>
+				<edit_product_list_allow>0</edit_product_list_allow>
+			</general_settings>
+		</marketplace>
+	</default>
+</config>

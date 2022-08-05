@@ -1,0 +1,44 @@
+Legend
+
++ Features
+- Bugs
+-------------------------------- Version 3.0.2 --------------------------------------
+    + Admin can set the method for address change in configuration.
+    + Customer cannot proceed without setting their location.
+    + We have added product quickview on the seller collection page.
+    + Customer can choose the previously used address to select their location.
+    - Resolve minor issue and bugs.
+
+-------------------------------- Version 3.0.1 --------------------------------------
+    + Seller can add their radius value.
+    + Admin can set single seller/multi seller checkout.
+    + Buyer can shop through the seller's shop.
+    + Seller can create the outlets as well.
+
+-------------------------------- Version 3.0.0 --------------------------------------
+    + Compatible with Magento 2.3.x and Marketplace 2.2.x version.
+    - Resolve minor issue and bugs
+
+-------------------------------- Version 2.1.0 --------------------------------------
+    + Compatible with Magento 2.3.x and Marketplace 2.2.x version.
+
+-------------------------------- Version 2.0.2 --------------------------------------
+    + Updated composer.json as per magento 2.2.x version.
+    + Updated according to magento 2.2.x and marketplace 2.1.x version
+    - Fixed some bugs
+    
+-------------------------------- Version 2.0.1 --------------------------------------
+
+    + admin can allow ship area on the basis of city, state and country
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+    + The customer can enter their location and buy products from nearest seller's store.
+    + The customer can also change their location.
+    + The customer can check seller's availability in their location.
+    + The customer can check product's availability in their location.
+    + The seller can add multiple locations.
+    + The seller can add Hyperlocal table rate shipping.
+    + The seller can add shipping price using CSV file.
+    + Admin can also add multiple locations.
+    + Admin can add radius unit and range which will be used to search the seller from customer's location.

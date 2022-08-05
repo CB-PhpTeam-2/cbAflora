@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Webkul_MpHyperLocal::css/style.css"/>
+        <css src="Webkul_MpHyperLocal::css/icon.css"/>
+    </head>
+    <body>
+        <referenceBlock name="header.links">
+            <block class="Webkul\MpHyperLocal\Block\AddressLink"  name="mphyperlocal-address-top-link" ifconfig="mphyperlocal/general_settings/enable">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Change Address</argument>
+                    <argument name="path" xsi:type="string">mphyperlocal/address/index</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="footer_links">
+            <block class="Webkul\MpHyperLocal\Block\AddressLink" name="mphyperlocal-address-link" ifconfig="mphyperlocal/general_settings/enable">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Change Address</argument>
+                    <argument name="path" xsi:type="string">mphyperlocal/address/index</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="layout2_seller_account_navigation">
+            <block class="Webkul\MpHyperLocal\Block\Account\Navigation" name="hyper_local_menu" before="-" template="Webkul_MpHyperLocal::/layout2/account/navigation.phtml"  ifconfig="mphyperlocal/general_settings/enable" />
+            <block class="Webkul\MpHyperLocal\Block\AddressForm" name="address-form-separate-panel" template="Webkul_MpHyperLocal::/layout2/account/addressform.phtml"  ifconfig="mphyperlocal/general_settings/enable" />
+        </referenceContainer>
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Template" name="hyperlocal_options" after="top.search" template="Webkul_MpHyperLocal::wrapper.phtml" ifconfig="mphyperlocal/general_settings/enable">
+            </block>
+        </referenceContainer>
+    </body> 
+</page>

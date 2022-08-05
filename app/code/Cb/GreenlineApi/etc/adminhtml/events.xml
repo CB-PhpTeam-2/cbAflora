@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+	<event name="customer_delete_after">
+		<observer name="delete_seller_from_greenline" instance="Cb\GreenlineApi\Observer\Customer\RemoveGreenlineSeller"/>
+	</event>
+</config>

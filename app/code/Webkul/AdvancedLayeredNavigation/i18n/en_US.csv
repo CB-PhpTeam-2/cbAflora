@@ -1,0 +1,85 @@
+"Rating","Rating"
+"item","item"
+"items","items"
+"Category","Category"
+"Now Shopping by","Now Shopping by"
+"Previous","Previous"
+"Remove","Remove"
+"Remove This Item","Remove This Item"
+"Shop By","Shop By"
+"Clear All","Clear All"
+"Shopping Options","Shopping Options"
+"Advanced Layered Navigation","Advanced Layered Navigation"
+"Background Color","Background Color"
+"Advanced Layered Navigation Settings","Advanced Layered Navigation Settings"
+"Filter By Ratings","Filter By Ratings"
+"If set 'Yes', then you can filter by customer ratings","If set 'Yes', then you can filter by customer ratings"
+"Carousel Filter","Carousel Filter"
+"If set 'Yes', then you can filter by attributes of your choice","If set 'Yes', then you can filter by attributes of your choice"
+"Image Width","Image Width"
+"Image Height","Image Height"
+"Edit Carousel Filter","Edit Carousel Filter"
+"General","General"
+"Title","Title"
+"Attribute","Attribute"
+"Category","Category"
+"Enable","Enable"
+"Image","Image"
+"ID","ID"
+"Created At","Created At"
+"Action","Action"
+"Add New Carousel Item","Add New Carousel Item"
+"Options","Options"
+"Add Carousel Filter","Add Carousel Filter"
+"Delete","Delete"
+"Are you sure you want to delete selected items?","Are you sure you want to delete selected items?"
+"Attention","Attention"
+"You haven't selected any items!","You haven't selected any items!"
+"OK","OK"
+"Disable","Disable"
+"Select...","Select..."
+"Select","Select"
+"Save","Save"
+"Save and Continue Edit","Save and Continue Edit"
+"Reset","Reset"
+"Back","Back"
+"e.g black,#000","e.g black,#000"
+"Border Color","Border Color"
+"Edit","Edit"
+"Deselect All","Deselect All"
+"Select All","Select All"
+"You can't enter less than 100","You can't enter less than 100"
+"No","No"
+Filterable (With results),Filterable (With results)
+Filterable (No results),Filterable (No results)
+Use in layered navigation,Use in layered navigation
+Are you sure?,Are you sure?
+Edit Carousel Filter '%1',Edit Carousel Filter '%1'
+Badge Information,Badge Information
+Mass Assign Attributes,Mass Assign Attributes
+Lists,Lists
+Manage Info,Manage Info
+Edit Info,Edit Info
+New Info,New Info
+New Carousel Filter,New Carousel Filter
+A total of %1 element(s) have been deleted.,A total of %1 element(s) have been deleted.
+Please select another category.,Please select another category.
+Carousel item updated successfully.,Carousel item updated successfully.
+Carousel item saved successfully.,Carousel item saved successfully.
+Image file is not correct.,Image file is not correct.
+ & up,& up
+%1 and above,%1 and above
+URL key for specified store already exists.,URL key for specified store already exists.
+%1 - %2,%1 - %2
+ & above, & above
+Customer Since,Customer Since
+ID,ID
+View Horizontal,View Horizontal
+View Vertical,View Vertical
+Display,Display
+Allow Horizontal,Allow Horizontal
+Allow Vertical,Allow Vertical,
+Horizontal,Horizontal
+Vertical,Vertical
+To change the filter view to horizontal or vertical,To change the filter view to horizontal or vertical
+Display Type,Display Type

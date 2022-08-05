@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_Marketplace::css/filter.css"/>
+        <css src="Magento_Swatches::css/swatches.css"/>
+        <css src="Webkul_AdvancedLayeredNavigation::css/styles.css"/>
+    </head>
+    <body>
+		<attribute name="class" value="page-products"/>
+		<referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Home</item>
+                    <item name="label" xsi:type="string" translate="true">Home</item>
+                    <item name="link" xsi:type="string">/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Recommendation Tool Result</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Recommendation Tool Result</item>
+                    <item name="label" xsi:type="string" translate="true">Recommendation Tool Result</item>
+                </argument>
+            </action>
+        </referenceBlock>
+		<attribute name="class" value="page-products"/>
+        <referenceContainer name="content">
+            <block class="Webkul\MpHyperLocal\Block\Collection" name="mphyperlocal_collection" template="Webkul_MpHyperLocal::resultview.phtml" after="-">
+                <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                    <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="setToolbarBlockName">
+                    <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                </action>
+            </block>
+        </referenceContainer>
+		
+		<referenceBlock name="guidetool.catalog.navigation.renderer">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+		<referenceBlock name="guidetool.catalog.leftnav">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+		<referenceBlock name="guidetool.catalog.navigation.state">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+        
+		<referenceContainer name="sidebar.main">
+            <block class="Magento\LayeredNavigation\Block\Navigation\Category" name="guidetool.catalog.leftnav" as="navigation" before="-" template="Webkul_AdvancedLayeredNavigation::view.phtml">
+                <block class="Magento\LayeredNavigation\Block\Navigation\State" name="guidetool.catalog.navigation.state" as="state" template="Webkul_AdvancedLayeredNavigation::state.phtml" />
+                <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="guidetool.catalog.navigation.renderer" as="renderer" template="Webkul_AdvancedLayeredNavigation::filter.phtml"/>
+            </block>
+        </referenceContainer>
+		<referenceBlock name="catalog.compare.sidebar" remove="true"/>
+		<referenceBlock name="wishlist_sidebar" remove="true"/>
+    </body>
+</page>

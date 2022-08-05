@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AdvancedLayeredNavigation
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_AdvancedLayeredNavigation::css/styles.css"/>
+    </head>
+    <body>
+        <referenceBlock name="catalogsearch.navigation.renderer">
+			<action method="setTemplate" ifconfig="advancedlayerednavigation/multi_assign/enable">
+				<argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::filter.phtml</argument>
+			</action>
+		</referenceBlock>
+		<referenceBlock name="catalogsearch.navigation.renderer">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+
+		<referenceBlock name="catalogsearch.leftnav">
+			<action method="setTemplate" ifconfig="advancedlayerednavigation/multi_assign/enable">
+				<argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::view.phtml</argument>
+			</action>
+		</referenceBlock>
+		<referenceBlock name="catalogsearch.leftnav">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+		
+		<referenceBlock name="catalogsearch.navigation.state">
+			<action method="setTemplate" ifconfig="advancedlayerednavigation/multi_assign/enable">
+				<argument name="template" xsi:type="string">Webkul_AdvancedLayeredNavigation::state.phtml</argument>
+			</action>
+		</referenceBlock>
+
+		<referenceBlock name="catalogsearch.navigation.state">
+			<arguments>
+                <argument 
+                    name="view_model" 
+                    xsi:type="object">Webkul\AdvancedLayeredNavigation\ViewModel\AdvancedNavViewModel</argument>
+            </arguments>
+		</referenceBlock>
+    </body>
+</page>

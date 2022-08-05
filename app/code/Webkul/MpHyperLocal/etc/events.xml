@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mp_order_save_after">
+        <observer name="webkul_mphyperlocal_sales_order_place_after_observer" instance="Webkul\MpHyperLocal\Observer\SalesOrderPlaceAfterObserver" />
+    </event>
+    <event name="controller_action_predispatch_sales_order_reorder">
+        <observer name="webkul_mphyperlocal_predispatch_sales_order_reorder_observer" instance="Webkul\MpHyperLocal\Observer\PredispatchSalesOrderReorder" />
+    </event>
+    <!-- event checkout_cart_product_add_after -->
+    <event name="checkout_cart_product_add_after">
+        <observer name="webkul_mphyperlocal_checkout_cart_product_add_after_observer" instance="Webkul\MpHyperLocal\Observer\CheckoutCartProductAddAfterObserver" />
+    </event>
+    <!-- event checkout_submit_before -->
+    <event name="checkout_submit_before">
+	    <observer name="webkul_mphyperlocal_checkout_submit_before_observer" instance="Webkul\MpHyperLocal\Observer\CheckoutSubmitBeforeObserver"/>
+	</event>
+</config>

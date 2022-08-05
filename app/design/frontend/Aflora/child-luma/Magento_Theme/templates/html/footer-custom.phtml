@@ -1,0 +1,114 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="footer-top-block">
+                <a href="/"><img class="footer_logo" alt="Logo" src="<?php echo $this->getViewFileUrl('images/logo.svg'); ?>"></a>
+                <div class="footer_social_icons">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <ul class="list-unstyled">
+            <li><a href="/about_us"><?= __('ABOUT') ?></a></li>
+            <li><a href="/policies"><?= __('POLICIES') ?></a></li>
+            <li><a href="/press"><?= __('PRESS') ?></a></li>
+            <li><a href="blogs"><?= __('BLOG') ?></a></li>
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul class="list-unstyled">
+            <li><a href="/faq"><?= __('FAQ') ?></a></li>
+            <li><a href="contact"><?= __('CONTACT') ?></a></li>
+            <li><a href="/help-center"><?= __('HELP CENTER') ?></a></li>
+            <li><a href="/privacy"><?= __('PRIVACY') ?></a></li>
+            <li><a href="<?= $this->getUrl('store-locator') ?>"><?= __('STORE LOCATOR') ?></a></li>
+            <li><a href="<?= $this->getUrl('marketplace') ?>"><?= __('Sell') ?></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div id="dispensaries-popup-response"></div>
+
+<?php $helper = $this->helper(\Webkul\Marketplace\Helper\Data::class); ?>
+<?php $is_logged_in = (int) $helper->isCustomerLoggedIn(); ?>
+<?php $is_seller = (int) $helper->isSeller(); ?>
+
+<script type="text/javascript">
+require([
+    'jquery',
+    'Magento_Ui/js/modal/modal'
+],
+function($, modal) {
+
+    var options = {
+        type: 'popup',
+        responsive: true,
+        innerScroll: true,
+        title: 'choose Dispensaries',
+        buttons: []
+    };
+
+    var is_logged_in = '<?php echo $is_logged_in ?>';
+    var is_seller = '<?php echo $is_seller ?>';
+    var ajaxLoadUrl = "<?php echo $this->getUrl('mphyperlocal/session/load') ?>";
+
+    $(window).on('load', function() {
+        if(is_logged_in == 1 && is_seller == 0){
+            $('.customer-welcome .customer-menu li .marketplace-account-top-switch-link').parent('li').remove();
+            $('.customer-welcome .customer-menu li .guidetool').attr('href', 'javascript:void(0);');
+            $('.customer-welcome .customer-menu li .guidetool').attr('id', 'recommendation_link');
+        }
+
+    });
+
+    /*$(document).ready(function(){
+        setTimeout(function(){
+            $.ajax({
+                url: ajaxLoadUrl,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){
+                    //$('#dispensaries-popup-response').html(data.output);
+                    console.log(data.output);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    var errorMsg = 'Ajax request failed: ' + xhr.responseText;
+                    //$('#content').html(errorMsg);
+                }
+            });
+        },500);
+    });*/
+
+    $(document).on("click","#recommendation_link",function() {
+        $.ajax({
+            url: ajaxLoadUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                $('#dispensaries-popup-response').html(data.output);
+                var popup = modal(options, $('#dispensaries-popup-modal'));
+                $('#dispensaries-popup-modal').modal('openModal');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                var errorMsg = 'Ajax request failed: ' + xhr.responseText;
+                //$('#content').html(errorMsg);
+            }
+        });
+        
+    });
+});
+</script>

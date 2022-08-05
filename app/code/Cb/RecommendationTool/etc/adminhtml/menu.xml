@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Cb_RecommendationTool::postcode" title="Recommendation Tool Manager" module="Cb_RecommendationTool" sortOrder="10" resource="Cb_RecommendationTool::postcode"/>
+		<add id="Cb_RecommendationTool::postcode_locations" title="Recommendation Tool Manager" module="Cb_RecommendationTool" sortOrder="20" action="postcode/locations" parent="Cb_RecommendationTool::postcode" resource="Cb_RecommendationTool::postcode_locations" />
+		<add id="Cb_RecommendationTool::postcode_menuitems" title="Add New Recommendation Tool" module="Cb_RecommendationTool" sortOrder="20" action="postcode/locations/new" parent="Cb_RecommendationTool::postcode" resource="Cb_RecommendationTool::postcode_locationitems"  />
+	</menu>
+</config>

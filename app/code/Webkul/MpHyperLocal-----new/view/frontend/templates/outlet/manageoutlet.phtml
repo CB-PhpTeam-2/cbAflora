@@ -1,0 +1,37 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$isPartner = $block->getMpHelper()->isSeller();
+?>
+<?php if ($isPartner == 1): ?>
+    <div class="wk-ui-component-container">
+        <div class="page-main-actions">
+            <div class="page-actions-placeholder"></div>
+            <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+                <div class="page-actions-inner" data-title='<?= /* @noEscape */ __("Manage Outlet"); ?>'>
+                    <div class="page-actions-buttons">
+                        <button id="save-outlet" 
+                            title='<?= /* @noEscape */ __("Add New Outlet"); ?>' 
+                            type="button" class="action- scalable primary" 
+                            onclick="location.href = '<?= $block->escapeUrl($block->getUrl('mphyperlocal/outlet/new'))?>';"
+                            data-ui-id="add-button">
+                            <span><?= /* @noEscape */ __("Add New Outlet"); ?></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?= /* @noEscape */ $block->getChildHtml(); ?>
+    </div>
+<?php else: ?>
+    <h2 class="wk-mp-error-msg">
+        <?= /* @noEscape */ __("To Become Seller Please Contact to Admin."); ?>
+    </h2>
+<?php endif; ?>

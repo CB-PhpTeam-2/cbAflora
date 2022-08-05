@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpTwilioSMSNotification
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mp_approve_product">
+        <observer name="webkul_mptwiliosmsnotification_mp_approve_product_observer" instance="Webkul\MpTwilioSMSNotification\Observer\MpApproveProductObserver" />
+    </event>
+    <event name="mp_approve_seller">
+        <observer name="webkul_mptwiliosmsnotification_mp_approve_seller_observer" instance="Webkul\MpTwilioSMSNotification\Observer\MpApproveSellerObserver" />
+    </event>
+    <event name="mp_disapprove_seller">
+        <observer name="webkul_mptwiliosmsnotification_mp_disapprove_seller_observer" instance="Webkul\MpTwilioSMSNotification\Observer\MpDisapproveSellerObserver" />
+    </event>
+    <event name="mp_product_sold">
+        <observer name="webkul_mptwiliosmsnotification_mp_product_sold_observer" instance="Webkul\MpTwilioSMSNotification\Observer\MpProductSoldObserver" />
+    </event>
+    <event name="mp_deny_seller">
+        <observer name="webkul_mptwiliosmsnotification_mp_deny_seller_observer" instance="Webkul\MpTwilioSMSNotification\Observer\MpDenySellerObserver" />
+    </event>
+    <event name="mp_deny_product">
+        <observer name="webkul_mptwiliosmsnotification_mp_deny_product_observer" instance="Webkul\MpTwilioSMSNotification\Observer\MpDenyProductObserver" />
+    </event>
+    <event name="mp_order_cancel_after">
+        <observer name="webkul_mptwiliosmsnotification_mp_order_cancel_after" instance="Webkul\MpTwilioSMSNotification\Observer\MpSalesOrderCancelAfterObserver" />
+    </event>
+    <event name="sales_order_shipment_save_after">
+        <observer name="webkul_mptwiliosmsnotification_sales_order_shipment_save_after_observer" instance="Webkul\MpTwilioSMSNotification\Observer\SalesOrderShipmentSaveAfterObserver" />
+    </event>
+    <event name="sales_order_invoice_save_after">
+        <observer name="webkul_mptwiliosmsnotification_sales_order_invoice_save_after_observer" instance="Webkul\MpTwilioSMSNotification\Observer\SalesOrderInvoiceSaveAfterObserver" />
+    </event>
+    <event name="sales_order_creditmemo_refund">
+        <observer name="webkul_mptwiliosmsnotification_sales_order_creditmemo_refund_observer" instance="Webkul\MpTwilioSMSNotification\Observer\SalesOrderCreditmemoRefundObserver" />
+    </event>
+    <event name="checkout_submit_all_after">
+        <observer name="webkul_mptwiliosmsnotification_sales_order_place_after_observer" instance="Webkul\MpTwilioSMSNotification\Observer\SalesOrderPlaceAfterObserver" />
+    </event>
+    <event name="mp_disapprove_product">
+        <observer name="webkul_mptwiliosmsnotification_mp_disapprove_product_observer" instance="Webkul\MpTwilioSMSNotification\Observer\MpDisapproveProductObserver" />
+    </event>
+    <event name="customer_register_success">
+        <observer name="webkul_mptwiliosmsnotification_customer_register_success_observer" instance="Webkul\MpTwilioSMSNotification\Observer\CustomerRegisterSuccessObserver" />
+    </event>
+</config>

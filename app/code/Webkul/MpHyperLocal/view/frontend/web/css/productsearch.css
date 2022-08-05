@@ -1,0 +1,39 @@
+.wk_collection_search {
+    display: none;
+    float: right;
+}
+
+.form-search{
+    padding:10px;
+}
+
+.wk-mp-float-left {
+    width: auto;
+    float: left;
+}
+
+.wk-collection-left {
+    float: left;
+}
+
+.wk-collection-right {
+    float: right;
+    padding-left: 5px;
+    padding-top: 0px;
+}
+
+@media only screen and (max-width: 350px) {
+    .wk-collection-left {
+        float: none;
+    }
+
+    .wk-collection-right {
+        float: none;
+        padding-left: 0px;
+        padding-top: 5px;
+    }
+
+    .wk_collection_search {
+        float: none;
+    }
+}

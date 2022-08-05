@@ -1,0 +1,31 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpTwilioSMSNotification
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php /* @var $block \Webkul\MpTwilioSMSNotification\Block\Adminhtml\System\Config\Form\VerifyPhoneNumber*/ ?>
+<div class="pp-buttons-container">
+    <button id="verify" onclick="return false;">
+        <span><span><span><?= /* @noEscape */ __("Verify Number") ?></span></span></span>
+    </button>
+    <p style="color: red;" id="err" class="wk-otp-display-none"></p>
+    <p style="color: green;" id="success" class="wk-otp-display-none"></p>
+</div>
+<div class="wk-otp-loading-mask wk-otp-display-none">
+    <div class="wk-otp-loader"></div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "VerifyNumber": {
+                "url": "<?= /* @noEscape */ $block->getAjaxUrl(); ?>"
+            }
+        }
+    }
+</script>

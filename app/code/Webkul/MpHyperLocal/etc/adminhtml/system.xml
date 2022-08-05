@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpHyperLocal
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="mphyperlocal" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Hyperlocal Marketplace</label>
+            <!-- Assign section to tab -->
+            <tab>webkul</tab>
+            <resource>Webkul_MpHyperlocal::config_mphyperlocal</resource>
+            <!-- create group for fields in section -->
+            <group id="general_settings" translate="label" type="text" sortOrder="1" showInDefault="1"  showInStore="1">
+                <label>General Settings</label>
+                <field id="enable" translate="label" sortOrder="1" type="select" showInDefault="1" showInWebsite="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allow_single_seller" translate="label" sortOrder="2" type="select" showInDefault="1" showInWebsite="1">
+                    <label>Single Seller Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="google_api_key" translate="label" type="obscure" sortOrder="3" showInDefault="1" >
+                    <label>Google API Key</label>
+                    <validate>validate-no-html-tags required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="location_popup_window" translate="label" type="text" sortOrder="4" showInDefault="1" >
+                    <label>Heading For Location Popup Window</label>
+                    <validate>validate-no-html-tags</validate>
+                </field>
+                <field id="address_option" translate="label" sortOrder="5" type="select" showInDefault="1">
+                    <label>Set Address Change Method</label>
+                    <source_model>Webkul\MpHyperLocal\Model\Config\Source\SetAddressOptions</source_model>
+                </field>
+                <field id="radious_unit" translate="label" sortOrder="6" type="select" showInDefault="1">
+                    <label>Radius Unit</label>
+                    <source_model>Webkul\MpHyperLocal\Model\Config\Source\RadiousUnit</source_model>
+                </field>
+                <field id="pickup_service_radius" translate="label" type="text" sortOrder="7" showInDefault="1" >
+                    <label>Pickup Service radius</label>
+                    <validate>validate-no-html-tags</validate>
+                </field>
+                <!-- <field id="show_collection" translate="label" sortOrder="6" type="select" showInDefault="1">
+                    <label>Set Ship Area/ Filter Product On The Basis Of</label>
+                    <source_model>Webkul\MpHyperLocal\Model\Config\Source\CollectionFilterOption</source_model>
+                </field> -->
+                <!-- <field id="radious" translate="label" type="text" sortOrder="5" showInDefault="1" >
+                    <label>Radius</label>
+                    <validate>validate-digits</validate>
+                </field> -->
+                <!-- <field id="address" translate="label" type="text" sortOrder="7" showInDefault="1">
+                    <label>Admin's  Origin Address</label>
+                    <validate>validate-no-html-tags</validate>
+                    <frontend_model>Webkul\MpHyperLocal\Block\Adminhtml\System\Config\Form\SetDefaultAddress</frontend_model>
+                </field>
+                <field id="latitude" translate="label" type="text" sortOrder="8" showInDefault="1">
+                    <label>Latitude</label>
+                    <validate>validate-no-html-tags</validate>
+                </field>
+                <field id="longitude" translate="label" type="text" sortOrder="9" showInDefault="1">
+                    <label>Longitude</label>
+                    <validate>validate-no-html-tags</validate>
+                </field> -->
+            </group>
+            <group id="shopLocatorStyle" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Searching Templates</label>
+                <field id="backgroundImage" translate="label" type="image" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Banner Image</label>
+                    <comment>Allowed file types: jpg, jpeg, gif, png</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">marketplace/hyperlocal</base_url>
+                    <upload_dir >pub/media/marketplace/hyperlocal</upload_dir>
+                </field>
+                <field id="btnColor" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Color</label>
+                    <comment>Choose the button color that will be visible at the frontend</comment>
+                    <frontend_model>Webkul\MpHyperLocal\Block\ColorPicker</frontend_model>
+                </field>
+            </group>
+        </section>
+        <section id="carriers">
+            <group id="mplocalship" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Hyper Local shipping</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled for Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="name" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <validate>validate-no-html-tags</validate>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show Method if Not Applicable</label>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
